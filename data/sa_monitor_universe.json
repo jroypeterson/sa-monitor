@@ -1,0 +1,5580 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-05-05T20:18:30+00:00",
+  "source": {
+    "csv_path": "/sessions/amazing-zen-galileo/mnt/Claude Folder/Coverage Manager/exports/universe.csv",
+    "status_path": "/sessions/amazing-zen-galileo/mnt/Claude Folder/Coverage Manager/exports/universe_status.json",
+    "cm_schema_version": 2,
+    "cm_dataset_version": "2026-05-03"
+  },
+  "filter": {
+    "rule": "Phase 1 lenient Biopharma exclusion + blank-subsector Biopharma exclusion",
+    "exclude_subsector": [
+      "Biotech"
+    ],
+    "exclude_biopharma_with_blank_subsector": true,
+    "applied_at": "2026-05-05T20:18:30+00:00"
+  },
+  "counts": {
+    "rows_in_source": 1095,
+    "rows_with_no_ticker": 0,
+    "rows_excluded_by_subsector_filter": 484,
+    "rows_excluded_blank_biopharma": 57,
+    "tickers_in_filtered_universe": 554,
+    "by_sector": {
+      "Biopharma": 164,
+      "MedTech": 142,
+      "Healthcare Services": 106,
+      "SaaS": 56,
+      "Tech": 52,
+      "Financials": 12,
+      "Industrials": 11,
+      "Consumer": 6,
+      "Energy": 3,
+      "Real Estate": 1,
+      "Materials": 1
+    }
+  },
+  "tickers": {
+    "000100.KS": {
+      "name": "Yuhan Corporation",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "KRX",
+      "country_hq": "South Korea",
+      "currency": "KRW"
+    },
+    "000661.SZ": {
+      "name": "Changchun High-Tech Industry (Group) Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SZSE",
+      "country_hq": "China",
+      "currency": "CNY"
+    },
+    "000963.SZ": {
+      "name": "Huadong Medicine Co., Ltd",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SZSE",
+      "country_hq": "China",
+      "currency": "CNY"
+    },
+    "019170.KS": {
+      "name": "Shinpoong Pharmaceutical Co.,Ltd",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "KRX",
+      "country_hq": "South Korea",
+      "currency": "KRW"
+    },
+    "1093.HK": {
+      "name": "CSPC Pharmaceutical Group Limited",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "HKEX",
+      "country_hq": "China",
+      "currency": "HKD"
+    },
+    "1SXP.DE": {
+      "name": "SCHOTT Pharma AG & Co. KGaA",
+      "sector": "MedTech",
+      "subsector": "Packaging",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "XETRA",
+      "country_hq": "Germany",
+      "currency": "EUR"
+    },
+    "2070.SR": {
+      "name": "Saudi Pharmaceutical Industries and Medical Appliances Corporation",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Tadawul",
+      "country_hq": "Saudi Arabia",
+      "currency": "SAR"
+    },
+    "2715.HK": {
+      "name": "Estun Automation Co Ltd",
+      "sector": "Tech",
+      "subsector": "Industrial Robotics / Automation",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "HKEX",
+      "country_hq": "China",
+      "currency": "HKD"
+    },
+    "3320.HK": {
+      "name": "China Resources Pharmaceutical Group Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "HKEX",
+      "country_hq": "Hong Kong",
+      "currency": "HKD"
+    },
+    "3692.HK": {
+      "name": "Hansoh Pharmaceutical Group Company Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "HKEX",
+      "country_hq": "China",
+      "currency": "HKD"
+    },
+    "4015.SR": {
+      "name": "Jamjoom Pharmaceuticals Factory Company",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Tadawul",
+      "country_hq": "Saudi Arabia",
+      "currency": "SAR"
+    },
+    "4016.SR": {
+      "name": "Middle East Pharmaceutical Industries Company",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Tadawul",
+      "country_hq": "Saudi Arabia",
+      "currency": "SAR"
+    },
+    "4503.T": {
+      "name": "Astellas Pharma Inc.",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4506.T": {
+      "name": "Sumitomo Pharma Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4507.T": {
+      "name": "Shionogi & Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4516.T": {
+      "name": "Nippon Shinyaku Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4528.T": {
+      "name": "Ono Pharmaceutical Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4534.T": {
+      "name": "Mochida Pharmaceutical Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4536.T": {
+      "name": "Santen Pharmaceutical Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4543.T": {
+      "name": "Terumo Corporation",
+      "sector": "MedTech",
+      "subsector": "Cardiovascular",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4547.T": {
+      "name": "Kissei Pharmaceutical Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4552.T": {
+      "name": "JCR Pharmaceuticals Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4553.T": {
+      "name": "Towa Pharmaceutical Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4559.T": {
+      "name": "Zeria Pharmaceutical Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4568.T": {
+      "name": "Daiichi Sankyo Company, Limited",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4569.T": {
+      "name": "KYORIN Pharmaceutical Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4578.T": {
+      "name": "OTSUKA HLDGS CO LTD",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "600085.SS": {
+      "name": "Beijing Tongrentang Co., Ltd",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SSE",
+      "country_hq": "China",
+      "currency": "CNY"
+    },
+    "600196.SS": {
+      "name": "Shanghai Fosun Pharmaceutical (Group) Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SSE",
+      "country_hq": "China",
+      "currency": "CNY"
+    },
+    "600276.SS": {
+      "name": "JIangsu",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SSE",
+      "country_hq": "China",
+      "currency": "CNY"
+    },
+    "6446.TW": {
+      "name": "PharmaEssentia Corporation",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TWSE",
+      "country_hq": "Taiwan",
+      "currency": "TWD"
+    },
+    "6472.TW": {
+      "name": "Bora Pharmaceuticals Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TWSE",
+      "country_hq": "Taiwan",
+      "currency": "TWD"
+    },
+    "6869.T": {
+      "name": "Sysmex Corporation",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "688506.SS": {
+      "name": "Sichuan Biokin Pharmaceutical Co.,Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SSE",
+      "country_hq": "China",
+      "currency": "CNY"
+    },
+    "7701.T": {
+      "name": "Shimadzu Corporation",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "Analytical Instruments",
+      "core": "Y",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "7733.T": {
+      "name": "Olympus Corporation",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "Endoscopy",
+      "core": "Y",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "7741.T": {
+      "name": "Hoya Corporation",
+      "sector": "MedTech",
+      "subsector": "Ophthalmology",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "8086.T": {
+      "name": "Nipro Corporation",
+      "sector": "MedTech",
+      "subsector": "Diversified MedTech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "A": {
+      "name": "Agilent Technologies, Inc.",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AAPL": {
+      "name": "Apple Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AARTIDRUGS.NS": {
+      "name": "Aarti Drugs Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "ABBOTINDIA.NS": {
+      "name": "Abbott India Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "ABBV": {
+      "name": "AbbVie Common Stock",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ABT": {
+      "name": "Abbott Laboratories",
+      "sector": "MedTech",
+      "subsector": "Diversified MedTech",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ACCD": {
+      "name": "Accolade, Inc.",
+      "sector": "Healthcare Services",
+      "subsector": "Benefits",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ACH": {
+      "name": "Accendra Health (fma Owens and Minor)",
+      "sector": "Healthcare Services",
+      "subsector": "Distributors",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ACHC": {
+      "name": "Acadia Healthcare Company Inc",
+      "sector": "Healthcare Services",
+      "subsector": "BH - Facilities",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ACVA": {
+      "name": "ACV Auctions Inc",
+      "sector": "Consumer",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ADBE": {
+      "name": "Adobe Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ADI": {
+      "name": "Analog Devices Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ADPT": {
+      "name": "Adaptive Biotechnologies Corporation",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ADSK": {
+      "name": "Autodesk Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ADUS": {
+      "name": "Addus Homecare Corporation",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AFRM": {
+      "name": "Affirm Holdings Inc",
+      "sector": "Financials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AFT.NZ": {
+      "name": "AFT Pharmaceuticals Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NZX",
+      "country_hq": "New Zealand",
+      "currency": "NZD"
+    },
+    "AFX DE": {
+      "name": "Carl Zeiss Meditec AG",
+      "sector": "MedTech",
+      "subsector": "Ophthalmology",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "XETRA",
+      "country_hq": "Germany",
+      "currency": "EUR"
+    },
+    "AGL": {
+      "name": "Agilon Health Inc",
+      "sector": "Healthcare Services",
+      "subsector": "VBC",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AGY.L": {
+      "name": "Allergy Therapeutics plc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "LSE",
+      "country_hq": "United Kingdom",
+      "currency": "GBp"
+    },
+    "AHCO": {
+      "name": "Adapthealth Corp",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AHR": {
+      "name": "American Healthcare REIT Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AKBA": {
+      "name": "Akebia Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ALC": {
+      "name": "Alcon Inc.",
+      "sector": "MedTech",
+      "subsector": "Ophthalmology",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "Switzerland",
+      "currency": "USD"
+    },
+    "ALGN": {
+      "name": "Align Technology, Inc.",
+      "sector": "MedTech",
+      "subsector": "Dental",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ALHC": {
+      "name": "Alignment Healthcare Inc",
+      "sector": "Healthcare Services",
+      "subsector": "VBC",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ALKEM.NS": {
+      "name": "Alkem Laboratories Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "ALKS": {
+      "name": "Alkermes Plc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Ireland",
+      "currency": "USD"
+    },
+    "ALKT": {
+      "name": "Alkami Technology Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ALM.MC": {
+      "name": "Almirall, S.A.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "BME Madrid",
+      "country_hq": "Spain",
+      "currency": "EUR"
+    },
+    "ALMR": {
+      "name": "Alamar Biosciences, Inc.",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ALVO": {
+      "name": "Alvotech SA",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Luxembourg",
+      "currency": "USD"
+    },
+    "AMGN": {
+      "name": "Amgen Inc",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AMLX": {
+      "name": "Amylyx Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AMN": {
+      "name": "AMN Healthcare Services Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Nurse staffing",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AMP IM": {
+      "name": "Amplifon S.p.A.",
+      "sector": "MedTech",
+      "subsector": "Hearing Aid",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "Borsa Italiana",
+      "country_hq": "Italy",
+      "currency": "EUR"
+    },
+    "AMPH": {
+      "name": "Amphastar Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AMPL": {
+      "name": "Amplitude Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AMRN": {
+      "name": "Amarin Corporation PLC",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Ireland",
+      "currency": "USD"
+    },
+    "AMRX": {
+      "name": "Amneal Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AMWL": {
+      "name": "American Well Corp",
+      "sector": "Healthcare Services",
+      "subsector": "HIT",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AMZN": {
+      "name": "Amazon.com, Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ANIP": {
+      "name": "ANI Pharmaceuticals Inc Common Stock",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AORT": {
+      "name": "Artivion Inc",
+      "sector": "MedTech",
+      "subsector": "Cardiovascular",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "APLLTD.NS": {
+      "name": "Alembic Pharmaceuticals Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "APN.JO": {
+      "name": "Aspen Pharmacare Holdings Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "JSE",
+      "country_hq": "South Africa",
+      "currency": "ZAc"
+    },
+    "APP": {
+      "name": "Applovin Corp",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AQST": {
+      "name": "Aquestive Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ARDT": {
+      "name": "Ardent Health Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Hospitals",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ARE": {
+      "name": "Alexandria Real Estate Equities Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ARXS": {
+      "name": "Arxis, Inc.",
+      "sector": "Industrials",
+      "subsector": "Aerospace & Defense Components",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ASAN": {
+      "name": "Asana Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ASML": {
+      "name": "ASML Holding NV",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Netherlands",
+      "currency": "USD"
+    },
+    "ASRT": {
+      "name": "Assertio Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ASX": {
+      "name": "ASE Technology Holding Co., Ltd.",
+      "sector": "MedTech",
+      "subsector": "Sleep",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "Taiwan",
+      "currency": "USD"
+    },
+    "ATEC": {
+      "name": "Alphatec Holdings, Inc.",
+      "sector": "MedTech",
+      "subsector": "Orthopedics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ATR": {
+      "name": "Aptargroup Inc",
+      "sector": "MedTech",
+      "subsector": "Packaging",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ATRC": {
+      "name": "AtriCure Inc",
+      "sector": "MedTech",
+      "subsector": "Cardiovascular",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AUNA": {
+      "name": "Auna SA",
+      "sector": "Healthcare Services",
+      "subsector": "Ex-US Facilities",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "Luxembourg",
+      "currency": "USD"
+    },
+    "AVAH": {
+      "name": "Aveanna Healthcare Holdings Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AVDL": {
+      "name": "Avadel Pharmaceuticals PLC",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Ireland",
+      "currency": "USD"
+    },
+    "AVTR": {
+      "name": "Avantor, Inc.",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "Lab Products / Chemicals",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AYTU": {
+      "name": "Aytu Biopharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AZN": {
+      "name": "AstraZeneca PLC",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
+    "AZTA": {
+      "name": "Azenta, Inc.",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "Ambush DC": {
+      "name": "Ambu A/S",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "OMX Copenhagen",
+      "country_hq": "Denmark",
+      "currency": "DKK"
+    },
+    "BAND": {
+      "name": "Bandwidth Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BAX": {
+      "name": "Baxter International Inc.",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BAYN": {
+      "name": "Bayer AG",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "XETRA",
+      "country_hq": "Germany",
+      "currency": "EUR"
+    },
+    "BBNX": {
+      "name": "Beta Bionics, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diabetes",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BCRX": {
+      "name": "BioCryst Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BDX": {
+      "name": "Becton Dickinson and Co",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BE": {
+      "name": "Bloom Energy Corporation",
+      "sector": "Energy",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BFLY": {
+      "name": "Butterfly Network, Inc.",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BFRI": {
+      "name": "Biofrontera Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BHC": {
+      "name": "Bausch Health Companies Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
+    "BIIB": {
+      "name": "Biogen Inc",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BILL": {
+      "name": "BILL Holdings Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BIM": {
+      "name": "bioMerieux SA",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "France",
+      "currency": "EUR"
+    },
+    "BIO": {
+      "name": "Bio-Rad Laboratories, Inc. Class A Common Stock",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BIOA": {
+      "name": "BIOAGE Labs Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BKD": {
+      "name": "Brookdale Senior Living Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BL": {
+      "name": "Blackline Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BLCO": {
+      "name": "Bausch + Lomb Corporation",
+      "sector": "MedTech",
+      "subsector": "Ophthalmology",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
+    "BLISSGVS.NS": {
+      "name": "Bliss GVS Pharma Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "BLLN": {
+      "name": "BillionToOne, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BLND": {
+      "name": "Blend Labs Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BMY": {
+      "name": "Bristol-Myers Squibb Company",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BOI.PA": {
+      "name": "Boiron SA",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Euronext Paris",
+      "country_hq": "France",
+      "currency": "EUR"
+    },
+    "BOX": {
+      "name": "Box Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BRKR": {
+      "name": "Bruker Corp",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BRO": {
+      "name": "Brown & Brown Inc.",
+      "sector": "Financials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BRZE": {
+      "name": "Braze Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BSX": {
+      "name": "Boston Scientific Corp",
+      "sector": "MedTech",
+      "subsector": "Cardiovascular",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BTAI": {
+      "name": "BioXcel Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BTSG": {
+      "name": "Brightspring Health Services Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "C43.F": {
+      "name": "Cosmo Pharmaceuticals N.V.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Frankfurt",
+      "country_hq": "Ireland",
+      "currency": "EUR"
+    },
+    "CAH": {
+      "name": "Cardinal Health Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Distributors",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CAT": {
+      "name": "Caterpillar Inc",
+      "sector": "Industrials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CCRN": {
+      "name": "Cross Country Healthcare, Inc.",
+      "sector": "Healthcare Services",
+      "subsector": "Nurse staffing",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CERT": {
+      "name": "Certara, Inc.",
+      "sector": "Healthcare Services",
+      "subsector": "Life Science Software",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CFLT": {
+      "name": "Confluent, Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CHCT": {
+      "name": "Community Healthcare Trust Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CHE": {
+      "name": "Chemed Corp",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CHKP": {
+      "name": "Check Point Software Technologies Ltd",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "CI": {
+      "name": "Cigna Group",
+      "sector": "Healthcare Services",
+      "subsector": "Mgd Care",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CIGI": {
+      "name": "Colliers International Group Inc",
+      "sector": "Real Estate",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
+    "CIPLA.NS": {
+      "name": "Cipla Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "CLN.WA": {
+      "name": "Celon Pharma S.A.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "WSE",
+      "country_hq": "Poland",
+      "currency": "PLN"
+    },
+    "CLOV": {
+      "name": "Clover Health Investments Corp",
+      "sector": "Healthcare Services",
+      "subsector": "Mgd Care",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CNC": {
+      "name": "Centene Corp",
+      "sector": "Healthcare Services",
+      "subsector": "Mgd Care",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CNI": {
+      "name": "Canadian National Railway Co",
+      "sector": "Industrials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
+    "CNMD": {
+      "name": "CONMED Corporation",
+      "sector": "MedTech",
+      "subsector": "Surgery",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "COH Au": {
+      "name": "Cochlear Limited",
+      "sector": "MedTech",
+      "subsector": "Hearing Aid",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "ASX",
+      "country_hq": "Australia",
+      "currency": "AUD"
+    },
+    "COIN": {
+      "name": "Coinbase Global Inc",
+      "sector": "Financials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "COLL": {
+      "name": "Collegium Pharmaceutical Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "COLOB DC": {
+      "name": "Coloplast A/S",
+      "sector": "MedTech",
+      "subsector": "Urology",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "OMX Copenhagen",
+      "country_hq": "Denmark",
+      "currency": "DKK"
+    },
+    "CON": {
+      "name": "Concentra Group Holdings Parent Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "COO": {
+      "name": "The Cooper Companies, Inc.",
+      "sector": "MedTech",
+      "subsector": "Ophthalmology",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "COR": {
+      "name": "Cencora Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Distributors",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CP": {
+      "name": "Canadian Pacific Kansas City Ltd",
+      "sector": "Industrials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
+    "CPH": {
+      "name": "Cipher Pharmaceuticals Inc",
+      "sector": "MedTech",
+      "subsector": "Hearing Aid",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "TSX",
+      "country_hq": "Canada",
+      "currency": "CAD"
+    },
+    "CPRT": {
+      "name": "Copart Inc.",
+      "sector": "Industrials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CRL": {
+      "name": "Charles River Lbrtrs ntrntl Inc",
+      "sector": "Healthcare Services",
+      "subsector": "CRO",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CRM": {
+      "name": "Salesforce, Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CRNO-B.ST": {
+      "name": "Cereno Scientific AB (publ)",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OMX Stockholm",
+      "country_hq": "Sweden",
+      "currency": "SEK"
+    },
+    "CROX": {
+      "name": "Crocs Inc",
+      "sector": "Consumer",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CRWD": {
+      "name": "CrowdStrike Holdings, Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CSTL": {
+      "name": "Castle Biosciences, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CSU": {
+      "name": "Constellation Software Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "TSX",
+      "country_hq": "Canada",
+      "currency": "CAD"
+    },
+    "CTEC LN": {
+      "name": "ConvaTec Group PLC",
+      "sector": "MedTech",
+      "subsector": "Urology",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "LSE",
+      "country_hq": "United Kingdom",
+      "currency": "GBp"
+    },
+    "CTRE": {
+      "name": "Caretrust REIT Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CURN.SW": {
+      "name": "Curatis Holding AG",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
+    "CVNA": {
+      "name": "Carvana Co",
+      "sector": "Consumer",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CVS": {
+      "name": "CVS Health Corp",
+      "sector": "Healthcare Services",
+      "subsector": "Mgd Care",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CVSG": {
+      "name": "CVS Group Plc",
+      "sector": "Healthcare Services",
+      "subsector": "Animal Health",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "LSE",
+      "country_hq": "United Kingdom",
+      "currency": "GBP"
+    },
+    "CVT": {
+      "name": "Comvita Ltd",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NZX",
+      "country_hq": "New Zealand",
+      "currency": "NZD"
+    },
+    "CXM": {
+      "name": "Sprinklr Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CYBR": {
+      "name": "CyberArk Software Ltd",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "CYH": {
+      "name": "Community Health Systems Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Hospitals",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DAE": {
+      "name": "Daetwyler Holding AG",
+      "sector": "MedTech",
+      "subsector": "Packaging",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
+    "DAY": {
+      "name": "NASDAQ US Dividend Achievers 50 Index",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DBX": {
+      "name": "Dropbox, Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DCGO": {
+      "name": "DocGo Inc",
+      "sector": "Healthcare Services",
+      "subsector": "HIT",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DDOG": {
+      "name": "Datadog, Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DERM": {
+      "name": "Journey Medical Corp",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DGX": {
+      "name": "Quest Diagnostics Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Labs",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DH": {
+      "name": "Definitive Healthcare Corp",
+      "sector": "Healthcare Services",
+      "subsector": "HIT",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DHC": {
+      "name": "Diversified Healthcare Trust",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DHR": {
+      "name": "Danaher Corp",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DHT-UN.TO": {
+      "name": "DRI Healthcare Trust",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSX",
+      "country_hq": "Canada",
+      "currency": "CAD"
+    },
+    "DIA.MI": {
+      "name": "DiaSorin S.p.A.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "Borsa Italiana",
+      "country_hq": "Italy",
+      "currency": "EUR"
+    },
+    "DIVISLAB.NS": {
+      "name": "Divi's Laboratories Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "DOC": {
+      "name": "Healthpeak Properties Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DOCN": {
+      "name": "DigitalOcean Holdings Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DOCS": {
+      "name": "Doximity, Inc.",
+      "sector": "Healthcare Services",
+      "subsector": "HIT",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DOCU": {
+      "name": "Docusign Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DOMO": {
+      "name": "Domo Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DSP": {
+      "name": "Viant Technology Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DT": {
+      "name": "Dynatrace Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DV": {
+      "name": "DoubleVerify Holdings Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DVA": {
+      "name": "Davita Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Dialysis",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DVAX": {
+      "name": "Dynavax Technologies Corp",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DXCM": {
+      "name": "DexCom, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diabetes",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EAPI.PA": {
+      "name": "Euroapi S.A.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Euronext Paris",
+      "country_hq": "France",
+      "currency": "EUR"
+    },
+    "EBS": {
+      "name": "Emergent Biosolutions Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EGRX": {
+      "name": "Eagle Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EHAB": {
+      "name": "Enhabit Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EHC": {
+      "name": "Encompass Health Corp",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ELAN": {
+      "name": "Elanco Animal Health Incorporated",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ELV": {
+      "name": "Elevance Health Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Mgd Care",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ENOV": {
+      "name": "Enovis Corporation",
+      "sector": "MedTech",
+      "subsector": "Orthopedics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ENSG": {
+      "name": "Ensign Group Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EOLS": {
+      "name": "Evolus Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ERF FP": {
+      "name": "Eurofins Scientific SE",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "Euronext Paris",
+      "country_hq": "Luxembourg",
+      "currency": "EUR"
+    },
+    "ESPR": {
+      "name": "Esperion Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ESTA": {
+      "name": "Establishment Labs Holdings Inc.",
+      "sector": "MedTech",
+      "subsector": "Aesthetics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EVCM": {
+      "name": "EverCommerce Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EVH": {
+      "name": "Evolent Health Inc",
+      "sector": "Healthcare Services",
+      "subsector": "VBC",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EVO": {
+      "name": "Evotec SE",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Germany",
+      "currency": "USD"
+    },
+    "EW": {
+      "name": "Edwards Lifesciences Corp",
+      "sector": "MedTech",
+      "subsector": "Cardiovascular",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EXAS": {
+      "name": "Exact Sciences Corporation",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EXFY": {
+      "name": "Expensify Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FAE.MC": {
+      "name": "Faes Farma, S.A.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "BME Madrid",
+      "country_hq": "Spain",
+      "currency": "EUR"
+    },
+    "FAGR.BR": {
+      "name": "Fagron NV",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Euronext Brussels",
+      "country_hq": "Belgium",
+      "currency": "EUR"
+    },
+    "FDC.NS": {
+      "name": "FDC Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "FDX": {
+      "name": "FedEx Corp",
+      "sector": "Industrials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FER": {
+      "name": "Ferrovial SE",
+      "sector": "Industrials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "Netherlands",
+      "currency": "USD"
+    },
+    "FI": {
+      "name": "Fiserv Inc.",
+      "sector": "Financials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FICO": {
+      "name": "Fair Isaac Corp",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FIG": {
+      "name": "Figma Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FIVE": {
+      "name": "Five Below Inc",
+      "sector": "Consumer",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FIVN": {
+      "name": "Five9 Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FLGT": {
+      "name": "Fulgent Genetics, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FMS": {
+      "name": "Fresenius Medical Care AG",
+      "sector": "Healthcare Services",
+      "subsector": "Dialysis",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "Germany",
+      "currency": "USD"
+    },
+    "FRE": {
+      "name": "Fresenius SE & Co KGaA",
+      "sector": "Healthcare Services",
+      "subsector": "Biosim",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "XETRA",
+      "country_hq": "Germany",
+      "currency": "EUR"
+    },
+    "FROG": {
+      "name": "JFrog Ltd",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FRSH": {
+      "name": "Freshworks Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FTNT": {
+      "name": "Fortinet Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FTRE": {
+      "name": "Fortrea Holdings Inc",
+      "sector": "Healthcare Services",
+      "subsector": "CRO",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GALD.SW": {
+      "name": "Galderma Group AG",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
+    "GDRX": {
+      "name": "Goodrx Holdings Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Pharmacy",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GEHC": {
+      "name": "GE HealthCare Technologies Inc.",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GELS": {
+      "name": "Gelteq Ltd",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Australia",
+      "currency": "USD"
+    },
+    "GEN": {
+      "name": "Gen Digital Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GETIB SS": {
+      "name": "Getinge AB",
+      "sector": "MedTech",
+      "subsector": "Cardiovascular",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "OMX Stockholm",
+      "country_hq": "Sweden",
+      "currency": "SEK"
+    },
+    "GH": {
+      "name": "Guardant Health, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GILD": {
+      "name": "Gilead Sciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GKOS": {
+      "name": "Glaukos Corporation",
+      "sector": "MedTech",
+      "subsector": "Ophthalmology",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GLAND.NS": {
+      "name": "Gland Pharma Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "GLENMARK.NS": {
+      "name": "Glenmark Pharmaceuticals Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "GMED": {
+      "name": "Globus Medical Inc",
+      "sector": "MedTech",
+      "subsector": "Orthopedics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GMRE": {
+      "name": "Global Medical REIT Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GN DC": {
+      "name": "GN Store Nord A/S",
+      "sector": "MedTech",
+      "subsector": "Hearing Aid",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "OMX Copenhagen",
+      "country_hq": "Denmark",
+      "currency": "DKK"
+    },
+    "GOOG": {
+      "name": "Alphabet Inc Class C",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GRAL": {
+      "name": "GRAIL, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GRANULES.NS": {
+      "name": "Granules India Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "GRFS": {
+      "name": "Grifols SA - ADR ADR Class B",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Spain",
+      "currency": "USD"
+    },
+    "GSK": {
+      "name": "GSK plc",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
+    "GTLB": {
+      "name": "GitLab Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GXI": {
+      "name": "Gerresheimer AG",
+      "sector": "MedTech",
+      "subsector": "Packaging",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "Germany",
+      "currency": "EUR"
+    },
+    "HAE": {
+      "name": "Haemonetics Corporation",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HAPV3.SA": {
+      "name": "Hapvida Participacoes e Investimentos SA",
+      "sector": "Healthcare Services",
+      "subsector": "Ex-US Facilities",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "B3",
+      "country_hq": "Brazil",
+      "currency": "BRL"
+    },
+    "HCA": {
+      "name": "HCA Healthcare Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Hospitals",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HCAT": {
+      "name": "Health Catalyst Inc",
+      "sector": "Healthcare Services",
+      "subsector": "HIT",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HCM": {
+      "name": "HUTCHMED (China) Ltd",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Hong Kong",
+      "currency": "USD"
+    },
+    "HCSG": {
+      "name": "Healthcare Services Group Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HESTERBIO.NS": {
+      "name": "Hester Biosciences Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "HIK.L": {
+      "name": "Hikma Pharmaceuticals PLC",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "LSE",
+      "country_hq": "United Kingdom",
+      "currency": "GBp"
+    },
+    "HIKAL.NS": {
+      "name": "Hikal Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "HIMS": {
+      "name": "Hims & Hers Health Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Consumer",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HLUN-B.CO": {
+      "name": "H. Lundbeck A/S",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OMX Copenhagen",
+      "country_hq": "Denmark",
+      "currency": "DKK"
+    },
+    "HNGE": {
+      "name": "Hinge Health Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Benefits",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HOLX": {
+      "name": "Hologic, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HOOD": {
+      "name": "Robinhood Markets Inc",
+      "sector": "Financials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HR": {
+      "name": "Healthcare Realty Trust Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HROW": {
+      "name": "Harrow Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HSIC": {
+      "name": "Henry Schein, Inc.",
+      "sector": "MedTech",
+      "subsector": "Dental",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HTFL": {
+      "name": "HeartFlow, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "AI",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HUBS": {
+      "name": "HubSpot, Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HUM": {
+      "name": "Humana Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Mgd Care",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HYPR": {
+      "name": "Hyperfine Inc",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IART": {
+      "name": "Integra LifeSciences Holdings Corporation",
+      "sector": "MedTech",
+      "subsector": "Orthopedics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ICLR": {
+      "name": "ICON PLC",
+      "sector": "Healthcare Services",
+      "subsector": "CRO",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "Ireland",
+      "currency": "USD"
+    },
+    "ICUI": {
+      "name": "ICU Medical, Inc.",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IDXX": {
+      "name": "IDEXX Laboratories Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Animal Health",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ILMN": {
+      "name": "Illumina, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "NextGen Sequencing",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "INCR": {
+      "name": "InterCure Ltd",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "INDOCO.NS": {
+      "name": "Indoco Remedies Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "INDV": {
+      "name": "Indivior Pharmaceuticals, Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "INMD": {
+      "name": "InMode Ltd.",
+      "sector": "MedTech",
+      "subsector": "Aesthetics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "INSP": {
+      "name": "Inspire Medical Systems, Inc.",
+      "sector": "MedTech",
+      "subsector": "Sleep",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IPCALAB.NS": {
+      "name": "Ipca Laboratories Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "IQV": {
+      "name": "IQVIA Holdings Inc.",
+      "sector": "Healthcare Services",
+      "subsector": "CRO / Health Data",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IRTC": {
+      "name": "iRhythm Holdings, Inc",
+      "sector": "MedTech",
+      "subsector": "Cardiovascular",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IRWD": {
+      "name": "Ironwood Pharmaceuticals, Inc.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ISRG": {
+      "name": "Intuitive Surgical Inc",
+      "sector": "MedTech",
+      "subsector": "Surgery",
+      "sub_subsector": "Surgical Robotics",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ITGR": {
+      "name": "Integer Holdings Corporation",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IXHL": {
+      "name": "Incannex Healthcare Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Australia",
+      "currency": "USD"
+    },
+    "JAN": {
+      "name": "Janus Living Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "Senior Housing REIT",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "JNJ": {
+      "name": "Johnson & Johnson",
+      "sector": "MedTech",
+      "subsector": "Diversified MedTech",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "JPM": {
+      "name": "JPMorgan Chase & Co",
+      "sector": "Financials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "JUBLPHARMA.NS": {
+      "name": "Jubilant Pharmova Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "KIDS": {
+      "name": "OrthoPediatrics Corp.",
+      "sector": "MedTech",
+      "subsector": "Orthopedics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "KKR": {
+      "name": "KKR & Co Inc",
+      "sector": "Financials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "KLTR": {
+      "name": "Kaltura Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "KMDA": {
+      "name": "Kamada Ltd",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "KNSA": {
+      "name": "Kiniksa Pharmaceuticals Internationl PLC",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
+    "KRC": {
+      "name": "Kilroy Realty Corporation",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "KVYO": {
+      "name": "Klaviyo Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LABB.MX": {
+      "name": "Genomma Lab Internacional, S.A.B. de C.V.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "BMV",
+      "country_hq": "Mexico",
+      "currency": "MXN"
+    },
+    "LAURUSLABS.NS": {
+      "name": "Laurus Labs Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "LAW": {
+      "name": "CS Disco Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LFCR": {
+      "name": "Lifecore Biomedical Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LFST": {
+      "name": "Lifestance Health Group Inc",
+      "sector": "Healthcare Services",
+      "subsector": "BH - Facilities",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LH": {
+      "name": "Labcorp Holdings Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Labs",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LIN": {
+      "name": "Linde plc",
+      "sector": "Materials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
+    "LIVN": {
+      "name": "LivaNova PLC",
+      "sector": "MedTech",
+      "subsector": "Cardiovascular",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
+    "LLY": {
+      "name": "Eli Lilly And Co",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LMRI": {
+      "name": "Lumexa Imaging Holdings Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Imaging",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LNTH": {
+      "name": "Lantheus Holdings, Inc.",
+      "sector": "MedTech",
+      "subsector": "Radiopharmaceuticals",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LONN CH": {
+      "name": "Lonza Group AG",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "CDMO",
+      "core": "Y",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
+    "LPSN": {
+      "name": "LivePerson Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LQDA": {
+      "name": "Liquidia Corp",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LTC": {
+      "name": "LTC Properties Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LULU": {
+      "name": "Lululemon Athletica Inc.",
+      "sector": "Consumer",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LUPIN.NS": {
+      "name": "Lupin Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "MA": {
+      "name": "Mastercard Inc",
+      "sector": "Financials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MAIR": {
+      "name": "Madison Air Solutions Corporation",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MANKIND.NS": {
+      "name": "Mankind Pharma Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "MARKSANS.NS": {
+      "name": "Marksans Pharma Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "MASI": {
+      "name": "Masimo Corporation",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MCK": {
+      "name": "McKesson Corp",
+      "sector": "Healthcare Services",
+      "subsector": "Distributors",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MCO": {
+      "name": "Moody's Corp",
+      "sector": "Financials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MD": {
+      "name": "Pediatrix Medical Group Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Providers",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MDA": {
+      "name": "MDA Space Ltd",
+      "sector": "Industrials",
+      "subsector": "Space Tech / Instrumentation",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
+    "MDB": {
+      "name": "Mongodb Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MDLA": {
+      "name": "Medela Potentia Tbk PT",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "IDX",
+      "country_hq": "Indonesia",
+      "currency": "IDR"
+    },
+    "MDLN": {
+      "name": "Medline Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Distributors",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MDT": {
+      "name": "Medtronic plc",
+      "sector": "MedTech",
+      "subsector": "Diversified MedTech",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "Ireland",
+      "currency": "USD"
+    },
+    "MED": {
+      "name": "Medartis Holding AG",
+      "sector": "MedTech",
+      "subsector": "Orthopedics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MEDP": {
+      "name": "Medpace Holdings, Inc.",
+      "sector": "Healthcare Services",
+      "subsector": "CRO",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "META": {
+      "name": "Meta Platforms Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MMED": {
+      "name": "MiniMed Group Inc",
+      "sector": "MedTech",
+      "subsector": "Diabetes",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MMSI": {
+      "name": "Merit Medical Systems, Inc.",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MNDY": {
+      "name": "Monday.Com Ltd",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "MODV": {
+      "name": "ModivCare Inc.",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MOH": {
+      "name": "Molina Healthcare Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Mgd Care",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MOVE": {
+      "name": "Medacta Group SA",
+      "sector": "MedTech",
+      "subsector": "Orthopedics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MPW": {
+      "name": "Medical Properties Trust, Inc.",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MRK": {
+      "name": "Merck & Co Inc",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MRVI": {
+      "name": "Maravai LifeSciences Holdings, Inc.",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MSFT": {
+      "name": "Microsoft Corporation",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MTD": {
+      "name": "Mettler-Toledo International Inc",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "Switzerland",
+      "currency": "USD"
+    },
+    "MYGN": {
+      "name": "Myriad Genetics, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NANEXA.ST": {
+      "name": "Nanexa AB (publ)",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OMX Stockholm",
+      "country_hq": "Sweden",
+      "currency": "SEK"
+    },
+    "NATCOPHARM.NS": {
+      "name": "NATCO Pharma Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "NBIX": {
+      "name": "Neurocrine Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NCNO": {
+      "name": "nCino Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NECLIFE.NS": {
+      "name": "Nectar Lifesciences Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "NEO": {
+      "name": "NeoGenomics, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NET": {
+      "name": "Cloudflare Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NEULANDLAB.NS": {
+      "name": "Neuland Laboratories Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "NFLX": {
+      "name": "Netflix Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NHI": {
+      "name": "National Health Investors Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NHP": {
+      "name": "National Healthcare Properties Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "Senior Housing REIT",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NNOX": {
+      "name": "Nano-X Imaging Ltd.",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "NOVT": {
+      "name": "Novanta Inc.",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NOW": {
+      "name": "ServiceNow, Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NTRA": {
+      "name": "Natera, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NVCR": {
+      "name": "Novocure Limited",
+      "sector": "MedTech",
+      "subsector": "Diversified MedTech",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NVDA": {
+      "name": "NVIDIA Corporation",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NVO": {
+      "name": "Novo Nordisk A/S",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "Denmark",
+      "currency": "USD"
+    },
+    "NVS": {
+      "name": "Novartis AG",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "Switzerland",
+      "currency": "USD"
+    },
+    "NVST": {
+      "name": "Envista Holdings Corporation",
+      "sector": "MedTech",
+      "subsector": "Dental",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OFIX": {
+      "name": "Orthofix Medical Inc.",
+      "sector": "MedTech",
+      "subsector": "Orthopedics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OGN": {
+      "name": "Organon & Co",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OHI": {
+      "name": "Omega Healthcare Investors Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OKTA": {
+      "name": "Okta, Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OMCL": {
+      "name": "Omnicell, Inc.",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OMDA": {
+      "name": "Omada Health, Inc.",
+      "sector": "Healthcare Services",
+      "subsector": "Digital Health",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ONT.L": {
+      "name": "Oxford Nanopore Technologies PLC",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "NextGen Sequencing",
+      "core": "Y",
+      "exchange": "LSE",
+      "country_hq": "United Kingdom",
+      "currency": "GBP"
+    },
+    "ONTF": {
+      "name": "ON24 Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OPCH": {
+      "name": "Option Care Health Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ORCL": {
+      "name": "Oracle Corp",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ORNAV.HE": {
+      "name": "Orion Oyj",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OMX Helsinki",
+      "country_hq": "Finland",
+      "currency": "EUR"
+    },
+    "OS": {
+      "name": "OneStream Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OSCR": {
+      "name": "Oscar Health Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Mgd Care",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OSSFF": {
+      "name": "Embla Medical hf.",
+      "sector": "MedTech",
+      "subsector": "Orthopedics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "OTC",
+      "country_hq": "Iceland",
+      "currency": "USD"
+    },
+    "PACB": {
+      "name": "Pacific Biosciences of California, Inc.",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "Genomics / Sequencing",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PACS": {
+      "name": "PACS Group Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PAHC": {
+      "name": "Phibro Animal Health Corp",
+      "sector": "Healthcare Services",
+      "subsector": "Animal Health",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PANW": {
+      "name": "Palo Alto Networks Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PAYC": {
+      "name": "Paycom Software Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PAYP": {
+      "name": "PayPay Corp",
+      "sector": "Financials",
+      "subsector": "Digital Payments",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Japan",
+      "currency": "USD"
+    },
+    "PCOR": {
+      "name": "Procore Technologies Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PCTY": {
+      "name": "Paylocity Holding Corp",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PD": {
+      "name": "Pagerduty Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PEN": {
+      "name": "Penumbra, Inc.",
+      "sector": "MedTech",
+      "subsector": "Cardiovascular",
+      "sub_subsector": "Peripheral",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PFE": {
+      "name": "Pfizer Inc",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PGNY": {
+      "name": "Progyny Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Benefits",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PHG": {
+      "name": "Koninklijke Philips N.V.",
+      "sector": "MedTech",
+      "subsector": "Sleep",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "Netherlands",
+      "currency": "USD"
+    },
+    "PHN.MI": {
+      "name": "Pharmanutra S.p.A.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Borsa Italiana",
+      "country_hq": "Italy",
+      "currency": "EUR"
+    },
+    "PHR": {
+      "name": "Phreesia Inc",
+      "sector": "Healthcare Services",
+      "subsector": "HIT",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PLSE": {
+      "name": "Pulse Biosciences Inc",
+      "sector": "MedTech",
+      "subsector": "Diversified MedTech",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PNTG": {
+      "name": "Pennant Group Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PODD": {
+      "name": "Insulet Corporation",
+      "sector": "MedTech",
+      "subsector": "Diabetes",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PPGN.SW": {
+      "name": "PolyPeptide Group AG",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
+    "PPLPHARMA.NS": {
+      "name": "Piramal Pharma Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "PRCT": {
+      "name": "PROCEPT BioRobotics Corporation",
+      "sector": "MedTech",
+      "subsector": "Urology",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PRFX": {
+      "name": "PRF Technologies Ltd",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "PRGO": {
+      "name": "Perrigo Company PLC",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "Ireland",
+      "currency": "USD"
+    },
+    "PRVA": {
+      "name": "Privia Health Group Inc",
+      "sector": "Healthcare Services",
+      "subsector": "VBC",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PTC": {
+      "name": "PTC Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PTPI": {
+      "name": "Petros Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "Q": {
+      "name": "Qnity Electronics Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "QDEL": {
+      "name": "QuidelOrtho Corporation",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "QGEN": {
+      "name": "Qiagen N.V.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "Netherlands",
+      "currency": "USD"
+    },
+    "QLYS": {
+      "name": "Qualys Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "QTWO": {
+      "name": "Q2 Holdings Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RAMP": {
+      "name": "Liveramp Holdings Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RBLX": {
+      "name": "Roblox Corp",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RDHL": {
+      "name": "RedHill Biopharma Ltd",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "RDNT": {
+      "name": "Radnet Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Imaging",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RDOR3": {
+      "name": "Rede D'Or Sao Luiz SA",
+      "sector": "Healthcare Services",
+      "subsector": "Ex-US Facilities",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "B3",
+      "country_hq": "Brazil",
+      "currency": "BRL"
+    },
+    "RDY": {
+      "name": "Dr Reddy's Laboratories Ltd",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "India",
+      "currency": "USD"
+    },
+    "REC.MI": {
+      "name": "Recordati Industria Chimica e Farmaceutica S.p.A.",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Borsa Italiana",
+      "country_hq": "Italy",
+      "currency": "EUR"
+    },
+    "RGC": {
+      "name": "Regencell Bioscience Holdings Ltd",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Hong Kong",
+      "currency": "USD"
+    },
+    "RGEN": {
+      "name": "Repligen Corporation",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "Bioprocessing",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RIG2.F": {
+      "name": "Gedeon Richter PLC",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Frankfurt",
+      "country_hq": "Hungary",
+      "currency": "EUR"
+    },
+    "RJF.MC": {
+      "name": "Laboratorio Reig Jofre, S.A.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "BME Madrid",
+      "country_hq": "Spain",
+      "currency": "EUR"
+    },
+    "RMD": {
+      "name": "Resmed Inc",
+      "sector": "MedTech",
+      "subsector": "Sleep",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RMTI": {
+      "name": "Rockwell Medical Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RNG": {
+      "name": "RingCentral Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ROG": {
+      "name": "Rogers Corporation",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "NextGen Sequencing",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ROG.SW": {
+      "name": "Roche",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
+    "ROVI.MC": {
+      "name": "Laboratorios Farmaceuticos Rovi, S.A.",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "BME Madrid",
+      "country_hq": "Spain",
+      "currency": "EUR"
+    },
+    "RPD": {
+      "name": "Rapid7, Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RPGLIFE.NS": {
+      "name": "RPG Life Sciences Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "RVTY": {
+      "name": "Revvity, Inc.",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RXST": {
+      "name": "RxSight, Inc.",
+      "sector": "MedTech",
+      "subsector": "Ophthalmology",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "S": {
+      "name": "SentinelOne Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SAAS": {
+      "name": "Microlise Group PLC",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "LSE",
+      "country_hq": "United Kingdom",
+      "currency": "GBP"
+    },
+    "SAIL": {
+      "name": "Sailpoint Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SANOFI.NS": {
+      "name": "Sanofi India Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "SAP": {
+      "name": "SAP SE",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "Germany",
+      "currency": "USD"
+    },
+    "SBRA": {
+      "name": "Sabra Health Care REIT Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SCI": {
+      "name": "Service Corporation International",
+      "sector": "Healthcare Services",
+      "subsector": "Deathcare",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SCLX": {
+      "name": "Scilex Holding Co",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SCYX": {
+      "name": "SCYNEXIS Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SDGR": {
+      "name": "Schrodinger Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Life Science Software",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SEM": {
+      "name": "Select Medical Holdings Corp",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SEMR": {
+      "name": "Semrush",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SEQUENT.NS": {
+      "name": "Viyash Scientific Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "SFZN.SW": {
+      "name": "Siegfried Holding AG",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
+    "SFZS sW": {
+      "name": "Siegfried Holding AG",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "CDMO",
+      "core": "Y",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
+    "SGHT": {
+      "name": "Sight Sciences, Inc.",
+      "sector": "MedTech",
+      "subsector": "Ophthalmology",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SGRY": {
+      "name": "Surgery Partners Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Outpatient",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SHC": {
+      "name": "Sotera Health Company",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SHL GY": {
+      "name": "Siemens Healthineers AG",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "XETRA",
+      "country_hq": "Germany",
+      "currency": "EUR"
+    },
+    "SHMZF": {
+      "name": "Shimadzu",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "OTC",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "SHOP": {
+      "name": "Shopify Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
+    "SIBN": {
+      "name": "SI-BONE, Inc.",
+      "sector": "MedTech",
+      "subsector": "Orthopedics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SIGA": {
+      "name": "SIGA Technologies Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SILA": {
+      "name": "Sila Realty Trust Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SMWB": {
+      "name": "Similarweb Ltd",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "SNCR": {
+      "name": "Synchronoss Technologies, Inc.",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SNN": {
+      "name": "Smith & Nephew PLC",
+      "sector": "MedTech",
+      "subsector": "Orthopedics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
+    "SNOA": {
+      "name": "Sonoma Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SNOW": {
+      "name": "Snowflake Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SNY": {
+      "name": "Sanofi SA",
+      "sector": "Biopharma",
+      "subsector": "Large Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "France",
+      "currency": "USD"
+    },
+    "SOBI.ST": {
+      "name": "Swedish Orphan Biovitrum AB (publ)",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OMX Stockholm",
+      "country_hq": "Sweden",
+      "currency": "SEK"
+    },
+    "SOLV": {
+      "name": "Solventum Corporation",
+      "sector": "MedTech",
+      "subsector": "Diversified MedTech",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SOON": {
+      "name": "Sonova Holding AG",
+      "sector": "MedTech",
+      "subsector": "Hearing Aid",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
+    "SPARC.NS": {
+      "name": "Sun Pharma Advanced Research Company Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "SPGI": {
+      "name": "S&P Global Inc",
+      "sector": "Financials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SPOT": {
+      "name": "Spotify Technology SA",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "Sweden",
+      "currency": "USD"
+    },
+    "SPSC": {
+      "name": "SPS Commerce Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SPT": {
+      "name": "Sprout Social Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SRT.DE": {
+      "name": "Sartorius AG",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "Bioprocessing",
+      "core": "Y",
+      "exchange": "XETRA",
+      "country_hq": "Germany",
+      "currency": "EUR"
+    },
+    "STAA": {
+      "name": "STAAR Surgical Company",
+      "sector": "MedTech",
+      "subsector": "Ophthalmology",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "STAR.NS": {
+      "name": "Strides Pharma Science Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "STE": {
+      "name": "STERIS plc",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "STMN.SW": {
+      "name": "Straumann Holding AG",
+      "sector": "MedTech",
+      "subsector": "Dental",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
+    "STRW": {
+      "name": "Strawberry Fields Reit Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "STVN": {
+      "name": "Stevanato Group S.p.A.",
+      "sector": "MedTech",
+      "subsector": "Packaging",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "Italy",
+      "currency": "USD"
+    },
+    "SUPN": {
+      "name": "Supernus Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SYK": {
+      "name": "Stryker Corp",
+      "sector": "MedTech",
+      "subsector": "Orthopedics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "Secare SS": {
+      "name": "Sectra AB",
+      "sector": "Healthcare Services",
+      "subsector": "HIT",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "OMX Stockholm",
+      "country_hq": "Sweden",
+      "currency": "SEK"
+    },
+    "TAK": {
+      "name": "Takeda Pharmaceutical Co Ltd",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "Japan",
+      "currency": "USD"
+    },
+    "TALK": {
+      "name": "Talkspace Inc",
+      "sector": "Healthcare Services",
+      "subsector": "HIT",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TCMD": {
+      "name": "Tactile Systems Technology Inc",
+      "sector": "MedTech",
+      "subsector": "Diversified MedTech",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TDOC": {
+      "name": "Teladoc Health Inc",
+      "sector": "Healthcare Services",
+      "subsector": "HIT",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TEAM": {
+      "name": "Atlassian Corporation",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Australia",
+      "currency": "USD"
+    },
+    "TECH": {
+      "name": "Bio-Techne Corporation",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TEM": {
+      "name": "Tempus AI, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TENB": {
+      "name": "Tenable Holdings Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TEVA": {
+      "name": "Teva Pharmaceutical Industries Ltd",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "TFX": {
+      "name": "Teleflex Incorporated",
+      "sector": "MedTech",
+      "subsector": "Urology",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "THC": {
+      "name": "Tenet Healthcare Corp",
+      "sector": "Healthcare Services",
+      "subsector": "Hospitals",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TLPH": {
+      "name": "Talphera Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TLRY": {
+      "name": "Tilray Brands Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
+    "TMDX": {
+      "name": "TransMedics Group Inc",
+      "sector": "MedTech",
+      "subsector": "Diversified MedTech",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TMO": {
+      "name": "Thermo Fisher Scientific Inc",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TNDM": {
+      "name": "Tandem Diabetes Care, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diabetes",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TORNTPHARM.NS": {
+      "name": "Torrent Pharmaceuticals Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "TPL": {
+      "name": "Texas Pacific Land Corp",
+      "sector": "Energy",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TRAK": {
+      "name": "Repositrak Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TSLA": {
+      "name": "Tesla, Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TTAN": {
+      "name": "ServiceTitan Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TWLO": {
+      "name": "Twilio Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TWST": {
+      "name": "Twist Bioscience Corporation",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TXG": {
+      "name": "10x Genomics, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "NextGen Sequencing",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TXMD": {
+      "name": "TherapeuticsMD Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TYL": {
+      "name": "Tyler Technologies Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "U": {
+      "name": "Unity Software Inc",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "UFPT": {
+      "name": "UFP Technologies, Inc.",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "UHS": {
+      "name": "Universal Health Services Inc",
+      "sector": "Healthcare Services",
+      "subsector": "BH - Facilities",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ULS": {
+      "name": "UL Solutions Inc.",
+      "sector": "Industrials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "UNH": {
+      "name": "UnitedHealth Group Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Mgd Care",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "UPLD": {
+      "name": "Upland Software Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "UPS": {
+      "name": "United Parcel Service Inc",
+      "sector": "Industrials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "USPH": {
+      "name": "US Physical Therapy Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "UTHR": {
+      "name": "United Therapeutics Corp",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "V": {
+      "name": "Visa Inc",
+      "sector": "Financials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VCEl": {
+      "name": "Vericel Corporation",
+      "sector": "MedTech",
+      "subsector": "Orthopedics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VCYT": {
+      "name": "Veracyte, Inc.",
+      "sector": "MedTech",
+      "subsector": "Diagnostics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VEEV": {
+      "name": "Veeva Systems Inc.",
+      "sector": "Healthcare Services",
+      "subsector": "HIT",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VETO.PA": {
+      "name": "Vetoquinol SA",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Euronext Paris",
+      "country_hq": "France",
+      "currency": "EUR"
+    },
+    "VIRP.PA": {
+      "name": "Virbac SA",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Euronext Paris",
+      "country_hq": "France",
+      "currency": "EUR"
+    },
+    "VISTN.OL": {
+      "name": "Vistin Pharma ASA",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Oslo Bors",
+      "country_hq": "Norway",
+      "currency": "NOK"
+    },
+    "VLTO": {
+      "name": "Veralto Corp",
+      "sector": "Industrials",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VMD": {
+      "name": "Viemed Healthcare Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Post-Acute",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VREX": {
+      "name": "Varex Imaging Corporation",
+      "sector": "MedTech",
+      "subsector": "Hospital Supply & Equipment",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VTEX": {
+      "name": "VTEX",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "Cayman Islands",
+      "currency": "USD"
+    },
+    "VTR": {
+      "name": "Ventas Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VTRS": {
+      "name": "Viatris Inc",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "WAT": {
+      "name": "Waters Corp",
+      "sector": "MedTech",
+      "subsector": "Life Science Tools",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "WAY": {
+      "name": "Waystar Holding Corp",
+      "sector": "Healthcare Services",
+      "subsector": "HIT",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "WDAY": {
+      "name": "Workday, Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "WELL": {
+      "name": "Welltower Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "WK": {
+      "name": "Workiva Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "WMT": {
+      "name": "Walmart Inc",
+      "sector": "Consumer",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "WST": {
+      "name": "West Pharmaceutical Services Inc",
+      "sector": "MedTech",
+      "subsector": "Packaging",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "XE": {
+      "name": "X-Energy, Inc.",
+      "sector": "Energy",
+      "subsector": "Clean Energy / Nuclear SMR",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "XRAY": {
+      "name": "DENTSPLY SIRONA Inc.",
+      "sector": "MedTech",
+      "subsector": "Dental",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "YEXT": {
+      "name": "Yext Inc",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "YPSN": {
+      "name": "Ypsomed Holding AG",
+      "sector": "MedTech",
+      "subsector": "Packaging",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
+    "YSS": {
+      "name": "York Space Systems Inc",
+      "sector": "Tech",
+      "subsector": "Space / Satellite Manufacturing",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ZBH": {
+      "name": "Zimmer Biomet Holdings, Inc",
+      "sector": "MedTech",
+      "subsector": "Orthopedics",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ZEN": {
+      "name": "Zentek Ltd",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSX",
+      "country_hq": "Canada",
+      "currency": "CAD"
+    },
+    "ZETA": {
+      "name": "Zeta Global Holdings Corp",
+      "sector": "SaaS",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ZM": {
+      "name": "Zoom Communications, Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ZS": {
+      "name": "Zscaler, Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ZTS": {
+      "name": "Zoetis Inc.",
+      "sector": "Healthcare Services",
+      "subsector": "Animal Health",
+      "sub_subsector": "",
+      "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ZYDUSLIFE.NS": {
+      "name": "Zydus Lifesciences Limited",
+      "sector": "Biopharma",
+      "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    }
+  }
+}

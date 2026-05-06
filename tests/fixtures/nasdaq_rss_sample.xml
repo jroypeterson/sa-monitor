@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:ndaq="http://www.nasdaqtrader.com/">
+  <channel>
+    <title>Nasdaq Trade Halt RSS</title>
+    <description>Live trade halts</description>
+    <link>https://www.nasdaqtrader.com/Trader.aspx?id=tradehalts</link>
+    <item>
+      <title>Trade Halt: VRDN</title>
+      <description>Issue Symbol: VRDN; Halt Date: 05/05/2026; Halt Time: 06:55:32; Reason Code: T1</description>
+      <pubDate>Tue, 05 May 2026 06:55:35 -0400</pubDate>
+      <ndaq:IssueSymbol>VRDN</ndaq:IssueSymbol>
+      <ndaq:CompanyName>Viridian Therapeutics, Inc.</ndaq:CompanyName>
+      <ndaq:ReasonCode>T1</ndaq:ReasonCode>
+      <ndaq:HaltDate>05/05/2026</ndaq:HaltDate>
+      <ndaq:HaltTime>06:55:32</ndaq:HaltTime>
+      <ndaq:Market>NASDAQ</ndaq:Market>
+      <ndaq:ResumptionDate></ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime></ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime></ndaq:ResumptionTradeTime>
+    </item>
+    <item>
+      <title>Trade Halt: INSM (resumed)</title>
+      <description>Insmed resume scheduled</description>
+      <pubDate>Tue, 07 Apr 2026 16:17:00 -0400</pubDate>
+      <ndaq:IssueSymbol>INSM</ndaq:IssueSymbol>
+      <ndaq:CompanyName>Insmed Incorporated</ndaq:CompanyName>
+      <ndaq:ReasonCode>T1</ndaq:ReasonCode>
+      <ndaq:HaltDate>04/07/2026</ndaq:HaltDate>
+      <ndaq:HaltTime>16:01:15</ndaq:HaltTime>
+      <ndaq:Market>NASDAQ</ndaq:Market>
+      <ndaq:ResumptionDate>04/07/2026</ndaq:ResumptionDate>
+      <ndaq:ResumptionQuoteTime>16:25:00</ndaq:ResumptionQuoteTime>
+      <ndaq:ResumptionTradeTime>16:30:00</ndaq:ResumptionTradeTime>
+    </item>
+    <item>
+      <title>LULD Pause: AAPL</title>
+      <description>Apple Inc. LULD</description>
+      <pubDate>Tue, 05 May 2026 11:23:45 -0400</pubDate>
+      <ndaq:IssueSymbol>AAPL</ndaq:IssueSymbol>
+      <ndaq:CompanyName>Apple Inc.</ndaq:CompanyName>
+      <ndaq:ReasonCode>LUDP</ndaq:ReasonCode>
+      <ndaq:HaltDate>05/05/2026</ndaq:HaltDate>
+      <ndaq:HaltTime>11:23:45</ndaq:HaltTime>
+      <ndaq:Market>NASDAQ</ndaq:Market>
+    </item>
+  </channel>
+</rss>

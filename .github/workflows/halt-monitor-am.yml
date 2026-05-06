@@ -1,0 +1,55 @@
+name: halt-monitor — AM session
+
+# AM session covers ~09:25 ET (EDT) or ~08:25 ET (EST) through ~15:10 ET (EDT)
+# or ~14:00 ET (EST). Cron is in UTC and not DST-aware, so 13:25 UTC drifts by
+# one hour vs ET twice a year. Pre-open buffer absorbs the EST early-start.
+#
+# Duration 20,100s = 5h35m. End at 19:00 UTC. PM session starts at 19:05 UTC.
+#
+# State persistence: scripts/ci_run.sh commits state/dedup_state_<YYYY-MM-DD>.json
+# back to the repo at end of run so PM session reads the latest state.
+
+on:
+  schedule:
+    - cron: '25 13 * * 1-5'  # 13:25 UTC weekdays
+  workflow_dispatch:
+
+# Prevent overlap if a prior AM run ran long.
+concurrency:
+  group: halt-monitor-session
+  cancel-in-progress: false
+
+permissions:
+  contents: write  # for state-commit-back
+
+jobs:
+  am-session:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350  # 5h50m hard cap (vs 5h35m ci_run duration)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history for clean rebases on state-commit-back
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run halt monitor (AM session)
+        env:
+          SLACK_WEBHOOK_STREET_ACCOUNT: ${{ secrets.SLACK_WEBHOOK_STREET_ACCOUNT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/ci_run.sh am 20100
+
+      - name: Upload event log artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: halt-monitor-am-log-${{ github.run_id }}
+          path: logs/
+          retention-days: 30

@@ -1,0 +1,74 @@
+name: halt-monitor — Watchdog
+
+# Hourly during weekday market window. If either AM or PM session hasn't fired
+# today (cron events on GitHub Actions are best-effort and can be silently
+# dropped during high load), recover by triggering it via gh workflow run.
+#
+# Mirrors the sigma-alert/.github/workflows/sigma-watchdog.yml pattern.
+
+on:
+  schedule:
+    # Every hour 14:00–21:00 UTC weekdays (covers AM + PM windows year-round)
+    - cron: '0 14-21 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  actions: write   # for gh workflow run
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for missed sessions and recover
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          SLACK_WEBHOOK_STREET_ACCOUNT: ${{ secrets.SLACK_WEBHOOK_STREET_ACCOUNT }}
+        run: |
+          set -euo pipefail
+          TODAY=$(date -u +%Y-%m-%d)
+          NOW_HHMM=$(date -u +%H%M)
+
+          recovered=()
+
+          check_session() {
+            local workflow_name="$1"
+            local scheduled_hhmm="$2"
+
+            if [ "$NOW_HHMM" -lt "$scheduled_hhmm" ]; then
+              echo "[$workflow_name] not yet due (scheduled $scheduled_hhmm UTC, now $NOW_HHMM UTC)"
+              return
+            fi
+
+            local count
+            count=$(gh run list \
+              --workflow "$workflow_name" \
+              --created "$TODAY" \
+              --limit 50 \
+              --json databaseId \
+              --jq 'length')
+
+            if [ "$count" -gt 0 ]; then
+              echo "[$workflow_name] OK — $count run(s) today"
+              return
+            fi
+
+            echo "[$workflow_name] MISSING — triggering manual run"
+            gh workflow run "$workflow_name"
+            recovered+=("$workflow_name")
+          }
+
+          check_session "halt-monitor — AM session" "1325"
+          check_session "halt-monitor — PM session" "1905"
+
+          # Slack heartbeat ONLY when we had to recover something — silent on healthy days.
+          if [ "${#recovered[@]}" -gt 0 ]; then
+            list=$(printf '• %s\n' "${recovered[@]}")
+            payload=$(jq -n \
+              --arg text "$(printf ':rotating_light: *halt-monitor watchdog* recovered missed run(s) on %s:\n%s' "$TODAY" "$list")" \
+              '{text: $text, blocks: [{type:"section",text:{type:"mrkdwn",text:$text}}]}')
+            curl -sS -X POST -H 'Content-Type: application/json' \
+              --data "$payload" "$SLACK_WEBHOOK_STREET_ACCOUNT" > /dev/null || \
+              echo "[WARN] Failed to post watchdog Slack heartbeat"
+          fi

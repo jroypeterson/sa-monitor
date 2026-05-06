@@ -1,0 +1,50 @@
+name: halt-monitor — PM session
+
+# PM session covers market close. Starts at 19:05 UTC (5-min gap after AM ends
+# at 19:00 UTC), runs 2h25m → ends 21:30 UTC.
+#   EDT: 15:05 ET → 17:30 ET (covers 16:00 close + 1h30m buffer)
+#   EST: 14:05 ET → 16:30 ET (covers 16:00 close + 30m buffer)
+
+on:
+  schedule:
+    - cron: '5 19 * * 1-5'  # 19:05 UTC weekdays
+  workflow_dispatch:
+
+concurrency:
+  group: halt-monitor-session
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  pm-session:
+    runs-on: ubuntu-latest
+    timeout-minutes: 160  # 2h40m hard cap (vs 2h25m ci_run duration)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run halt monitor (PM session)
+        env:
+          SLACK_WEBHOOK_STREET_ACCOUNT: ${{ secrets.SLACK_WEBHOOK_STREET_ACCOUNT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/ci_run.sh pm 8700
+
+      - name: Upload event log artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: halt-monitor-pm-log-${{ github.run_id }}
+          path: logs/
+          retention-days: 30

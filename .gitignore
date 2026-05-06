@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Project-specific
+# logs/ are committed by ci_run.sh for audit; keep them tracked
+# state/ is committed by ci_run.sh for cross-session dedup; keep tracked
