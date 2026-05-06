@@ -26,7 +26,7 @@ from ..reason_codes import describe, normalize_nyse_reason
 log = logging.getLogger(__name__)
 
 FEED_URL = "https://www.nyse.com/api/trade-halts/current/download"
-USER_AGENT = "sa-monitor/0.1 (jroypeterson@gmail.com)"
+USER_AGENT = "sa-monitor/0.1 (+https://github.com/jroypeterson/sa-monitor)"
 TIMEOUT_SEC = 10
 
 

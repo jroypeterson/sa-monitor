@@ -53,7 +53,7 @@ fi
 
 if [ -z "$(git log --oneline -n 1 2>/dev/null)" ]; then
   git config user.name  "$(git config --global user.name  || echo 'Jason Peterson')"
-  git config user.email "$(git config --global user.email || echo 'jroypeterson@gmail.com')"
+  git config user.email "$(git config --global user.email || echo '19582261+jroypeterson@users.noreply.github.com')"
   git add -A
   git commit -m "sa-monitor Phase 1 initial commit (D1-D8)"
   ok "first commit created"

@@ -22,7 +22,7 @@ from ..reason_codes import describe
 log = logging.getLogger(__name__)
 
 FEED_URL = "https://www.nasdaqtrader.com/rss.aspx?feed=tradehalts"
-USER_AGENT = "sa-monitor/0.1 (jroypeterson@gmail.com)"
+USER_AGENT = "sa-monitor/0.1 (+https://github.com/jroypeterson/sa-monitor)"
 TIMEOUT_SEC = 10
 
 # Custom namespace seen in nasdaqtrader's RSS feed for trade halts.
