@@ -9,6 +9,12 @@ on:
   schedule:
     - cron: '5 19 * * 1-5'  # 19:05 UTC weekdays
   workflow_dispatch:
+    inputs:
+      duration:
+        description: 'Run duration in seconds. Default 8700 (2h25m full session). Use a small value (e.g. 60) for a smoke test.'
+        required: false
+        default: '8700'
+        type: string
 
 concurrency:
   group: halt-monitor-session
@@ -39,7 +45,8 @@ jobs:
         env:
           SLACK_WEBHOOK_STREET_ACCOUNT: ${{ secrets.SLACK_WEBHOOK_STREET_ACCOUNT }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: bash scripts/ci_run.sh pm 8700
+          DURATION: ${{ inputs.duration || '8700' }}
+        run: bash scripts/ci_run.sh pm "$DURATION"
 
       - name: Upload event log artifact
         if: always()

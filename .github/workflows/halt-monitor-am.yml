@@ -13,6 +13,12 @@ on:
   schedule:
     - cron: '25 13 * * 1-5'  # 13:25 UTC weekdays
   workflow_dispatch:
+    inputs:
+      duration:
+        description: 'Run duration in seconds. Default 20100 (5h35m full session). Use a small value (e.g. 60) for a smoke test.'
+        required: false
+        default: '20100'
+        type: string
 
 # Prevent overlap if a prior AM run ran long.
 concurrency:
@@ -44,7 +50,8 @@ jobs:
         env:
           SLACK_WEBHOOK_STREET_ACCOUNT: ${{ secrets.SLACK_WEBHOOK_STREET_ACCOUNT }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: bash scripts/ci_run.sh am 20100
+          DURATION: ${{ inputs.duration || '20100' }}
+        run: bash scripts/ci_run.sh am "$DURATION"
 
       - name: Upload event log artifact
         if: always()
