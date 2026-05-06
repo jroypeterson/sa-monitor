@@ -1,6 +1,6 @@
-# sa-monitor — Session State (updated 2026-05-05)
+# sa-monitor — Session State (updated 2026-05-06)
 
-**STATUS: All 8 build deliverables complete (D1–D8). Pending: GH repo creation + secret config + 1-day live acceptance test.** See `README.md` for the full project overview going forward; this doc remains as the cross-session cliff-notes for non-deliverable side items.
+**STATUS: Deployed to production. Repo public at `jroypeterson/sa-monitor`. AM/PM/watchdog crons live. Only remaining item is the 1-day live acceptance test against Gmail SA halts.** See `README.md` for the full project overview going forward; this doc remains as the cross-session cliff-notes for non-deliverable side items.
 
 ## Quick resume
 
@@ -27,10 +27,10 @@ The new session has everything it needs from this folder.
 
 | Item | Notes |
 |---|---|
-| **GH repo creation** | `gh repo create jroypeterson/sa-monitor --private --source . --push` from the sa-monitor folder. Workflows auto-schedule on first push. |
-| **Repo secret config** | Add `SLACK_WEBHOOK_STREET_ACCOUNT` repo secret pointing at the same webhook URL stored in `Claude Folder/.secrets/slack_webhook_street_account.txt`. |
-| **Manual first-run trigger** | `gh workflow run "halt-monitor — AM session"` to confirm green before relying on the cron. |
-| **Acceptance test** | One full trading day of live operation. Cross-check vs Gmail SA halts: zero false positives required, ≥80% match rate vs SA on coverage names. Per kickoff §"Acceptance test": relaxed latency criterion if data sources don't physically support 30s. |
+| ~~GH repo creation~~ | ✅ Done 2026-05-06. Repo public at `https://github.com/jroypeterson/sa-monitor`. Made public to use free Actions minutes (private repo would have billed ~$69/mo at the 8h/day workflow runtime). |
+| ~~Repo secret config~~ | ✅ Done 2026-05-06. `SLACK_WEBHOOK_STREET_ACCOUNT` registered for Actions. |
+| ~~Manual first-run trigger~~ | ✅ Done 2026-05-06. Smoke run confirmed checkout/Python/deps/main loop all green; cancelled mid-run since markets were closed. AM/PM workflows now accept `-f duration=<seconds>` for cheap manual smokes going forward. |
+| **Acceptance test** | One full trading day of live operation. Cross-check vs Gmail SA halts: zero false positives required, ≥80% match rate vs SA on coverage names. Per kickoff §"Acceptance test": relaxed latency criterion if data sources don't physically support 30s. **Next scheduled cron**: 2026-05-07 13:25 UTC (AM session). |
 
 ## Phase 1 routing decisions (locked)
 
@@ -45,21 +45,23 @@ Recap so next session doesn't re-litigate:
 
 ## Outstanding environmental issues
 
-These are operational items not blocking design but blocking either testing or deployment:
-
-1. **Cowork workspace egress allowlist** — STILL BLOCKED for `nasdaqtrader.com`, `nyse.com`, `hooks.slack.com`, `api.github.com`. The "All domains" UI toggle (Settings → Capabilities) is set but isn't propagating to the workspace sandbox proxy. Confirmed Cowork bug; feedback report drafted earlier in chat. Workaround: run code locally on the Windows machine where egress is unrestricted.
-2. **CM ticker mismatch GH issue** — drafted at `coverage-manager-issue-draft.md`. Not filed because GH API egress is blocked. To file:
+1. **Cowork workspace egress allowlist** — Cowork bug, "All domains" toggle doesn't propagate to sandbox proxy. Workaround: run locally on Windows where egress is unrestricted. Not blocking deployment (production runs on GH Actions where egress is unrestricted).
+2. **CM ticker mismatch GH issue** — drafted at `coverage-manager-issue-draft.md`, not yet filed:
    ```
    gh issue create --repo jroypeterson/coverage-manager \
      --title "Ticker/Company-Name mismatches in coverage_universe_tickers.csv (ADAP, LIAN, MNK, ZOM, FGEN)" \
      --body-file "C:\Users\jroyp\Dropbox\Claude Folder\sa-monitor\coverage-manager-issue-draft.md"
    ```
-3. **GH repo `jroypeterson/sa-monitor`** — not yet created. Will be needed for D7 (GH Actions workflow). To create:
-   ```
-   gh repo create jroypeterson/sa-monitor --private --source . --push
-   ```
-4. **Slack webhook in chat transcript** — webhook URL leaked into this session's transcript via stack trace before redaction caught it. Rotate at Slack app settings → Incoming Webhooks → Regenerate URL on the same config. Channel binding stays; old URL invalidates. After rotation, re-paste the new URL and the runner will pick it up from `Claude Folder/.secrets/slack_webhook_street_account.txt`.
-5. **GitHub PAT** — fine-grained PAT in `Claude Folder/.secrets/gh_pat_claude_issues.txt`, 90-day expiry, scoped to Issues:Read+Write across all `jroypeterson/*` repos. Also leaked into transcript when first pasted; consider rotating before next session if conservative.
+3. **Slack webhook in chat transcript** — old webhook URL leaked into a prior session's transcript via stack trace. Rotate at Slack app settings → Incoming Webhooks → Regenerate URL. After rotation, also update the GH Actions secret (`gh secret set SLACK_WEBHOOK_STREET_ACCOUNT --repo jroypeterson/sa-monitor` from `.secrets/slack_webhook_street_account.txt`).
+4. **GitHub PAT** — fine-grained PAT in `Claude Folder/.secrets/gh_pat_claude_issues.txt`, also leaked into transcript when first pasted. Rotate before next session if conservative.
+
+## Privacy posture (2026-05-06)
+
+Repo is public, so commit history and code are world-readable. Steps taken to scrub personal info before going public:
+- All 3 commits' author/committer fields rewritten to `19582261+jroypeterson@users.noreply.github.com` (force-push to main on a then-private brand-new repo with no collaborators — safe blast radius).
+- Local git config for this repo set to the noreply alias so future commits stay clean automatically.
+- User-Agent in `src/feeds/nasdaq.py` and `src/feeds/nyse.py` uses the `+URL` convention (`sa-monitor/0.1 (+https://github.com/jroypeterson/sa-monitor)`) instead of the real email — same pattern as Googlebot/Slackbot.
+- `scripts/one_shot_deploy.sh` fallback updated to noreply alias.
 
 ## File map
 

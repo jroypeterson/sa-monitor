@@ -2,6 +2,8 @@
 
 Self-hosted recreation of StreetAccount's halt-feed for healthcare and adjacent coverage. Polls NYSE LULD + Nasdaq trade-halt feeds at 5-second cadence, filters to a curated 554-ticker universe sourced from sibling project Coverage Manager, dedupes by halt-id, and posts halt + resume notifications to Slack `#street-account` in real time.
 
+Repo: `https://github.com/jroypeterson/sa-monitor` (public — runs on free GitHub Actions minutes).
+
 Phase 1 of a longer-term StreetAccount-equivalent pipeline. See `phase1-data-sources.md` for the full Phase 1 routing decisions and `template-library.md` for the canonical SA template grammar that downstream phases consume.
 
 ## What it does
@@ -75,19 +77,19 @@ The runtime deployment is two scheduled workflows + a watchdog, modeled on `sigm
 └── halt-monitor-watchdog.yml # Hourly 14:00-21:00 UTC; recovers missed sessions
 ```
 
-**Setup checklist:**
+**Setup checklist (one-time, completed 2026-05-06):**
 
-1. Create the GitHub repo:
-   ```
-   gh repo create jroypeterson/sa-monitor --private --source . --push
-   ```
-2. Add the Slack webhook as a repo secret named `SLACK_WEBHOOK_STREET_ACCOUNT`.
-3. Push the workflows; they auto-schedule.
-4. Manually trigger the AM workflow once to confirm green:
-   ```
-   gh workflow run "halt-monitor — AM session"
-   ```
-5. Watch `#street-account` for the end-of-run heartbeat.
+1. ✅ Repo created at `jroypeterson/sa-monitor` (public).
+2. ✅ `SLACK_WEBHOOK_STREET_ACCOUNT` repo secret configured for Actions.
+3. ✅ Workflows pushed; auto-scheduled.
+4. ✅ AM workflow manually triggered for first-run smoke; setup steps green.
+
+**Manual smoke test going forward.** The AM/PM workflows accept a `duration` input (seconds) on `workflow_dispatch`. Use a small value to exercise the runner without burning a full session:
+```
+gh workflow run "halt-monitor — AM session" -f duration=60
+gh workflow run "halt-monitor — PM session" -f duration=60
+```
+Defaults preserve full session length (20100s AM, 8700s PM) when scheduled by cron. Watch `#street-account` for the end-of-run heartbeat.
 
 **State persistence on Actions.** `scripts/ci_run.sh` commits `state/dedup_state_<YYYY-MM-DD>.json` and `logs/halt_monitor_<date>_<session>.jsonl` back to the repo at end-of-job (via shell trap). The next session reads the latest state via `actions/checkout` at job start. There's a 5-minute gap between AM (ends 19:00 UTC) and PM (starts 19:05 UTC) — this is a known halt-monitor blind spot during market hours; documented and accepted for Phase 1.
 
