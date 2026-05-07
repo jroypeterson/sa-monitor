@@ -11,6 +11,11 @@ on:
     # Every hour 14:00–21:00 UTC weekdays (covers AM + PM windows year-round)
     - cron: '0 14-21 * * 1-5'
   workflow_dispatch:
+    inputs:
+      test_heartbeat:
+        description: 'Force a Slack heartbeat post (for verifying webhook plumbing)'
+        type: boolean
+        default: false
 
 permissions:
   actions: write   # for gh workflow run
@@ -25,6 +30,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           SLACK_WEBHOOK_STREET_ACCOUNT: ${{ secrets.SLACK_WEBHOOK_STREET_ACCOUNT }}
+          TEST_HEARTBEAT: ${{ github.event.inputs.test_heartbeat }}
         run: |
           set -euo pipefail
           TODAY=$(date -u +%Y-%m-%d)
@@ -62,13 +68,22 @@ jobs:
           check_session "halt-monitor — AM session" "1325"
           check_session "halt-monitor — PM session" "1905"
 
+          # Test mode — force a heartbeat to validate the Slack webhook path on demand.
+          if [ "${TEST_HEARTBEAT:-false}" = "true" ] && [ "${#recovered[@]}" -eq 0 ]; then
+            recovered+=("(test heartbeat — no real recovery)")
+          fi
+
           # Slack heartbeat ONLY when we had to recover something — silent on healthy days.
           if [ "${#recovered[@]}" -gt 0 ]; then
             list=$(printf '• %s\n' "${recovered[@]}")
             payload=$(jq -n \
               --arg text "$(printf ':rotating_light: *halt-monitor watchdog* recovered missed run(s) on %s:\n%s' "$TODAY" "$list")" \
               '{text: $text, blocks: [{type:"section",text:{type:"mrkdwn",text:$text}}]}')
+            # Strip stray whitespace/newlines from the secret — GH Actions secrets set
+            # from a file via `cat` may carry a trailing newline, which curl rejects as
+            # an invalid URL ("Port number was not a decimal number between 0 and 65535").
+            webhook_url=$(printf '%s' "$SLACK_WEBHOOK_STREET_ACCOUNT" | tr -d '[:space:]')
             curl -sS -X POST -H 'Content-Type: application/json' \
-              --data "$payload" "$SLACK_WEBHOOK_STREET_ACCOUNT" > /dev/null || \
+              --data "$payload" "$webhook_url" > /dev/null || \
               echo "[WARN] Failed to post watchdog Slack heartbeat"
           fi
