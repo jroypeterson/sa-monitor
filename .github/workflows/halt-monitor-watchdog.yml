@@ -79,11 +79,23 @@ jobs:
             payload=$(jq -n \
               --arg text "$(printf ':rotating_light: *halt-monitor watchdog* recovered missed run(s) on %s:\n%s' "$TODAY" "$list")" \
               '{text: $text, blocks: [{type:"section",text:{type:"mrkdwn",text:$text}}]}')
-            # Strip stray whitespace/newlines from the secret — GH Actions secrets set
-            # from a file via `cat` may carry a trailing newline, which curl rejects as
-            # an invalid URL ("Port number was not a decimal number between 0 and 65535").
-            webhook_url=$(printf '%s' "$SLACK_WEBHOOK_STREET_ACCOUNT" | tr -d '[:space:]')
-            curl -sS -X POST -H 'Content-Type: application/json' \
-              --data "$payload" "$webhook_url" > /dev/null || \
-              echo "[WARN] Failed to post watchdog Slack heartbeat"
+
+            # Diagnostic: byte counts only (the secret itself is masked by GH).
+            raw_len=$(printf '%s' "$SLACK_WEBHOOK_STREET_ACCOUNT" | wc -c)
+            echo "[debug] webhook secret raw byte length: $raw_len"
+
+            # Extract the URL robustly — anchor on https:// and take until first
+            # whitespace. This survives leading garbage (BOM, stray quotes, etc.)
+            # and trailing newlines that earlier tr -d '[:space:]' didn't catch.
+            webhook_url=$(printf '%s' "$SLACK_WEBHOOK_STREET_ACCOUNT" | grep -oE 'https?://[^[:space:]"]+' | head -1)
+            url_len=$(printf '%s' "$webhook_url" | wc -c)
+            echo "[debug] extracted webhook url byte length: $url_len"
+
+            if [ -z "$webhook_url" ]; then
+              echo "[WARN] Could not extract a valid http(s) URL from SLACK_WEBHOOK_STREET_ACCOUNT — skipping heartbeat"
+            else
+              curl -sS -X POST -H 'Content-Type: application/json' \
+                --data "$payload" "$webhook_url" > /dev/null || \
+                echo "[WARN] Failed to post watchdog Slack heartbeat"
+            fi
           fi
