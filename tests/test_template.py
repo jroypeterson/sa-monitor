@@ -73,6 +73,26 @@ def test_render_resume_handles_missing_resume_time():
     assert "VRDN" in out
 
 
+def test_render_halt_with_note_context_inserts_line_before_sector():
+    event = make_event()
+    out = render_halt(
+        event, sector="MedTech", subsector="Med Devices",
+        note_context="Note VRDN is scheduled to report earnings this morning",
+    )
+    lines = out.split("\n")
+    note_idx = next(i for i, l in enumerate(lines) if l.startswith("Note "))
+    sector_idx = next(i for i, l in enumerate(lines) if l.startswith("Sector:"))
+    assert note_idx < sector_idx
+    assert "Note VRDN is scheduled to report earnings this morning" in out
+
+
+def test_render_halt_without_note_context_unchanged():
+    event = make_event()
+    base = render_halt(event, sector="MedTech")
+    explicit_none = render_halt(event, sector="MedTech", note_context=None)
+    assert base == explicit_none
+
+
 def test_date_format_matches_sa_grammar():
     """SA bodies use M/DD/YY (single-digit month, 2-digit day, 2-digit year)."""
     event = make_event(halt_date="2026-05-05", halt_time="06:55:32")

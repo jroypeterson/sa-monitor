@@ -48,13 +48,14 @@ def _ticker_display_name(event: HaltEvent, name_override: str = "") -> str:
 
 
 def render_halt(event: HaltEvent, *, sector: str = "", subsector: str = "",
-                name_override: str = "") -> str:
+                name_override: str = "", note_context: Optional[str] = None) -> str:
     """Render a halt notification — sa-monitor variant.
 
     Phase 1 v0 template (per template-library.md §3):
 
         SA: TICKER [Company halted, news pending]
         HH:MM ET M/DD/YY [TICKER] halted at $X.XX, reason code [CODE - description]
+        Note TICKER is scheduled to report earnings this morning   <-- Phase 2 enrichment
         Sector: {sector} / {subsector}
     """
     name = _ticker_display_name(event, name_override)
@@ -84,6 +85,8 @@ def render_halt(event: HaltEvent, *, sector: str = "", subsector: str = "",
             sector_line += f" / {subsector}"
 
     parts = [headline, body_line]
+    if note_context:
+        parts.append(note_context)
     if sector_line:
         parts.append(sector_line)
     parts.append(f"Source: {event.source} ({event.exchange})")

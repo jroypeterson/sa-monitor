@@ -28,8 +28,10 @@ from pathlib import Path
 from typing import Optional
 
 from . import slack, state
+from .calendars import AnalystDayCalendar, EarningsCalendar
 from .coverage import Universe
 from .dedup import HaltTracker
+from .enrichment import build_note_context
 from .feeds import nasdaq, nyse
 from .feeds.types import HaltEvent
 from .reason_codes import is_phase1_emit_code
@@ -66,10 +68,15 @@ class RunStats:
     resumes_emitted: int = 0
     halts_filtered_out_of_universe: int = 0
     halts_filtered_non_emit_code: int = 0
+    halts_enriched_with_note: int = 0
     slack_posts_succeeded: int = 0
     slack_posts_failed: int = 0
     state_loads: int = 0
     state_saves: int = 0
+    earnings_calendar_loaded: int = 0
+    earnings_calendar_generated_at: Optional[str] = None
+    analyst_days_calendar_loaded: int = 0
+    analyst_days_calendar_generated_at: Optional[str] = None
     feed_health: dict = field(default_factory=lambda: {
         "nasdaq_rss": asdict(FeedHealth()),
         "nyse_csv": asdict(FeedHealth()),
@@ -135,6 +142,8 @@ def _emit(
     stats: RunStats,
     slack_mode: str = "off",
     slack_webhook_url: Optional[str] = None,
+    earnings_calendar: Optional[EarningsCalendar] = None,
+    analyst_days_calendar: Optional[AnalystDayCalendar] = None,
 ) -> None:
     """Filter, render, and emit one halt or resume event."""
     meta = universe.get(event.symbol)
@@ -151,10 +160,22 @@ def _emit(
             _append_log(log_path, kind, event, meta, emitted=False)
         return
 
+    note_context: Optional[str] = None
+    if kind == "halt" and (earnings_calendar is not None or analyst_days_calendar is not None):
+        note_context = build_note_context(
+            event,
+            earnings=earnings_calendar,
+            analyst_days=analyst_days_calendar,
+        )
+        if note_context:
+            stats.halts_enriched_with_note += 1
+            log.info("enriched %s with note: %s", event.symbol, note_context)
+
     if kind == "halt":
         stats.halts_emitted += 1
         rendered = render_halt(event, sector=meta.sector,
-                               subsector=meta.subsector, name_override=meta.name)
+                               subsector=meta.subsector, name_override=meta.name,
+                               note_context=note_context)
     elif kind == "resume":
         stats.resumes_emitted += 1
         rendered = render_resume(event, sector=meta.sector,
@@ -171,20 +192,24 @@ def _emit(
 
     if slack_mode != "off":
         try:
-            poster = slack.post_halt if kind == "halt" else slack.post_resume
-            poster(event, meta, webhook_url=slack_webhook_url,
-                   dry_run=(slack_mode == "dry-run"))
+            if kind == "halt":
+                slack.post_halt(event, meta, webhook_url=slack_webhook_url,
+                                dry_run=(slack_mode == "dry-run"),
+                                note_context=note_context)
+            else:
+                slack.post_resume(event, meta, webhook_url=slack_webhook_url,
+                                  dry_run=(slack_mode == "dry-run"))
             stats.slack_posts_succeeded += 1
         except Exception as exc:
             stats.slack_posts_failed += 1
             log.error("slack post failed for %s: %s", event.symbol, exc)
 
     if log_path:
-        _append_log(log_path, kind, event, meta, emitted=True)
+        _append_log(log_path, kind, event, meta, emitted=True, note_context=note_context)
 
 
 def _append_log(log_path: Path, kind: str, event: HaltEvent, meta,
-                *, emitted: bool) -> None:
+                *, emitted: bool, note_context: Optional[str] = None) -> None:
     log_path.parent.mkdir(parents=True, exist_ok=True)
     record = {
         "ts_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -200,6 +225,7 @@ def _append_log(log_path: Path, kind: str, event: HaltEvent, meta,
         "source": event.source,
         "sector": meta.sector if meta else None,
         "subsector": meta.subsector if meta else None,
+        "note_context": note_context,
     }
     with log_path.open("a", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
@@ -238,10 +264,25 @@ def run(
     slack_mode: str = "off",
     slack_webhook_url: Optional[str] = None,
     persist_state: bool = True,
+    earnings_calendar_path: Optional[Path] = None,
+    analyst_days_calendar_path: Optional[Path] = None,
 ) -> RunStats:
     universe = Universe(universe_path) if universe_path else Universe()
     log.info("loaded universe: %d tickers (%s)", len(universe), universe.filter_rule)
     log.info("slack_mode=%s persist_state=%s", slack_mode, persist_state)
+
+    earnings_calendar = (
+        EarningsCalendar(earnings_calendar_path) if earnings_calendar_path else None
+    )
+    analyst_days_calendar = (
+        AnalystDayCalendar(analyst_days_calendar_path) if analyst_days_calendar_path else None
+    )
+    if earnings_calendar is not None:
+        log.info("earnings calendar: %d events (generated_at=%s)",
+                 earnings_calendar.loaded_count, earnings_calendar.generated_at)
+    if analyst_days_calendar is not None:
+        log.info("analyst-days calendar: %d events (generated_at=%s)",
+                 analyst_days_calendar.loaded_count, analyst_days_calendar.generated_at)
 
     if persist_state:
         state.cleanup_old()
@@ -251,6 +292,12 @@ def run(
 
     stats = RunStats(started_at=datetime.now(timezone.utc).isoformat(timespec="seconds"))
     stats.state_loads = 1 if persist_state else 0
+    if earnings_calendar is not None:
+        stats.earnings_calendar_loaded = earnings_calendar.loaded_count
+        stats.earnings_calendar_generated_at = earnings_calendar.generated_at
+    if analyst_days_calendar is not None:
+        stats.analyst_days_calendar_loaded = analyst_days_calendar.loaded_count
+        stats.analyst_days_calendar_generated_at = analyst_days_calendar.generated_at
     health = {name: FeedHealth(**stats.feed_health[name])
               for name in stats.feed_health}
 
@@ -272,7 +319,9 @@ def run(
             for kind, event in tracker.ingest(nasdaq_events + nyse_events):
                 _emit(kind, event, universe, log_path,
                       include_non_emit=include_non_emit, stats=stats,
-                      slack_mode=slack_mode, slack_webhook_url=slack_webhook_url)
+                      slack_mode=slack_mode, slack_webhook_url=slack_webhook_url,
+                      earnings_calendar=earnings_calendar,
+                      analyst_days_calendar=analyst_days_calendar)
 
             if persist_state:
                 try:
@@ -330,6 +379,10 @@ def main(argv: Optional[list[str]] = None) -> int:
     parser.add_argument("--slack", choices=["off", "dry-run", "live"], default="off")
     parser.add_argument("--no-persist", action="store_true",
                         help="disable dedup-state persistence (default: enabled)")
+    parser.add_argument("--earnings-calendar", type=Path, default=None,
+                        help="path to earnings-agent upcoming_events.json (Phase 2 enrichment)")
+    parser.add_argument("--analyst-days-calendar", type=Path, default=None,
+                        help="path to analyst-days upcoming_events.json (Phase 2 enrichment)")
     args = parser.parse_args(argv)
 
     stats = run(
@@ -337,6 +390,8 @@ def main(argv: Optional[list[str]] = None) -> int:
         log_path=args.log, include_non_emit=args.include_non_emit,
         universe_path=args.universe, slack_mode=args.slack,
         persist_state=not args.no_persist,
+        earnings_calendar_path=args.earnings_calendar,
+        analyst_days_calendar_path=args.analyst_days_calendar,
     )
     print(json.dumps(asdict(stats), indent=2))
     return 0

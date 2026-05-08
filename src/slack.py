@@ -45,7 +45,8 @@ def resolve_webhook_url(env_var: str = ENV_VAR,
     )
 
 
-def build_halt_blocks(event: HaltEvent, meta: Optional[TickerMeta]) -> dict:
+def build_halt_blocks(event: HaltEvent, meta: Optional[TickerMeta],
+                      *, note_context: Optional[str] = None) -> dict:
     name = (meta.name if meta else "") or event.name or event.symbol
     date_short = _format_date_short(event.halt_date)
     time_hhmm = _format_time_hhmm(event.halt_time)
@@ -65,7 +66,11 @@ def build_halt_blocks(event: HaltEvent, meta: Optional[TickerMeta]) -> dict:
         reason_line += f"  ·  Sector: {sector_str}"
 
     source_line = f"_source: {event.source} ({event.exchange})_"
-    text_block = "\n".join([headline, reason_line, source_line])
+    lines = [headline, reason_line]
+    if note_context:
+        lines.append(f"_{note_context}_")
+    lines.append(source_line)
+    text_block = "\n".join(lines)
     fallback = (
         f"SA: {event.symbol} {name} halted, news pending "
         f"({event.reason_code} - {event.reason_description})"
@@ -143,8 +148,9 @@ def post_payload(payload: dict, *, webhook_url: Optional[str] = None,
 
 def post_halt(event: HaltEvent, meta: Optional[TickerMeta], *,
               webhook_url: Optional[str] = None,
-              dry_run: bool = False) -> Optional[dict]:
-    payload = build_halt_blocks(event, meta)
+              dry_run: bool = False,
+              note_context: Optional[str] = None) -> Optional[dict]:
+    payload = build_halt_blocks(event, meta, note_context=note_context)
     if dry_run:
         log.info("slack[dry-run] halt payload for %s:\n%s", event.symbol,
                  json.dumps(payload, indent=2))

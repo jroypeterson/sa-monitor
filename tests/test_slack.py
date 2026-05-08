@@ -78,6 +78,21 @@ def test_halt_blocks_omit_sector_without_meta():
     assert "Sector:" not in payload["blocks"][0]["text"]["text"]
 
 
+def test_halt_blocks_include_note_context_when_provided():
+    payload = build_halt_blocks(
+        make_event(), make_meta(),
+        note_context="Note VRDN is scheduled to report earnings this morning",
+    )
+    text = payload["blocks"][0]["text"]["text"]
+    assert "_Note VRDN is scheduled to report earnings this morning_" in text
+
+
+def test_halt_blocks_omit_note_context_when_absent():
+    payload = build_halt_blocks(make_event(), make_meta())
+    text = payload["blocks"][0]["text"]["text"]
+    assert "Note " not in text
+
+
 def test_halt_blocks_include_price():
     payload = build_halt_blocks(make_event(last_price=14.06), make_meta())
     assert "$14.06" in payload["blocks"][0]["text"]["text"]

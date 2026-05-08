@@ -125,20 +125,31 @@ Both rules live in `scripts/build_universe.py`. To add/remove sectors from the w
 
 A CORRECTION halt fired by SA on a ticker we already alerted on (e.g., RGEN 11/19/25) is currently not auto-handled — Phase 2 work. For Phase 1, manual surface-back via Slack thread reply.
 
-## How to extend for Phase 2
+## Phase 2 — "Note:" context enrichment (slice 1, in progress)
 
-Phase 2 adds the news/PR wire ingest and the SEC 8-K cross-reference layer to enable:
-- The "Note" context line on halt subtypes (`Note ITGR is scheduled to report earnings this morning`)
-- The cross-ref to broken news (`Follows weekend FT report that Neurocrine was near a deal to buy Soleno`)
-- The Follow-up substantive alert (the actual news content after a halt)
+Phase 2 adds the SA editorial "Note" preface line on halt alerts:
+- `Note ITGR is scheduled to report earnings this morning` (earnings same-day)
+- `Note AFRM is hosting an investor day today` (analyst-day same-day)
+- `Note WST is presenting at an investor conference today` (conference)
 
-The architectural seams for Phase 2 are already in place:
-- `src/feeds/types.py:HaltEvent` is extensible — add `note_context: Optional[str]`, `cross_ref: Optional[CrossRef]`, `follow_up: Optional[FollowUp]` fields
-- `src/template.py` has separate `render_halt` / `render_resume` functions — add `render_follow_up` per the §7 template in `template-library.md`
-- `src/slack.py` has `post_halt`, `post_resume`, `post_dm` — add `post_follow_up` as a new function
-- `src/halt_monitor.py:_emit` has a `kind` switch — extend with `"follow_up"` case
+Implemented in `src/enrichment.py` + `src/calendars.py`. Calendars are loaded from local JSON files at session start; pass paths via `--earnings-calendar` and `--analyst-days-calendar` to `python -m src.halt_monitor`. If the path doesn't exist or the file is malformed, that calendar no-ops silently — sa-monitor never fails on missing enrichment data.
 
-The Phase 2 ingest layer (PR Newswire, Business Wire, GlobeNewswire, FT/Bloomberg headline feed) is a new package `src/news/` mirroring `src/feeds/`. The cross-ref-to-halt logic lives in a new `src/enrichment.py` module that joins `HaltEvent` against fresh news within a time window.
+Calendar JSON schema (both):
+```json
+{ "schema_version": 1, "source": "<repo>", "generated_at": "<iso>", "events": [...] }
+```
+
+Earnings event keys: `ticker, event_date (ISO), event_hour (bmo|amc|""), tier, date_confirmed, call_datetime_utc, company_name`. Analyst-day event keys: `ticker, company_name, event_type (investor_day|analyst_day|rd_day|capital_markets_day|conference), start_date, end_date, multi_day, status`.
+
+Both feeds are published by sibling repos (`earnings-agent`, `analyst-days`) to `exports/upcoming_events.json`. sa-monitor's CI fetches them at session start (see `scripts/ci_run.sh`).
+
+Phase 2 follow-on slices (not yet built):
+- News/PR wire ingest (PRN, BW, GNW) → `Follows {source} report that...` cross-ref subtype
+- Follow-up substantive alerts (the actual news content posted ~1-30 min after halt)
+- Biotech re-inclusion in the universe (currently filtered out per Phase 1 design)
+- CORRECTION-handling for SA's CORRECTION-halt edits
+
+Architectural seams for those slices: new `src/news/` package mirroring `src/feeds/`; `_emit` extension with new `kind` values; biotech revisit is a `scripts/build_universe.py` filter change.
 
 For Phases 3-5 (earnings, weekly digests, morning brief), the template skeletons are all locked in `template-library.md` §10–§21. Each phase adds a new generator module + new poll cadence in CI.
 
