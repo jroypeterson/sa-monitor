@@ -15,3 +15,6 @@ venv/
 # Project-specific
 # logs/ are committed by ci_run.sh for audit; keep them tracked
 # state/ is committed by ci_run.sh for cross-session dedup; keep tracked
+# data/calendars/ holds Phase 2 enrichment calendars fetched per-session
+# from sibling repos — transient cache, never commit
+data/calendars/

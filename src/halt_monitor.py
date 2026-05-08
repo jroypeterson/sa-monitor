@@ -241,12 +241,20 @@ def _post_health_heartbeat(stats: RunStats, slack_mode: str,
     if stats.fetch_errors > 0 and not ended_with_error:
         status = "warning"
 
-    summary = (
-        f"halt-monitor run summary: polls={stats.polls_completed}, "
-        f"halts={stats.halts_emitted}, resumes={stats.resumes_emitted}, "
-        f"slack_ok/fail={stats.slack_posts_succeeded}/{stats.slack_posts_failed}, "
-        f"fetch_errors={stats.fetch_errors}"
-    )
+    parts = [
+        f"halt-monitor run summary: polls={stats.polls_completed}",
+        f"halts={stats.halts_emitted}",
+        f"resumes={stats.resumes_emitted}",
+        f"slack_ok/fail={stats.slack_posts_succeeded}/{stats.slack_posts_failed}",
+        f"fetch_errors={stats.fetch_errors}",
+    ]
+    if stats.earnings_calendar_loaded or stats.analyst_days_calendar_loaded:
+        parts.append(
+            f"enriched={stats.halts_enriched_with_note} "
+            f"(earnings={stats.earnings_calendar_loaded}@{stats.earnings_calendar_generated_at or '?'}, "
+            f"analyst_days={stats.analyst_days_calendar_loaded}@{stats.analyst_days_calendar_generated_at or '?'})"
+        )
+    summary = ", ".join(parts[:5]) + (" — " + parts[5] if len(parts) > 5 else "")
     try:
         slack.post_dm(summary, level=status if status in {"ok","warning","error"} else "warning")
     except Exception as exc:

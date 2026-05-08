@@ -22,7 +22,30 @@ DURATION="${2:-3600}"
 TODAY=$(date -u +%Y-%m-%d)
 LOG_FILE="logs/halt_monitor_${TODAY}_${SESSION}.jsonl"
 
-mkdir -p logs state
+# Phase 2 enrichment calendars — fetched fresh each session from sibling
+# public repos. Best-effort: missing/stale calendars only mean the "Note:"
+# context line won't appear on alerts; the halt monitor still runs.
+EARNINGS_CALENDAR_URL="${EARNINGS_CALENDAR_URL:-https://raw.githubusercontent.com/jroypeterson/earnings-agent/main/exports/upcoming_events.json}"
+ANALYST_DAYS_CALENDAR_URL="${ANALYST_DAYS_CALENDAR_URL:-https://raw.githubusercontent.com/jroypeterson/analyst-days/master/exports/upcoming_events.json}"
+EARNINGS_CALENDAR_PATH="data/calendars/earnings_upcoming.json"
+ANALYST_DAYS_CALENDAR_PATH="data/calendars/analyst_days_upcoming.json"
+
+mkdir -p logs state data/calendars
+
+echo "::group::fetch enrichment calendars"
+for pair in "earnings|$EARNINGS_CALENDAR_URL|$EARNINGS_CALENDAR_PATH" \
+            "analyst-days|$ANALYST_DAYS_CALENDAR_URL|$ANALYST_DAYS_CALENDAR_PATH"; do
+  IFS='|' read -r label url out <<< "$pair"
+  if curl -sS -fL --max-time 30 "$url" -o "$out.tmp"; then
+    mv "$out.tmp" "$out"
+    bytes=$(wc -c < "$out")
+    echo "[$label] fetched ${bytes}b -> $out"
+  else
+    rm -f "$out.tmp"
+    echo "[$label] fetch failed; enrichment will no-op for this calendar"
+  fi
+done
+echo "::endgroup::"
 
 echo "::group::ci_run config"
 echo "session=${SESSION}"
@@ -58,8 +81,17 @@ commit_state() {
 }
 trap commit_state EXIT
 
+EXTRA_ARGS=()
+if [ -f "$EARNINGS_CALENDAR_PATH" ]; then
+  EXTRA_ARGS+=(--earnings-calendar "$EARNINGS_CALENDAR_PATH")
+fi
+if [ -f "$ANALYST_DAYS_CALENDAR_PATH" ]; then
+  EXTRA_ARGS+=(--analyst-days-calendar "$ANALYST_DAYS_CALENDAR_PATH")
+fi
+
 python -m src.halt_monitor \
   --slack live \
   --duration "${DURATION}" \
   --interval 5 \
-  --log "${LOG_FILE}"
+  --log "${LOG_FILE}" \
+  "${EXTRA_ARGS[@]}"
