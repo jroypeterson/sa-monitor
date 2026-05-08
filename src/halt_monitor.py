@@ -34,6 +34,8 @@ from .dedup import HaltTracker
 from .enrichment import build_note_context
 from .feeds import nasdaq, nyse
 from .feeds.types import HaltEvent
+from .news import bw, gnw, prnewswire
+from .news.cache import NewsCache
 from .reason_codes import is_phase1_emit_code
 from .template import render_halt, render_resume
 
@@ -47,6 +49,11 @@ log = logging.getLogger("halt_monitor")
 # After this many consecutive failures on a single feed we DM the user.
 # At 5s polling, 60 = ~5 minutes of a feed being unavailable.
 FAILURE_DM_THRESHOLD = 60
+
+# News feeds are slower-moving and rate-conscious — poll every Nth halt
+# tick rather than every tick. At 5s halt cadence, NEWS_POLL_EVERY=6 means
+# news refreshes every ~30s.
+NEWS_POLL_EVERY = 6
 
 
 @dataclass
@@ -69,6 +76,7 @@ class RunStats:
     halts_filtered_out_of_universe: int = 0
     halts_filtered_non_emit_code: int = 0
     halts_enriched_with_note: int = 0
+    halts_enriched_with_cross_ref: int = 0
     slack_posts_succeeded: int = 0
     slack_posts_failed: int = 0
     state_loads: int = 0
@@ -77,9 +85,15 @@ class RunStats:
     earnings_calendar_generated_at: Optional[str] = None
     analyst_days_calendar_loaded: int = 0
     analyst_days_calendar_generated_at: Optional[str] = None
+    news_polls_completed: int = 0
+    news_items_ingested: int = 0
+    news_cache_size: int = 0
     feed_health: dict = field(default_factory=lambda: {
         "nasdaq_rss": asdict(FeedHealth()),
         "nyse_csv": asdict(FeedHealth()),
+        "news_prnewswire": asdict(FeedHealth()),
+        "news_businesswire": asdict(FeedHealth()),
+        "news_globenewswire": asdict(FeedHealth()),
     })
 
 
@@ -144,6 +158,7 @@ def _emit(
     slack_webhook_url: Optional[str] = None,
     earnings_calendar: Optional[EarningsCalendar] = None,
     analyst_days_calendar: Optional[AnalystDayCalendar] = None,
+    news_cache: Optional[NewsCache] = None,
 ) -> None:
     """Filter, render, and emit one halt or resume event."""
     meta = universe.get(event.symbol)
@@ -161,14 +176,19 @@ def _emit(
         return
 
     note_context: Optional[str] = None
-    if kind == "halt" and (earnings_calendar is not None or analyst_days_calendar is not None):
+    if kind == "halt" and (earnings_calendar is not None
+                            or analyst_days_calendar is not None
+                            or news_cache is not None):
         note_context = build_note_context(
             event,
             earnings=earnings_calendar,
             analyst_days=analyst_days_calendar,
+            news_cache=news_cache,
         )
         if note_context:
             stats.halts_enriched_with_note += 1
+            if note_context.startswith("Follows "):
+                stats.halts_enriched_with_cross_ref += 1
             log.info("enriched %s with note: %s", event.symbol, note_context)
 
     if kind == "halt":
@@ -248,12 +268,25 @@ def _post_health_heartbeat(stats: RunStats, slack_mode: str,
         f"slack_ok/fail={stats.slack_posts_succeeded}/{stats.slack_posts_failed}",
         f"fetch_errors={stats.fetch_errors}",
     ]
-    if stats.earnings_calendar_loaded or stats.analyst_days_calendar_loaded:
-        parts.append(
-            f"enriched={stats.halts_enriched_with_note} "
-            f"(earnings={stats.earnings_calendar_loaded}@{stats.earnings_calendar_generated_at or '?'}, "
-            f"analyst_days={stats.analyst_days_calendar_loaded}@{stats.analyst_days_calendar_generated_at or '?'})"
-        )
+    if (stats.earnings_calendar_loaded or stats.analyst_days_calendar_loaded
+            or stats.news_polls_completed):
+        enrich_bits = [f"enriched={stats.halts_enriched_with_note}"]
+        if stats.halts_enriched_with_cross_ref:
+            enrich_bits.append(f"cross_ref={stats.halts_enriched_with_cross_ref}")
+        sources = []
+        if stats.earnings_calendar_loaded:
+            sources.append(
+                f"earnings={stats.earnings_calendar_loaded}@{stats.earnings_calendar_generated_at or '?'}"
+            )
+        if stats.analyst_days_calendar_loaded:
+            sources.append(
+                f"analyst_days={stats.analyst_days_calendar_loaded}@{stats.analyst_days_calendar_generated_at or '?'}"
+            )
+        if stats.news_polls_completed:
+            sources.append(
+                f"news_cache={stats.news_cache_size} ({stats.news_polls_completed} polls)"
+            )
+        parts.append(" ".join(enrich_bits) + " (" + ", ".join(sources) + ")")
     summary = ", ".join(parts[:5]) + (" — " + parts[5] if len(parts) > 5 else "")
     try:
         slack.post_dm(summary, level=status if status in {"ok","warning","error"} else "warning")
@@ -274,6 +307,8 @@ def run(
     persist_state: bool = True,
     earnings_calendar_path: Optional[Path] = None,
     analyst_days_calendar_path: Optional[Path] = None,
+    enable_news_cross_ref: bool = False,
+    news_window_minutes: int = 60,
 ) -> RunStats:
     universe = Universe(universe_path) if universe_path else Universe()
     log.info("loaded universe: %d tickers (%s)", len(universe), universe.filter_rule)
@@ -291,6 +326,12 @@ def run(
     if analyst_days_calendar is not None:
         log.info("analyst-days calendar: %d events (generated_at=%s)",
                  analyst_days_calendar.loaded_count, analyst_days_calendar.generated_at)
+
+    news_cache: Optional[NewsCache] = (
+        NewsCache(window_minutes=news_window_minutes) if enable_news_cross_ref else None
+    )
+    if news_cache is not None:
+        log.info("news cross-ref enabled (window=%dm, sources=PRN/BW/GNW)", news_window_minutes)
 
     if persist_state:
         state.cleanup_old()
@@ -324,12 +365,27 @@ def run(
             stats.nasdaq_events_seen = max(stats.nasdaq_events_seen, len(nasdaq_events))
             stats.nyse_events_seen = max(stats.nyse_events_seen, len(nyse_events))
 
+            # News-feed poll (slower cadence than halt feeds — every Nth tick).
+            # Run BEFORE halt emit so a halt fired this tick can cross-ref news
+            # already in the cache from this poll.
+            if news_cache is not None and stats.polls_completed % NEWS_POLL_EVERY == 0:
+                news_items: list = []
+                for label, mod in [("news_prnewswire", prnewswire),
+                                    ("news_businesswire", bw),
+                                    ("news_globenewswire", gnw)]:
+                    news_items.extend(_safe_fetch(label, mod.fetch, stats, health, slack_mode))
+                added = news_cache.ingest(news_items)
+                stats.news_polls_completed += 1
+                stats.news_items_ingested += added
+                stats.news_cache_size = len(news_cache)
+
             for kind, event in tracker.ingest(nasdaq_events + nyse_events):
                 _emit(kind, event, universe, log_path,
                       include_non_emit=include_non_emit, stats=stats,
                       slack_mode=slack_mode, slack_webhook_url=slack_webhook_url,
                       earnings_calendar=earnings_calendar,
-                      analyst_days_calendar=analyst_days_calendar)
+                      analyst_days_calendar=analyst_days_calendar,
+                      news_cache=news_cache)
 
             if persist_state:
                 try:
@@ -391,6 +447,10 @@ def main(argv: Optional[list[str]] = None) -> int:
                         help="path to earnings-agent upcoming_events.json (Phase 2 enrichment)")
     parser.add_argument("--analyst-days-calendar", type=Path, default=None,
                         help="path to analyst-days upcoming_events.json (Phase 2 enrichment)")
+    parser.add_argument("--news-cross-ref", action="store_true",
+                        help="enable PRN/BW/GNW news cross-ref enrichment (Phase 2 slice 2B)")
+    parser.add_argument("--news-window-minutes", type=int, default=60,
+                        help="lookback window for news cross-ref (default 60min)")
     args = parser.parse_args(argv)
 
     stats = run(
@@ -400,6 +460,8 @@ def main(argv: Optional[list[str]] = None) -> int:
         persist_state=not args.no_persist,
         earnings_calendar_path=args.earnings_calendar,
         analyst_days_calendar_path=args.analyst_days_calendar,
+        enable_news_cross_ref=args.news_cross_ref,
+        news_window_minutes=args.news_window_minutes,
     )
     print(json.dumps(asdict(stats), indent=2))
     return 0

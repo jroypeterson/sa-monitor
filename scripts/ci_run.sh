@@ -89,6 +89,12 @@ if [ -f "$ANALYST_DAYS_CALENDAR_PATH" ]; then
   EXTRA_ARGS+=(--analyst-days-calendar "$ANALYST_DAYS_CALENDAR_PATH")
 fi
 
+# Phase 2 slice 2B: enable news cross-ref (PRN/BW/GNW polled every 30s).
+# Opt-out via DISABLE_NEWS_CROSS_REF=1 if rate-limits become an issue.
+if [ "${DISABLE_NEWS_CROSS_REF:-0}" != "1" ]; then
+  EXTRA_ARGS+=(--news-cross-ref)
+fi
+
 python -m src.halt_monitor \
   --slack live \
   --duration "${DURATION}" \
