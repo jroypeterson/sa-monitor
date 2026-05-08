@@ -377,7 +377,10 @@ def run(
                 added = news_cache.ingest(news_items)
                 stats.news_polls_completed += 1
                 stats.news_items_ingested += added
-                stats.news_cache_size = len(news_cache)
+                # tickers_indexed reflects items currently in the lookback
+                # window (i.e. cross-refable). news_items_ingested is the
+                # cumulative count for dedup auditing.
+                stats.news_cache_size = news_cache.tickers_indexed
 
             for kind, event in tracker.ingest(nasdaq_events + nyse_events):
                 _emit(kind, event, universe, log_path,
