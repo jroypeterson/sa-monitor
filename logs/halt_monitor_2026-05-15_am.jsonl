@@ -1,0 +1,1 @@
+{"ts_utc": "2026-05-15T15:35:20+00:00", "kind": "halt", "emitted": false, "symbol": "EHAB", "exchange": "NYSE", "halt_date": "2026-05-15", "halt_time": "08:38:41", "reason_code": "MERGER EFFECTIVE", "reason_description": "Merger Effective", "resume_trade_time": null, "source": "nyse_csv", "sector": "Healthcare Services", "subsector": "Post-Acute", "note_context": null}
