@@ -1,4 +1,11 @@
 # sa-monitor
+> Self-hosted recreation of StreetAccount's trade-halt feed: polls NYSE LULD + Nasdaq halt feeds every 5s, filters to a ~554-ticker HC universe, and posts halt/resume alerts to Slack `#street-account` in real time.
+
+- **Status:** live
+- **Runtime/trigger:** Python via GitHub Actions (AM session 13:25 UTC, PM session 19:05 UTC, weekdays; hourly watchdog)
+- **Reads:** NYSE LULD CSV + Nasdaq halt RSS (5s poll) · Coverage Manager universe (`data/sa_monitor_universe.json`) · earnings-agent + analyst-days event calendars
+- **Writes:** Slack `#street-account` (halt/resume) · `state/dedup_state_<date>.json` · `logs/*.jsonl` · `#status-reports` (heartbeat/failure)
+- **Run:** `bash scripts/ci_run.sh am 20100` (or `python -m src.halt_monitor --slack live --duration …`)  ·  **Entry points:** `src/halt_monitor.py`, `scripts/ci_run.sh`, `src/slack.py`
 
 Self-hosted recreation of StreetAccount's halt-feed for healthcare and adjacent coverage. Polls NYSE LULD + Nasdaq trade-halt feeds at 5-second cadence, filters to a curated 554-ticker universe sourced from sibling project Coverage Manager, dedupes by halt-id, and posts halt + resume notifications to Slack `#street-account` in real time.
 
