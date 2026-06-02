@@ -12,6 +12,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import time
 from pathlib import Path
 from typing import Optional
 
@@ -30,6 +31,11 @@ ENV_VAR = "SLACK_WEBHOOK_STREET_ACCOUNT"
 
 POST_TIMEOUT_SEC = 10
 SLACK_SECTION_TEXT_LIMIT = 3000
+
+# Backoff for the wake-race: a scheduled task that catches up on wake
+# (StartWhenAvailable) can fire before DNS/WiFi is up, so the first POST dies
+# with a transient transport error. Retry rides through it. See CONVENTIONS s3.
+_RETRY_BACKOFF = (5, 15, 30)  # seconds to wait BEFORE retry attempts 2..N
 
 
 def resolve_webhook_url(env_var: str = ENV_VAR,
@@ -140,8 +146,24 @@ def post_payload(payload: dict, *, webhook_url: Optional[str] = None,
     url = webhook_url or resolve_webhook_url()
     headers = {"Content-Type": "application/json"}
     log.debug("slack: POST (url redacted)")
-    resp = requests.post(url, headers=headers, data=json.dumps(payload),
-                         timeout=timeout)
+    body = json.dumps(payload)
+    # Retry only transient transport errors (DNS-not-ready on wake, etc.); a
+    # successful-but-bad-status response is left to raise_for_status as before.
+    attempts = len(_RETRY_BACKOFF) + 1
+    last_exc = None
+    for i in range(attempts):
+        try:
+            resp = requests.post(url, headers=headers, data=body, timeout=timeout)
+            break
+        except requests.exceptions.RequestException as exc:
+            last_exc = exc
+            if i == attempts - 1:
+                raise
+            delay = _RETRY_BACKOFF[i]
+            log.warning("slack: POST attempt %d/%d failed (%s); retrying in %ds",
+                        i + 1, attempts, exc, delay)
+            if not os.environ.get("PYTEST_CURRENT_TEST"):
+                time.sleep(delay)
     resp.raise_for_status()
     return resp
 
