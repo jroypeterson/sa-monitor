@@ -29,12 +29,12 @@ jobs:
     timeout-minutes: 160  # 2h40m hard cap (vs 2h25m ci_run duration)
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
@@ -50,7 +50,7 @@ jobs:
 
       - name: Upload event log artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: halt-monitor-pm-log-${{ github.run_id }}
           path: logs/
