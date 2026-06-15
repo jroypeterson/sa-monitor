@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-05-05T20:18:30+00:00",
+  "generated_at": "2026-06-15T02:09:06+00:00",
   "source": {
-    "csv_path": "/sessions/amazing-zen-galileo/mnt/Claude Folder/Coverage Manager/exports/universe.csv",
-    "status_path": "/sessions/amazing-zen-galileo/mnt/Claude Folder/Coverage Manager/exports/universe_status.json",
-    "cm_schema_version": 2,
-    "cm_dataset_version": "2026-05-03"
+    "csv_path": "C:\\Users\\jroyp\\Dropbox\\Claude Folder\\Coverage Manager\\exports\\universe.csv",
+    "status_path": "C:\\Users\\jroyp\\Dropbox\\Claude Folder\\Coverage Manager\\exports\\universe_status.json",
+    "cm_schema_version": 3,
+    "cm_dataset_version": "2026-06-12"
   },
   "filter": {
     "rule": "Phase 1 lenient Biopharma exclusion + blank-subsector Biopharma exclusion",
@@ -13,25 +13,25 @@
       "Biotech"
     ],
     "exclude_biopharma_with_blank_subsector": true,
-    "applied_at": "2026-05-05T20:18:30+00:00"
+    "applied_at": "2026-06-15T02:09:06+00:00"
   },
   "counts": {
-    "rows_in_source": 1095,
+    "rows_in_source": 1109,
     "rows_with_no_ticker": 0,
     "rows_excluded_by_subsector_filter": 484,
     "rows_excluded_blank_biopharma": 57,
-    "tickers_in_filtered_universe": 554,
+    "tickers_in_filtered_universe": 568,
     "by_sector": {
       "Biopharma": 164,
-      "MedTech": 142,
+      "MedTech": 141,
       "Healthcare Services": 106,
-      "SaaS": 56,
-      "Tech": 52,
+      "SaaS": 57,
+      "Tech": 55,
+      "Industrials": 13,
+      "Consumer": 12,
       "Financials": 12,
-      "Industrials": 11,
-      "Consumer": 6,
-      "Energy": 3,
-      "Real Estate": 1,
+      "Energy": 5,
+      "Real Estate": 2,
       "Materials": 1
     }
   },
@@ -473,16 +473,6 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
-      "country_hq": "United States",
-      "currency": "USD"
-    },
-    "ACCD": {
-      "name": "Accolade, Inc.",
-      "sector": "Healthcare Services",
-      "subsector": "Benefits",
-      "sub_subsector": "",
-      "core": "Y",
-      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -1376,6 +1366,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "BXDC": {
+      "name": "Blackstone Digital Infrastructure Trust Inc.",
+      "sector": "Real Estate",
+      "subsector": "Data Center REIT",
+      "sub_subsector": "Hyperscale",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "C43.F": {
       "name": "Cosmo Pharmaceuticals N.V.",
       "sector": "Biopharma",
@@ -1406,12 +1406,32 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "CBRS": {
+      "name": "Cerebras Systems Inc.",
+      "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "AI Hardware",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "CCRN": {
       "name": "Cross Country Healthcare, Inc.",
       "sector": "Healthcare Services",
       "subsector": "Nurse staffing",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CENTA": {
+      "name": "Central Garden & Pet Company",
+      "sector": "Consumer",
+      "subsector": "Animal Health",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -1464,6 +1484,16 @@
       "core": "",
       "exchange": "NASDAQ",
       "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "CHWY": {
+      "name": "Chewy, Inc.",
+      "sector": "Consumer",
+      "subsector": "Animal Health",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
       "currency": "USD"
     },
     "CI": {
@@ -2226,16 +2256,6 @@
       "country_hq": "United States",
       "currency": "USD"
     },
-    "EXAS": {
-      "name": "Exact Sciences Corporation",
-      "sector": "MedTech",
-      "subsector": "Diagnostics",
-      "sub_subsector": "",
-      "core": "Y",
-      "exchange": "NASDAQ",
-      "country_hq": "United States",
-      "currency": "USD"
-    },
     "EXFY": {
       "name": "Expensify Inc",
       "sector": "SaaS",
@@ -2282,6 +2302,16 @@
       "subsector": "",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FDXF": {
+      "name": "FedEx Freight Corporation",
+      "sector": "Industrials",
+      "subsector": "",
+      "sub_subsector": "LTL",
+      "core": "",
       "exchange": "NYSE",
       "country_hq": "United States",
       "currency": "USD"
@@ -2386,10 +2416,30 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "FRPT": {
+      "name": "Freshpet, Inc.",
+      "sector": "Consumer",
+      "subsector": "Animal Health",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "FRSH": {
       "name": "Freshworks Inc",
       "sector": "SaaS",
       "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FRVO": {
+      "name": "Fervo Energy Co.",
+      "sector": "Energy",
+      "subsector": "Clean Energy / Geothermal",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -2536,11 +2586,11 @@
       "country_hq": "United States",
       "currency": "USD"
     },
-    "GMRE": {
-      "name": "Global Medical REIT Inc",
+    "GMRS": {
+      "name": "GMR Solutions Inc.",
       "sector": "Healthcare Services",
-      "subsector": "Healthcare Real Estate",
-      "sub_subsector": "",
+      "subsector": "Emergency Medical Services",
+      "sub_subsector": "Patient Transport",
       "core": "",
       "exchange": "NYSE",
       "country_hq": "United States",
@@ -2646,6 +2696,16 @@
       "country_hq": "Brazil",
       "currency": "BRL"
     },
+    "HAWK": {
+      "name": "HawkEye 360, Inc.",
+      "sector": "Industrials",
+      "subsector": "Space Tech / Instrumentation",
+      "sub_subsector": "RF SIGINT",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "HCA": {
       "name": "HCA Healthcare Inc",
       "sector": "Healthcare Services",
@@ -2743,16 +2803,6 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
-      "country_hq": "United States",
-      "currency": "USD"
-    },
-    "HOLX": {
-      "name": "Hologic, Inc.",
-      "sector": "MedTech",
-      "subsector": "Diagnostics",
-      "sub_subsector": "",
-      "core": "Y",
-      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -2914,6 +2964,16 @@
       "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
+      "currency": "USD"
+    },
+    "INIO": {
+      "name": "INNIO Group",
+      "sector": "Energy",
+      "subsector": "Power Generation / Gas Engines",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Austria",
       "currency": "USD"
     },
     "INMD": {
@@ -3476,6 +3536,16 @@
       "country_hq": "Israel",
       "currency": "USD"
     },
+    "MOBI": {
+      "name": "Mobia Medical, Inc.",
+      "sector": "MedTech",
+      "subsector": "Neuromodulation",
+      "sub_subsector": "Stroke Recovery",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "MODV": {
       "name": "ModivCare Inc.",
       "sector": "Healthcare Services",
@@ -3506,7 +3576,7 @@
       "country_hq": "United States",
       "currency": "USD"
     },
-    "MPW": {
+    "MPT": {
       "name": "Medical Properties Trust, Inc.",
       "sector": "Healthcare Services",
       "subsector": "Healthcare Real Estate",
@@ -3766,6 +3836,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "OCTV": {
+      "name": "Octave Intelligence plc",
+      "sector": "SaaS",
+      "subsector": "Industrial / Design SaaS",
+      "sub_subsector": "EHS / CAD / ALI",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Sweden",
+      "currency": "USD"
+    },
     "OFIX": {
       "name": "Orthofix Medical Inc.",
       "sector": "MedTech",
@@ -4006,6 +4086,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "PETS": {
+      "name": "PetMed Express, Inc.",
+      "sector": "Consumer",
+      "subsector": "Animal Health",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "PFE": {
       "name": "Pfizer Inc",
       "sector": "Biopharma",
@@ -4200,6 +4290,16 @@
       "name": "Qualys Inc",
       "sector": "Tech",
       "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "QNT": {
+      "name": "Quantinuum Inc.",
+      "sector": "Tech",
+      "subsector": "Quantum Computing",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -4766,6 +4866,16 @@
       "country_hq": "India",
       "currency": "INR"
     },
+    "SPCX": {
+      "name": "Space Exploration Technologies Corp.",
+      "sector": "Tech",
+      "subsector": "Aerospace & Space",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "SPGI": {
       "name": "S&P Global Inc",
       "sector": "Financials",
@@ -4783,7 +4893,7 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
-      "country_hq": "Sweden",
+      "country_hq": "Luxembourg",
       "currency": "USD"
     },
     "SPSC": {
@@ -5093,6 +5203,16 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TRUP": {
+      "name": "Trupanion, Inc.",
+      "sector": "Consumer",
+      "subsector": "Animal Health",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -5446,6 +5566,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "WOOF": {
+      "name": "Petco Health and Wellness Company, Inc.",
+      "sector": "Consumer",
+      "subsector": "Animal Health",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "WST": {
       "name": "West Pharmaceutical Services Inc",
       "sector": "MedTech",
@@ -5473,6 +5603,16 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "XRN": {
+      "name": "Chiron Real Estate Inc",
+      "sector": "Healthcare Services",
+      "subsector": "Healthcare Real Estate",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
       "country_hq": "United States",
       "currency": "USD"
     },

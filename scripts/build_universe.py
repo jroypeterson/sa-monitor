@@ -24,8 +24,8 @@ EXCLUDE_BIOPHARMA_BLANK_SUBSECTOR = True
 
 def main() -> None:
     status = json.loads(CM_UNIVERSE_STATUS.read_text())
-    if status.get("schema_version") != 2:
-        raise SystemExit(f"Coverage Manager schema_version {status.get('schema_version')!r}, expected 2")
+    if status.get("schema_version") != 3:
+        raise SystemExit(f"Coverage Manager schema_version {status.get('schema_version')!r}, expected 3")
     if not status.get("validation_passed"):
         raise SystemExit(f"Coverage Manager universe failed validation: {status.get('validation_errors')!r}")
 
