@@ -4,12 +4,27 @@ name: halt-monitor — Watchdog
 # today (cron events on GitHub Actions are best-effort and can be silently
 # dropped during high load), recover by triggering it via gh workflow run.
 #
+# Two hardening changes (2026-06-15, fixes the recurring PM "failures"):
+#   1) Grace window. GitHub routinely DELIVERS scheduled crons late under load —
+#      the PM cron (19:05 UTC) often slips to ~21:00. The old logic checked the
+#      instant NOW >= scheduled time, saw no run yet, and fired a redundant
+#      workflow_dispatch that then COLLIDED with the late scheduled run in the
+#      `halt-monitor-session` concurrency group — one of the pair ended up
+#      `cancelled` every single PM day, which the fleet digest counted as a
+#      failure (the "4 of 9 failed" report). We now only recover well PAST the
+#      scheduled time, by which point a merely-delayed run has appeared.
+#   2) Healthy-run coverage. A session counts as covered only if a run is still
+#      queued/in_progress OR finished `success`. A `failure`/`cancelled` run no
+#      longer counts as coverage, so a fire-then-fail run triggers recovery
+#      instead of silently masking it.
+#
 # Mirrors the sigma-alert/.github/workflows/sigma-watchdog.yml pattern.
 
 on:
   schedule:
-    # Every hour 14:00–21:00 UTC weekdays (covers AM + PM windows year-round)
-    - cron: '0 14-21 * * 1-5'
+    # Every hour 14:00–23:00 UTC weekdays. Extended past 21:00 so the post-grace
+    # PM recovery check (>= 22:00 UTC) has ticks to run on.
+    - cron: '0 14-23 * * 1-5'
   workflow_dispatch:
     inputs:
       test_heartbeat:
@@ -40,33 +55,39 @@ jobs:
 
           check_session() {
             local workflow_name="$1"
-            local scheduled_hhmm="$2"
+            local recover_after_hhmm="$2"  # scheduled time + grace for GitHub's cron-delivery lag
 
-            if [ "$NOW_HHMM" -lt "$scheduled_hhmm" ]; then
-              echo "[$workflow_name] not yet due (scheduled $scheduled_hhmm UTC, now $NOW_HHMM UTC)"
+            if [ "$NOW_HHMM" -lt "$recover_after_hhmm" ]; then
+              echo "[$workflow_name] within grace window (recover after $recover_after_hhmm UTC, now $NOW_HHMM UTC)"
               return
             fi
 
-            local count
-            count=$(gh run list \
+            # A run "covers" the session only if it is healthy: still queued or
+            # in_progress, or it finished `success`. A failure/cancelled run does
+            # NOT count — otherwise a fire-then-fail run silently masks recovery.
+            local healthy
+            healthy=$(gh run list \
               --workflow "$workflow_name" \
               --created "$TODAY" \
               --limit 50 \
-              --json databaseId \
-              --jq 'length')
+              --json status,conclusion \
+              --jq '[.[] | select(.status=="queued" or .status=="in_progress" or .conclusion=="success")] | length')
 
-            if [ "$count" -gt 0 ]; then
-              echo "[$workflow_name] OK — $count run(s) today"
+            if [ "$healthy" -gt 0 ]; then
+              echo "[$workflow_name] OK — $healthy healthy run(s) today"
               return
             fi
 
-            echo "[$workflow_name] MISSING — triggering manual run"
+            echo "[$workflow_name] MISSING or all-runs-failed — triggering manual run"
             gh workflow run "$workflow_name"
             recovered+=("$workflow_name")
           }
 
-          check_session "halt-monitor — AM session" "1325"
-          check_session "halt-monitor — PM session" "1905"
+          # Recover-after = scheduled time + grace. AM cron 13:25 → 15:30 (2h grace);
+          # PM cron 19:05 → 22:00 (absorbs the observed ~2h PM delivery slip, so the
+          # late-but-fine scheduled run lands and counts before we'd ever dispatch).
+          check_session "halt-monitor — AM session" "1530"
+          check_session "halt-monitor — PM session" "2200"
 
           # Test mode — force a heartbeat to validate the Slack webhook path on demand.
           if [ "${TEST_HEARTBEAT:-false}" = "true" ] && [ "${#recovered[@]}" -eq 0 ]; then

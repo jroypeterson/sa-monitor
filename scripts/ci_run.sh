@@ -63,18 +63,43 @@ commit_state() {
   git config user.name "sa-monitor-ci"
   git config user.email "sa-monitor-ci@users.noreply.github.com"
 
-  # Pull/rebase before push in case watchdog or other workflow committed.
-  git fetch origin "${GITHUB_REF_NAME:-master}" || true
-  git rebase "origin/${GITHUB_REF_NAME:-master}" || git rebase --abort || true
+  local branch="${GITHUB_REF_NAME:-main}"
 
-  # Stage state + log; ignore if no changes
+  # Stage + commit FIRST, then rebase/push. The previous ordering rebased before
+  # staging, so the run's freshly-written (tracked) log file was an unstaged
+  # change and `git rebase` aborted with "cannot rebase: You have unstaged
+  # changes" — the branch never incorporated concurrent commits, the push was
+  # rejected non-fast-forward, and the failure was swallowed. PM runs collide
+  # daily (delayed cron + watchdog dispatch both commit), so PM state/logs were
+  # silently lost since 2026-06-02. Committing first gives rebase a clean tree.
   git add -A state/ logs/ || true
   if git diff --cached --quiet; then
     echo "no state/log changes to commit"
-  else
-    git commit -m "ci: halt-monitor ${SESSION} run for ${TODAY} (exit ${exit_code})"
-    git push "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
-      "HEAD:${GITHUB_REF_NAME:-master}" || echo "push failed (continuing)"
+    echo "::endgroup::"
+    return $exit_code
+  fi
+
+  git commit -m "ci: halt-monitor ${SESSION} run for ${TODAY} (exit ${exit_code})"
+
+  # Push with rebase-retry: another session (or the watchdog) may have advanced
+  # the branch while this 2h25m–5h35m run was active. The working tree is clean
+  # now (commit made), so the rebase won't choke; --autostash guards any stray
+  # unstaged change defensively.
+  local pushed=0 attempt
+  for attempt in 1 2 3 4 5; do
+    if git push "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
+        "HEAD:${branch}"; then
+      pushed=1
+      break
+    fi
+    echo "push attempt ${attempt} rejected — fetch + rebase onto origin/${branch} + retry"
+    git fetch origin "${branch}" || true
+    git rebase --autostash "origin/${branch}" || { git rebase --abort || true; }
+  done
+
+  if [ "$pushed" -ne 1 ]; then
+    # Visible alarm rather than a silent skip (feedback_no_silent_failures).
+    echo "::warning::sa-monitor ${SESSION} ${TODAY}: state/log push FAILED after 5 attempts — this session's state was NOT persisted"
   fi
   echo "::endgroup::"
   return $exit_code

@@ -1,0 +1,7 @@
+# Shell scripts run on Ubuntu in CI — keep them LF so a Windows/Dropbox edit
+# can't silently rewrite them to CRLF and break the `bash` invocation
+# (`#!/usr/bin/env bash\r: bad interpreter`).
+*.sh text eol=lf
+
+# Atomic-write leftovers from Windows + Dropbox rename races (defensive).
+*.tmp.* binary
