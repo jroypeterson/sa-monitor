@@ -58,7 +58,7 @@ release) to triage without opening the terminal.**
 | 7 | Runs unattended and free | ✅ Done | GitHub Actions AM (13:25 UTC) + PM (19:05 UTC) weekdays + hourly watchdog; `scripts/ci_run.sh` |
 | 8 | No silent failures | ✅ Done | Failure DM after 60 consecutive feed failures (~5 min); end-of-run `health/v1`-style heartbeat regardless of outcome; watchdog recovers missed sessions |
 | 9 | Universe stays in sync with the Coverage Manager source of truth | ✅ Done | Regenerated via `scripts/build_universe.py`; CM schema gate bumped v2→**v3** on 2026-06-14 (565af1c), so regeneration tracks CM's current exports |
-| 10 | Cover the names the user actually trades | 🟡 Partial-by-design | HC Svcs / MedTech / Pharma + all non-HC sectors covered; **biotech deliberately excluded in Phase 1** (see §4) |
+| 10 | Cover the names the user actually trades | 🟡 Partial → changing | HC Svcs / MedTech / Pharma + all non-HC sectors covered; biotech excluded in Phase 1 but **re-inclusion is the first Phase 3 step** (JP decision 2026-06-15; see `PHASE3_PLAN.md` §4) |
 
 **Overall verdict: the Phase 1+2 goal is met — the halt feed is live, filtered,
 deduped, context-enriched, and self-monitoring.** The one non-green row is a

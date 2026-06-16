@@ -34,7 +34,7 @@ sa-monitor recreates the *whole* StreetAccount editorial product, phase by phase
 ### What the live halt feed does (Phase 1)
 
 1. **Polls** Nasdaq Trader Trade Halt RSS (`nasdaqtrader.com/rss.aspx?feed=tradehalts`) and NYSE Trade Halt CSV (`nyse.com/api/trade-halts/current/download`) every 5 seconds during market hours.
-2. **Filters** halt events to the sa-monitor coverage universe: 554 tickers covering Healthcare Services, MedTech, Large Pharma + Specialty/Generic Pharma, plus all non-healthcare sectors. Biotech is excluded for Phase 1; will revisit in Phase 2.
+2. **Filters** halt events to the sa-monitor coverage universe: 554 tickers covering Healthcare Services, MedTech, Large Pharma + Specialty/Generic Pharma, plus all non-healthcare sectors. Biotech is excluded today; **re-inclusion is the first Phase 3 step** (JP decision 2026-06-15 — biotech will then be covered by both halts and events; see `PHASE3_PLAN.md` §4).
 3. **Dedupes** by `(symbol, halt_date, halt_time)` across both feeds — the same halt event reported by Nasdaq and NYSE simultaneously emits once.
 4. **Renders** halt + resume notifications using the sa-monitor template variant (sector tag from Coverage Manager taxonomy + raw exchange reason code, both improvements over SA's editorial output).
 5. **Posts** to Slack `#street-account` channel using Block Kit format, plus a JSONL event log for audit.

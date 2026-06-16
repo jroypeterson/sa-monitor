@@ -83,27 +83,33 @@ only adds: classify → extract → render → dedup-as-events → deliver.
   piggyback the in-session 30s news poll — rejected: misses pre-market/evening,
   the prime catalyst windows.)
 
-## 4. The one decision that gates value — biotech
+## 4. Biotech — DECIDED: re-include biotech in the whole universe (option i)
 
 **Trial readouts and FDA approvals are overwhelmingly biotech** (DAZALS, ARVN,
-the §15/§16 captures are all biopharma). But **Phase 1 deliberately excludes
-biotech from the universe** (`build_universe.py` drops `Subsector == Biotech` +
-blank-subsector Biopharma). So an events lane filtered to the current ~554-name
-non-biotech universe would **miss most of the catalysts it exists to catch.**
+the §15/§16 captures are all biopharma), but Phase 1 deliberately excluded biotech
+from the universe (`build_universe.py` drops `Subsector == Biotech` +
+blank-subsector Biopharma). So events needed biotech back.
 
-Options:
-- **(i)** Re-include biotech in the *whole* universe — also adds biotech **halt**
-  noise (the reason it was excluded); couples two decisions.
-- **(ii)** Give the **events lane its own biotech-inclusive universe** — halts stay
-  non-biotech, events filter on a broader list. **← Recommended.** Cleanly decouples
-  the lanes; biotech catalysts surface without changing halt behavior.
-- **(iii)** Ship events non-biotech first — low value; mostly large-pharma/medtech
-  approvals only.
+**JP decision (2026-06-15): re-include biotech in the *whole* universe** — biotech
+is covered by **both** the halt feed and the events lane, on one shared universe.
 
-**This is the call needed before building 3A.** Recommend (ii).
+Implications (accepted):
+- **First build step is a universe change:** remove `EXCLUDE_SUBSECTOR` (Biotech) +
+  `EXCLUDE_BIOPHARMA_BLANK_SUBSECTOR` from `scripts/build_universe.py`, regenerate
+  `data/sa_monitor_universe.json`, commit. This also resolves the long-standing
+  "biotech re-inclusion (Phase 2 follow-on)" item — it ships as part of Phase 3.
+- **The halt feed will now alert on biotech halts too** — frequent and binary, so
+  expect more `#street-account` halt volume. This is the exact tradeoff Phase 1
+  excluded biotech for; explicitly accepted to get biotech catalyst coverage.
+- The foreign-listed biotech names already in CM stay subject to the §9
+  US-feed-coverage limit (no behavior change there).
 
 ## 5. Build slices (each = module + fixtures + tests, ship/verify one at a time)
 
+- **3A.0 — Universe: re-include biotech** (§4). Drop the two biotech excludes in
+  `build_universe.py`, regenerate + commit the universe. Smallest first step;
+  immediately broadens halt coverage and unblocks events. Verify the universe
+  count jumps and spot-check a few biotech names resolve their CM metadata.
 - **3A.1 — Classifier + templates**, fixture-driven (the captured §15/§16 PRs +
   a handful of negatives). No live posting. Proves classify→extract→render.
 - **3A.2 — Event dedup + wire integration**, dry-run against the live wire
@@ -133,12 +139,11 @@ negligible. No Wave-4-style transcript-summary cost lands in sa-monitor (that's 
 - **Wave 5 Street Takeaways** — parked; no sell-side source. Future enhancement
   if a sentiment/broker-note feed becomes available.
 
-## 8. Open questions for JP (just to confirm before 3A)
+## 8. Open questions for JP
 
-1. **§4 biotech:** confirm option (ii) — an events-only biotech-inclusive universe
-   (recommended), vs (i) whole-universe re-include, vs (iii) non-biotech first.
+1. ~~§4 biotech~~ — ✅ DECIDED 2026-06-15: re-include biotech in the whole universe.
 2. **§3D cadence:** OK to add a dedicated ~15-min `events` CI workflow (separate
-   from the halt sessions)?
+   from the halt sessions)? (Assumed yes.)
 3. **Destination:** events → `#street-account` (consolidated), as assumed?
 4. Anything to add to the trial-readout/FDA extraction fields beyond §1's list?
 
