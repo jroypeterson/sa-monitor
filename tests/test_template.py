@@ -93,6 +93,22 @@ def test_render_halt_without_note_context_unchanged():
     assert base == explicit_none
 
 
+def test_render_halt_biotech_includes_triage_cta():
+    """Biotech halts carry the copy-pasteable triage nudge (option A, 2026-06-16)."""
+    event = make_event()
+    out = render_halt(event, sector="Biopharma", subsector="Biotech")
+    assert "Biotech halt — triage this name?" in out
+    assert "`triage VRDN`" in out
+
+
+def test_render_halt_non_biotech_no_triage_cta():
+    """Non-biotech halts must NOT carry the triage nudge."""
+    event = make_event()
+    out = render_halt(event, sector="MedTech", subsector="Diagnostics")
+    assert "triage this name" not in out
+    assert "triage VRDN" not in out
+
+
 def test_date_format_matches_sa_grammar():
     """SA bodies use M/DD/YY (single-digit month, 2-digit day, 2-digit year)."""
     event = make_event(halt_date="2026-05-05", halt_time="06:55:32")

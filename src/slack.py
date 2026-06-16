@@ -20,7 +20,13 @@ import requests
 
 from .coverage import TickerMeta
 from .feeds.types import HaltEvent
-from .template import _format_date_short, _format_price, _format_time_hhmm
+from .template import (
+    _format_date_short,
+    _format_price,
+    _format_time_hhmm,
+    biotech_triage_cta,
+    is_biotech,
+)
 
 log = logging.getLogger(__name__)
 
@@ -75,6 +81,10 @@ def build_halt_blocks(event: HaltEvent, meta: Optional[TickerMeta],
     lines = [headline, reason_line]
     if note_context:
         lines.append(f"_{note_context}_")
+    # Lean halt->triage hand-off (option A): biotech halts carry a copy-pasteable
+    # triage nudge. See root biotech_catalyst_architecture_plan.md §3.
+    if meta and is_biotech(meta.subsector):
+        lines.append(biotech_triage_cta(event.symbol))
     lines.append(source_line)
     text_block = "\n".join(lines)
     fallback = (

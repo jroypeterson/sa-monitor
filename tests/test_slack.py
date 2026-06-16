@@ -78,6 +78,24 @@ def test_halt_blocks_omit_sector_without_meta():
     assert "Sector:" not in payload["blocks"][0]["text"]["text"]
 
 
+def test_halt_blocks_biotech_include_triage_cta():
+    """Biotech halts carry the copy-pasteable triage nudge (option A, 2026-06-16)."""
+    payload = build_halt_blocks(make_event(), make_meta(subsector="Biotech"))
+    text = payload["blocks"][0]["text"]["text"]
+    assert "Biotech halt — triage this name?" in text
+    assert "`triage VRDN`" in text
+
+
+def test_halt_blocks_non_biotech_omit_triage_cta():
+    payload = build_halt_blocks(make_event(), make_meta(subsector="Diagnostics"))
+    assert "triage this name" not in payload["blocks"][0]["text"]["text"]
+
+
+def test_halt_blocks_no_meta_omit_triage_cta():
+    payload = build_halt_blocks(make_event(), None)
+    assert "triage this name" not in payload["blocks"][0]["text"]["text"]
+
+
 def test_halt_blocks_include_note_context_when_provided():
     payload = build_halt_blocks(
         make_event(), make_meta(),

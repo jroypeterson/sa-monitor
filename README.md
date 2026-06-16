@@ -17,7 +17,7 @@ sa-monitor recreates the *whole* StreetAccount editorial product, phase by phase
 |:--:|---|:--:|:--:|
 | **1** | **Trade halts / resumes** (basic, Note-context, news cross-ref, resume, foreign/ADR) | ✅ Locked (§1–9) | ✅ **LIVE** |
 | **2** | **Halt enrichment** — editorial "Note:" preface, press-release cross-ref, calendar context | ✅ Locked | 🟡 **Partly live** — cross-ref + calendar live; Follow-up generation, CORRECTION auto-handling, biotech re-inclusion not built |
-| **3** | **Halt→triage hand-off** — biotech now in-universe (so halts cover it) + a Slack CTA nudging a triage on a halted name | n/a | 🟡 biotech re-include ✅ done; Slack-CTA next |
+| **3** | **Halt→triage hand-off** — biotech now in-universe (so halts cover it) + a Slack nudge on a biotech halt with a copy-pasteable `triage {TICKER}` command | n/a | ✅ biotech re-include + biotech-halt triage nudge both done (2026-06-16) |
 | **4** | **Weekly data products** — GLP-1 Rx Tracker (`^GLP1`), Notable Drug Events (`^BIOEVENTS`) | ✅ Locked (§17–18) | ❌ Not built |
 | **5** | **Morning brief / weekly digests** | ◻️ Skeleton | ❌ Not built |
 

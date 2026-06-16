@@ -47,6 +47,21 @@ def _ticker_display_name(event: HaltEvent, name_override: str = "") -> str:
     return (name_override or event.name or event.symbol).strip()
 
 
+def is_biotech(subsector: str) -> bool:
+    """True when the name's CM subsector is Biotech (case/space-insensitive)."""
+    return (subsector or "").strip().casefold() == "biotech"
+
+
+def biotech_triage_cta(symbol: str) -> str:
+    """Lean halt->triage hand-off nudge for a biotech halt (option A, 2026-06-16).
+
+    sa-monitor can't auto-invoke the Claude-driven biotech_triage, so instead of
+    pretending to trigger it we surface a copy-pasteable command. See the root
+    biotech_catalyst_architecture_plan.md (§3) for why this is human-mediated.
+    """
+    return f":dna: Biotech halt — triage this name?  ->  `triage {symbol}`"
+
+
 def render_halt(event: HaltEvent, *, sector: str = "", subsector: str = "",
                 name_override: str = "", note_context: Optional[str] = None) -> str:
     """Render a halt notification — sa-monitor variant.
@@ -89,6 +104,8 @@ def render_halt(event: HaltEvent, *, sector: str = "", subsector: str = "",
         parts.append(note_context)
     if sector_line:
         parts.append(sector_line)
+    if is_biotech(subsector):
+        parts.append(biotech_triage_cta(event.symbol))
     parts.append(f"Source: {event.source} ({event.exchange})")
     return "\n".join(parts)
 
