@@ -1,19 +1,29 @@
 # sa-monitor
-> Self-hosted recreation of StreetAccount's trade-halt feed: polls NYSE LULD + Nasdaq halt feeds every 5s, filters to a ~554-ticker HC universe, and posts halt/resume alerts to Slack `#street-account` in real time.
+> **Goal: a self-hosted, free recreation of StreetAccount's full editorial feed**, scoped to the user's coverage universe and delivered to Slack `#street-account`. StreetAccount (a paid FactSet product) publishes halt notes, earnings-cycle alerts, clinical/regulatory event alerts, and weekly data trackers; sa-monitor recreates that *signal* without the subscription. **Phase 1 (trade-halt feed) and Phase 2 (halt enrichment) are LIVE; Phases 3–5 (earnings cycle, clinical/regulatory events, weekly data products, morning brief) are spec'd but not yet built.**
 
-- **Status:** live
+- **Status:** live — **Phase 1–2 of 5** (halt feed + enrichment). See the phase roadmap below for what's built vs planned.
 - **Runtime/trigger:** Python via GitHub Actions (AM session 13:25 UTC, PM session 19:05 UTC, weekdays; hourly watchdog)
 - **Reads:** NYSE LULD CSV + Nasdaq halt RSS (5s poll) · Coverage Manager universe (`data/sa_monitor_universe.json`) · earnings-agent + analyst-days event calendars
 - **Writes:** Slack `#street-account` (halt/resume) · `state/dedup_state_<date>.json` · `logs/*.jsonl` · `#status-reports` (heartbeat/failure)
 - **Run:** `bash scripts/ci_run.sh am 20100` (or `python -m src.halt_monitor --slack live --duration …`)  ·  **Entry points:** `src/halt_monitor.py`, `scripts/ci_run.sh`, `src/slack.py`
 
-Self-hosted recreation of StreetAccount's halt-feed for healthcare and adjacent coverage. Polls NYSE LULD + Nasdaq trade-halt feeds at 5-second cadence, filters to a curated 554-ticker universe sourced from sibling project Coverage Manager, dedupes by halt-id, and posts halt + resume notifications to Slack `#street-account` in real time.
-
 Repo: `https://github.com/jroypeterson/sa-monitor` (public — runs on free GitHub Actions minutes).
 
-Phase 1 of a longer-term StreetAccount-equivalent pipeline. See `phase1-data-sources.md` for the full Phase 1 routing decisions and `template-library.md` for the canonical SA template grammar that downstream phases consume.
+## Vision & phase roadmap
 
-## What it does
+sa-monitor recreates the *whole* StreetAccount editorial product, phase by phase. Every phase's output grammar is reverse-engineered from real captured SA emails and "LOCKED" in `template-library.md`; each phase then adds a generator module + a poll cadence in CI. The halt feed shipped first because it's the most time-sensitive and the cheapest to source.
+
+| Phase | Surface (StreetAccount output recreated) | Template spec | Generator status |
+|:--:|---|:--:|:--:|
+| **1** | **Trade halts / resumes** (basic, Note-context, news cross-ref, resume, foreign/ADR) | ✅ Locked (§1–9) | ✅ **LIVE** |
+| **2** | **Halt enrichment** — editorial "Note:" preface, press-release cross-ref, calendar context | ✅ Locked | 🟡 **Partly live** — cross-ref + calendar live; Follow-up generation, CORRECTION auto-handling, biotech re-inclusion not built |
+| **3** | **Earnings cycle** (EPS/Sales print → Metrics Recap → Transcript Intelligence → Street Takeaways) + **clinical/regulatory events** (trial readouts, FDA approvals, investor-day takeaways) | ✅ Locked (§10–16) | ❌ Not built — **next phase; plan in `PHASE3_PLAN.md`** |
+| **4** | **Weekly data products** — GLP-1 Rx Tracker (`^GLP1`), Notable Drug Events (`^BIOEVENTS`) | ✅ Locked (§17–18) | ❌ Not built |
+| **5** | **Morning brief / weekly digests** | ◻️ Skeleton | ❌ Not built |
+
+**Current operational scope = Phase 1 + Phase 2.** Everything below this section documents the live halt feed unless a heading says otherwise. For the full Phase 1 routing decisions see `phase1-data-sources.md`; for the canonical SA template grammar every phase consumes see `template-library.md`; for the Phase 3 build plan see `PHASE3_PLAN.md`.
+
+### What the live halt feed does (Phase 1)
 
 1. **Polls** Nasdaq Trader Trade Halt RSS (`nasdaqtrader.com/rss.aspx?feed=tradehalts`) and NYSE Trade Halt CSV (`nyse.com/api/trade-halts/current/download`) every 5 seconds during market hours.
 2. **Filters** halt events to the sa-monitor coverage universe: 554 tickers covering Healthcare Services, MedTech, Large Pharma + Specialty/Generic Pharma, plus all non-healthcare sectors. Biotech is excluded for Phase 1; will revisit in Phase 2.
@@ -237,7 +247,7 @@ sa-monitor/
 
 sa-monitor reads from but does not write to sibling projects:
 
-- **Coverage Manager** (`../Coverage Manager/`) — read-only dependency. sa-monitor consumes `exports/universe.csv` + `exports/universe_status.json` to build its filtered universe. Schema v2 assertion gates the import.
+- **Coverage Manager** (`../Coverage Manager/`) — read-only dependency. sa-monitor consumes `exports/universe.csv` + `exports/universe_status.json` to build its filtered universe. `build_universe.py` gates on CM schema **v3** (bumped from v2 on 2026-06-14, commit 565af1c).
 - **sigma-alert** (`../sigma-alert/`) — pattern reference. sa-monitor's GH Actions structure mirrors sigma-alert's (cron + watchdog + state-commit-back).
 - **earnings_agent** (`../earnings_agent/`) — Slack app reference. sa-monitor reuses the existing "Earnings Agent Bot" Slack app for the `#street-account` webhook.
 
