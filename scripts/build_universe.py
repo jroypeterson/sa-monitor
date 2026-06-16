@@ -1,8 +1,12 @@
 """Build sa_monitor_universe.json from Coverage Manager exports.
 
-Phase 1 filter (locked 2026-05-05):
-- Drop Subsector (JP) == "Biotech".
-- Drop Biopharma rows with blank Subsector (Coverage Manager has not classified them yet).
+Universe filter history:
+- Phase 1 (locked 2026-05-05): dropped Subsector (JP) == "Biotech" and blank-subsector
+  Biopharma, because biotech halts are frequent/binary and were out of Phase 1 scope.
+- 2026-06-16: **biotech re-included** (JP decision) — biotech halts are now the
+  real-time signal that feeds the biotech catalyst/triage loop (see the root
+  `biotech_catalyst_architecture_plan.md`). Both exclusions are disabled below;
+  the filter mechanism is kept (empty/false) so it's trivially reversible.
 """
 from __future__ import annotations
 
@@ -18,8 +22,10 @@ CM_UNIVERSE_CSV = CM_EXPORTS / "universe.csv"
 CM_UNIVERSE_STATUS = CM_EXPORTS / "universe_status.json"
 OUTPUT_PATH = REPO_ROOT / "data" / "sa_monitor_universe.json"
 
-EXCLUDE_SUBSECTOR = {"Biotech"}
-EXCLUDE_BIOPHARMA_BLANK_SUBSECTOR = True
+# Biotech re-included 2026-06-16 — both exclusions disabled (empty / False).
+# Re-exclude by restoring {"Biotech"} / True.
+EXCLUDE_SUBSECTOR: set[str] = set()
+EXCLUDE_BIOPHARMA_BLANK_SUBSECTOR = False
 
 
 def main() -> None:
@@ -73,7 +79,7 @@ def main() -> None:
             "cm_dataset_version": status.get("dataset_version"),
         },
         "filter": {
-            "rule": "Phase 1 lenient Biopharma exclusion + blank-subsector Biopharma exclusion",
+            "rule": "2026-06-16: biotech re-included; no sector/subsector exclusions",
             "exclude_subsector": sorted(EXCLUDE_SUBSECTOR),
             "exclude_biopharma_with_blank_subsector": EXCLUDE_BIOPHARMA_BLANK_SUBSECTOR,
             "applied_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),

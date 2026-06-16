@@ -1,32 +1,30 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-15T02:09:06+00:00",
+  "generated_at": "2026-06-16T18:07:56+00:00",
   "source": {
     "csv_path": "C:\\Users\\jroyp\\Dropbox\\Claude Folder\\Coverage Manager\\exports\\universe.csv",
     "status_path": "C:\\Users\\jroyp\\Dropbox\\Claude Folder\\Coverage Manager\\exports\\universe_status.json",
     "cm_schema_version": 3,
-    "cm_dataset_version": "2026-06-12"
+    "cm_dataset_version": "2026-06-15"
   },
   "filter": {
-    "rule": "Phase 1 lenient Biopharma exclusion + blank-subsector Biopharma exclusion",
-    "exclude_subsector": [
-      "Biotech"
-    ],
-    "exclude_biopharma_with_blank_subsector": true,
-    "applied_at": "2026-06-15T02:09:06+00:00"
+    "rule": "2026-06-16: biotech re-included; no sector/subsector exclusions",
+    "exclude_subsector": [],
+    "exclude_biopharma_with_blank_subsector": false,
+    "applied_at": "2026-06-16T18:07:56+00:00"
   },
   "counts": {
-    "rows_in_source": 1109,
+    "rows_in_source": 1095,
     "rows_with_no_ticker": 0,
-    "rows_excluded_by_subsector_filter": 484,
-    "rows_excluded_blank_biopharma": 57,
-    "tickers_in_filtered_universe": 568,
+    "rows_excluded_by_subsector_filter": 0,
+    "rows_excluded_blank_biopharma": 0,
+    "tickers_in_filtered_universe": 1095,
     "by_sector": {
-      "Biopharma": 164,
+      "Biopharma": 696,
       "MedTech": 141,
-      "Healthcare Services": 106,
-      "SaaS": 57,
-      "Tech": 55,
+      "Healthcare Services": 105,
+      "Tech": 54,
+      "SaaS": 54,
       "Industrials": 13,
       "Consumer": 12,
       "Financials": 12,
@@ -66,10 +64,40 @@
       "country_hq": "China",
       "currency": "CNY"
     },
+    "002007.SZ": {
+      "name": "Hualan Biological Engineering Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SZSE",
+      "country_hq": "China",
+      "currency": "CNY"
+    },
+    "008930.KS": {
+      "name": "Hanmi Science Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "KRX",
+      "country_hq": "South Korea",
+      "currency": "KRW"
+    },
     "019170.KS": {
       "name": "Shinpoong Pharmaceutical Co.,Ltd",
       "sector": "Biopharma",
       "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "KRX",
+      "country_hq": "South Korea",
+      "currency": "KRW"
+    },
+    "068270.KS": {
+      "name": "Celltrion, Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "KRX",
@@ -85,6 +113,26 @@
       "exchange": "HKEX",
       "country_hq": "China",
       "currency": "HKD"
+    },
+    "1801.HK": {
+      "name": "Innovent Biologics, Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "HKEX",
+      "country_hq": "China",
+      "currency": "HKD"
+    },
+    "196170.KQ": {
+      "name": "ALTEOGEN Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "KOSDAQ",
+      "country_hq": "South Korea",
+      "currency": "KRW"
     },
     "1SXP.DE": {
       "name": "SCHOTT Pharma AG & Co. KGaA",
@@ -106,6 +154,36 @@
       "country_hq": "Saudi Arabia",
       "currency": "SAR"
     },
+    "207940": {
+      "name": "Samsung Biologics Co Ltd",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "KRX",
+      "country_hq": "South Korea",
+      "currency": "KRW"
+    },
+    "2269.HK": {
+      "name": "WuXi Biologics (Cayman) Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "HKEX",
+      "country_hq": "China",
+      "currency": "HKD"
+    },
+    "2359.HK": {
+      "name": "WUXI Apptech",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "HKEX",
+      "country_hq": "China",
+      "currency": "HKD"
+    },
     "2715.HK": {
       "name": "Estun Automation Co Ltd",
       "sector": "Tech",
@@ -115,6 +193,26 @@
       "exchange": "HKEX",
       "country_hq": "China",
       "currency": "HKD"
+    },
+    "300122.SZ": {
+      "name": "Chongqing Zhifei Biological Products Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SZSE",
+      "country_hq": "China",
+      "currency": "CNY"
+    },
+    "300765.SZ": {
+      "name": "CSPC Innovation Pharmaceutical Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SZSE",
+      "country_hq": "China",
+      "currency": "CNY"
     },
     "3320.HK": {
       "name": "China Resources Pharmaceutical Group Limited",
@@ -190,6 +288,26 @@
       "name": "Nippon Shinyaku Co., Ltd.",
       "sector": "Biopharma",
       "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4519": {
+      "name": "Chugai",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4527.T": {
+      "name": "Rohto Pharmaceutical Co.,Ltd.",
+      "sector": "Biopharma",
+      "subsector": "",
       "sub_subsector": "",
       "core": "",
       "exchange": "TSE",
@@ -276,6 +394,16 @@
       "country_hq": "Japan",
       "currency": "JPY"
     },
+    "4565.T": {
+      "name": "Nxera Pharma Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
     "4568.T": {
       "name": "Daiichi Sankyo Company, Limited",
       "sector": "Biopharma",
@@ -306,10 +434,40 @@
       "country_hq": "Japan",
       "currency": "JPY"
     },
+    "4587.T": {
+      "name": "PeptiDream Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
+    "4967.T": {
+      "name": "Kobayashi Pharmaceutical Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSE",
+      "country_hq": "Japan",
+      "currency": "JPY"
+    },
     "600085.SS": {
       "name": "Beijing Tongrentang Co., Ltd",
       "sector": "Biopharma",
       "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SSE",
+      "country_hq": "China",
+      "currency": "CNY"
+    },
+    "600161.SS": {
+      "name": "Beijing Tiantan Biological Products Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "SSE",
@@ -376,6 +534,26 @@
       "country_hq": "China",
       "currency": "CNY"
     },
+    "688578.SS": {
+      "name": "Shanghai Allist Pharmaceuticals Co., Ltd.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SSE",
+      "country_hq": "China",
+      "currency": "CNY"
+    },
+    "6919.TW": {
+      "name": "CALIWAY BIOPHARMACEUTICALS CO L",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TWSE",
+      "country_hq": "Taiwan",
+      "currency": "TWD"
+    },
     "7701.T": {
       "name": "Shimadzu Corporation",
       "sector": "MedTech",
@@ -416,6 +594,16 @@
       "country_hq": "Japan",
       "currency": "JPY"
     },
+    "9926.HK": {
+      "name": "Akeso, Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "HKEX",
+      "country_hq": "China",
+      "currency": "HKD"
+    },
     "A": {
       "name": "Agilent Technologies, Inc.",
       "sector": "MedTech",
@@ -432,6 +620,16 @@
       "subsector": "",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AARD": {
+      "name": "Aardvark Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -466,6 +664,46 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ABCL": {
+      "name": "AbCellera Biologics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
+    "ABEO": {
+      "name": "Abeona Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ABOS": {
+      "name": "Acumen Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ABSI": {
+      "name": "Absci Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "ABT": {
       "name": "Abbott Laboratories",
       "sector": "MedTech",
@@ -473,6 +711,36 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ABUS": {
+      "name": "Arbutus Biopharma Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ACAD": {
+      "name": "ACADIA Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ACET": {
+      "name": "Adicet Bio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -496,6 +764,56 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ACHV": {
+      "name": "Achieve Life Sciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ACIU": {
+      "name": "AC Immune SA",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Switzerland",
+      "currency": "USD"
+    },
+    "ACLX": {
+      "name": "Arcellx Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ACRS": {
+      "name": "Aclaris Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ACRV": {
+      "name": "Acrivon Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "ACVA": {
       "name": "ACV Auctions Inc",
       "sector": "Consumer",
@@ -504,6 +822,26 @@
       "core": "Y",
       "exchange": "NYSE",
       "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ADAG": {
+      "name": "Adagene Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "China",
+      "currency": "USD"
+    },
+    "ADAP": {
+      "name": "Adaptimmune Therapeutics PLC",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
       "currency": "USD"
     },
     "ADBE": {
@@ -516,12 +854,42 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ADCT": {
+      "name": "ADC Therapeutics SA",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "Switzerland",
+      "currency": "USD"
+    },
     "ADI": {
       "name": "Analog Devices Inc",
       "sector": "Tech",
       "subsector": "",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ADIL": {
+      "name": "Adial Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ADMA": {
+      "name": "ADMA Biologics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -556,6 +924,36 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ADXN": {
+      "name": "Addex Therapeutics Ltd - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Switzerland",
+      "currency": "USD"
+    },
+    "AEON": {
+      "name": "Aeon Biopharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AFMD": {
+      "name": "Affimed N.V.",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Netherlands",
+      "currency": "USD"
+    },
     "AFRM": {
       "name": "Affirm Holdings Inc",
       "sector": "Financials",
@@ -585,6 +983,26 @@
       "exchange": "XETRA",
       "country_hq": "Germany",
       "currency": "EUR"
+    },
+    "AGEN": {
+      "name": "Agenus Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AGIO": {
+      "name": "Agios Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
     },
     "AGL": {
       "name": "Agilon Health Inc",
@@ -626,10 +1044,40 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "AIM": {
+      "name": "AIM ImmunoTech Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "AKBA": {
       "name": "Akebia Therapeutics Inc",
       "sector": "Biopharma",
       "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AKTS": {
+      "name": "Aktis Oncology Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ALBT": {
+      "name": "Avalon Globocare Corp",
+      "sector": "Biopharma",
+      "subsector": "",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -645,6 +1093,36 @@
       "exchange": "NYSE",
       "country_hq": "Switzerland",
       "currency": "USD"
+    },
+    "ALDX": {
+      "name": "Aldeyra Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ALEC": {
+      "name": "Alector Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ALGEN.PA": {
+      "name": "genOway Société anonyme",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Euronext Paris",
+      "country_hq": "France",
+      "currency": "EUR"
     },
     "ALGN": {
       "name": "Align Technology, Inc.",
@@ -665,6 +1143,16 @@
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
+    },
+    "ALK-B.CO": {
+      "name": "ALK-Abelló A/S",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OMX Copenhagen",
+      "country_hq": "Denmark",
+      "currency": "DKK"
     },
     "ALKEM.NS": {
       "name": "Alkem Laboratories Limited",
@@ -696,6 +1184,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ALLO": {
+      "name": "Allogene Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "ALM.MC": {
       "name": "Almirall, S.A.",
       "sector": "Biopharma",
@@ -716,6 +1214,56 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ALMS": {
+      "name": "Alumis Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ALNY": {
+      "name": "Alnylam Pharmaceuticals, Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ALOPM.PA": {
+      "name": "Oncodesign Precision Medicine Société anonyme",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Euronext Paris",
+      "country_hq": "France",
+      "currency": "EUR"
+    },
+    "ALSEN.PA": {
+      "name": "Sensorion SA",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Euronext Paris",
+      "country_hq": "France",
+      "currency": "EUR"
+    },
+    "ALT": {
+      "name": "Altimmune Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "ALVO": {
       "name": "Alvotech SA",
       "sector": "Biopharma",
@@ -724,6 +1272,16 @@
       "core": "",
       "exchange": "NASDAQ",
       "country_hq": "Luxembourg",
+      "currency": "USD"
+    },
+    "ALXO": {
+      "name": "ALX Oncology Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
       "currency": "USD"
     },
     "AMGN": {
@@ -765,6 +1323,16 @@
       "exchange": "Borsa Italiana",
       "country_hq": "Italy",
       "currency": "EUR"
+    },
+    "AMPE": {
+      "name": "Ampio Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
+      "country_hq": "United States",
+      "currency": "USD"
     },
     "AMPH": {
       "name": "Amphastar Pharmaceuticals Inc",
@@ -826,6 +1394,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ANAB": {
+      "name": "AnaptysBio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "ANIP": {
       "name": "ANI Pharmaceuticals Inc Common Stock",
       "sector": "Biopharma",
@@ -833,6 +1411,66 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ANIX": {
+      "name": "Anixa Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ANL": {
+      "name": "Adlai Nortye Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Cayman Islands",
+      "currency": "USD"
+    },
+    "ANNX": {
+      "name": "Annexon Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ANRO": {
+      "name": "Alto Neuroscience Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ANTX": {
+      "name": "AN2 Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ANVS": {
+      "name": "Annovis Bio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -846,6 +1484,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "APGE": {
+      "name": "Apogee Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "APLLTD.NS": {
       "name": "Alembic Pharmaceuticals Limited",
       "sector": "Biopharma",
@@ -855,6 +1503,26 @@
       "exchange": "NSE",
       "country_hq": "India",
       "currency": "INR"
+    },
+    "APLT": {
+      "name": "Applied Therapeutics, Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "APM": {
+      "name": "Aptorum Group Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
     },
     "APN.JO": {
       "name": "Aspen Pharmacare Holdings Limited",
@@ -876,10 +1544,40 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "APRE": {
+      "name": "Aprea Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "APTO": {
+      "name": "Aptose Biosciences, Inc.",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
     "AQST": {
       "name": "Aquestive Therapeutics Inc",
       "sector": "Biopharma",
       "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ARCT": {
+      "name": "Arcturus Therapeutics Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -896,6 +1594,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ARDX": {
+      "name": "Ardelyx Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "ARE": {
       "name": "Alexandria Real Estate Equities Inc",
       "sector": "Healthcare Services",
@@ -903,6 +1611,66 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ARGX": {
+      "name": "argenx SE - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Netherlands",
+      "currency": "USD"
+    },
+    "ARMP": {
+      "name": "Armata Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ARQT": {
+      "name": "Arcutis Biotherapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ARTV": {
+      "name": "Artiva Biotherapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ARVN": {
+      "name": "Arvinas Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ARWR": {
+      "name": "Arrowhead Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -936,6 +1704,16 @@
       "country_hq": "Netherlands",
       "currency": "USD"
     },
+    "ASND": {
+      "name": "Ascendis Pharma A/S",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Denmark",
+      "currency": "USD"
+    },
     "ASRT": {
       "name": "Assertio Holdings Inc",
       "sector": "Biopharma",
@@ -956,12 +1734,52 @@
       "country_hq": "Taiwan",
       "currency": "USD"
     },
+    "ATAI": {
+      "name": "AtaiBeckley Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "ATEC": {
       "name": "Alphatec Holdings, Inc.",
       "sector": "MedTech",
       "subsector": "Orthopedics",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ATNM": {
+      "name": "Actinium Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ATORX.ST": {
+      "name": "Alligator Bioscience AB (publ)",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OMX Stockholm",
+      "country_hq": "Sweden",
+      "currency": "SEK"
+    },
+    "ATOS": {
+      "name": "Atossa Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -976,12 +1794,32 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ATRA": {
+      "name": "Atara Biotherapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "ATRC": {
       "name": "AtriCure Inc",
       "sector": "MedTech",
       "subsector": "Cardiovascular",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ATYR": {
+      "name": "aTyr Pharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -996,6 +1834,36 @@
       "country_hq": "Luxembourg",
       "currency": "USD"
     },
+    "AUPH": {
+      "name": "Aurinia Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
+    "AURA": {
+      "name": "Aura Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AUTL": {
+      "name": "Autolus Therapeutics PLC",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
     "AVAH": {
       "name": "Aveanna Healthcare Holdings Inc",
       "sector": "Healthcare Services",
@@ -1005,6 +1873,26 @@
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
+    },
+    "AVBP": {
+      "name": "Arrivent Biopharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AVCT.L": {
+      "name": "Avacta Group Plc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "LSE",
+      "country_hq": "United Kingdom",
+      "currency": "GBp"
     },
     "AVDL": {
       "name": "Avadel Pharmaceuticals PLC",
@@ -1016,6 +1904,16 @@
       "country_hq": "Ireland",
       "currency": "USD"
     },
+    "AVIR": {
+      "name": "Atea Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "AVTR": {
       "name": "Avantor, Inc.",
       "sector": "MedTech",
@@ -1023,6 +1921,16 @@
       "sub_subsector": "Lab Products / Chemicals",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "AVXL": {
+      "name": "Anavex Life Sciences Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -1056,6 +1964,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "AZTR": {
+      "name": "Azitra Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "Ambush DC": {
       "name": "Ambu A/S",
       "sector": "MedTech",
@@ -1066,6 +1984,16 @@
       "country_hq": "Denmark",
       "currency": "DKK"
     },
+    "BANB.SW": {
+      "name": "Bachem Holding AG",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
     "BAND": {
       "name": "Bandwidth Inc",
       "sector": "SaaS",
@@ -1075,6 +2003,16 @@
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
+    },
+    "BAVA.CO": {
+      "name": "Bavarian Nordic A/S",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OMX Copenhagen",
+      "country_hq": "Denmark",
+      "currency": "DKK"
     },
     "BAX": {
       "name": "Baxter International Inc.",
@@ -1096,6 +2034,16 @@
       "country_hq": "Germany",
       "currency": "EUR"
     },
+    "BBIO": {
+      "name": "BridgeBio Pharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "BBNX": {
       "name": "Beta Bionics, Inc.",
       "sector": "MedTech",
@@ -1103,6 +2051,36 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BCAB": {
+      "name": "Bioatla Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BCAX": {
+      "name": "Bicara Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BCLI": {
+      "name": "Brainstorm Cell Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OQB",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -1114,6 +2092,16 @@
       "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BCYC": {
+      "name": "Bicycle Therapeutics PLC",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
       "currency": "USD"
     },
     "BDX": {
@@ -1136,6 +2124,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "BEAM": {
+      "name": "Beam Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "BFLY": {
       "name": "Butterfly Network, Inc.",
       "sector": "MedTech",
@@ -1143,6 +2141,16 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BFRG": {
+      "name": "Bullfrog AI Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -1164,6 +2172,26 @@
       "core": "",
       "exchange": "NYSE",
       "country_hq": "Canada",
+      "currency": "USD"
+    },
+    "BHVN": {
+      "name": "Biohaven Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BIAF": {
+      "name": "bioAffinity Technologies Inc",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
       "currency": "USD"
     },
     "BIIB": {
@@ -1213,6 +2241,46 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BIOA-B.ST": {
+      "name": "BioArctic AB (publ)",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OMX Stockholm",
+      "country_hq": "Sweden",
+      "currency": "SEK"
+    },
+    "BIOCON.NS": {
+      "name": "Biocon Limited",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
+    "BION.SW": {
+      "name": "BB Biotech AG",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
+    "BIOR": {
+      "name": "Biora Therapeutics, Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -1276,6 +2344,36 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "BLRX": {
+      "name": "BioLine RX Ltd - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "BLTE": {
+      "name": "Belite Bio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BMRN": {
+      "name": "Biomarin Pharmaceutical Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "BMY": {
       "name": "Bristol-Myers Squibb Company",
       "sector": "Biopharma",
@@ -1284,6 +2382,26 @@
       "core": "",
       "exchange": "NYSE",
       "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BNTC": {
+      "name": "Benitec Biopharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BNTX": {
+      "name": "BioNTech SE - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Germany",
       "currency": "USD"
     },
     "BOI.PA": {
@@ -1295,6 +2413,26 @@
       "exchange": "Euronext Paris",
       "country_hq": "France",
       "currency": "EUR"
+    },
+    "BOLD": {
+      "name": "Boundless Bio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "BOT.AX": {
+      "name": "Botanix Pharmaceuticals Limited",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "ASX",
+      "country_hq": "Australia",
+      "currency": "AUD"
     },
     "BOX": {
       "name": "Box Inc",
@@ -1316,6 +2454,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "BRNS": {
+      "name": "Barinthus Biotherapeutics PLC - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
     "BRO": {
       "name": "Brown & Brown Inc.",
       "sector": "Financials",
@@ -1335,6 +2483,16 @@
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
+    },
+    "BSLN.SW": {
+      "name": "Basilea Pharmaceutica AG",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
     },
     "BSX": {
       "name": "Boston Scientific Corp",
@@ -1376,6 +2534,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "BYSI": {
+      "name": "Beyondspring Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "C43.F": {
       "name": "Cosmo Pharmaceuticals N.V.",
       "sector": "Biopharma",
@@ -1385,6 +2553,16 @@
       "exchange": "Frankfurt",
       "country_hq": "Ireland",
       "currency": "EUR"
+    },
+    "CABA": {
+      "name": "Cabaletta Bio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
     },
     "CAH": {
       "name": "Cardinal Health Inc",
@@ -1396,6 +2574,76 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "CAI": {
+      "name": "Caris Life Sciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CALA": {
+      "name": "Calithera Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CAMP": {
+      "name": "CAMP4 Therapeutics Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CANF": {
+      "name": "Can Fite Biopharma ADR Representing 300 Ord Shs",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "CAPR": {
+      "name": "Capricor Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CARA": {
+      "name": "Carasent AB (publ)",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Oslo Bors",
+      "country_hq": "Norway",
+      "currency": "NOK"
+    },
+    "CASI": {
+      "name": "CASI Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "China",
+      "currency": "USD"
+    },
     "CAT": {
       "name": "Caterpillar Inc",
       "sector": "Industrials",
@@ -1403,6 +2651,26 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CATX": {
+      "name": "Perspective Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CBIO": {
+      "name": "Crescent Biopharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -1416,12 +2684,42 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "CCCC": {
+      "name": "C4 Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "CCRN": {
       "name": "Cross Country Healthcare, Inc.",
       "sector": "Healthcare Services",
       "subsector": "Nurse staffing",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CDXS": {
+      "name": "Codexis Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CELU": {
+      "name": "Celularity Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -1446,10 +2744,20 @@
       "country_hq": "United States",
       "currency": "USD"
     },
-    "CFLT": {
-      "name": "Confluent, Inc.",
-      "sector": "Tech",
-      "subsector": "",
+    "CGEM": {
+      "name": "Cullinan Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CGON": {
+      "name": "CG Oncology Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -1486,6 +2794,16 @@
       "country_hq": "Israel",
       "currency": "USD"
     },
+    "CHRS": {
+      "name": "Coherus Oncology Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "CHWY": {
       "name": "Chewy, Inc.",
       "sector": "Consumer",
@@ -1516,6 +2834,16 @@
       "country_hq": "Canada",
       "currency": "USD"
     },
+    "CING": {
+      "name": "Cingulate Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "CIPLA.NS": {
       "name": "Cipla Limited",
       "sector": "Biopharma",
@@ -1525,6 +2853,26 @@
       "exchange": "NSE",
       "country_hq": "India",
       "currency": "INR"
+    },
+    "CLDX": {
+      "name": "Celldex Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CLLS": {
+      "name": "Cellectis SA",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "France",
+      "currency": "USD"
     },
     "CLN.WA": {
       "name": "Celon Pharma S.A.",
@@ -1542,6 +2890,36 @@
       "subsector": "Mgd Care",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CLS.JO": {
+      "name": "Clicks Group Limited",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "JSE",
+      "country_hq": "South Africa",
+      "currency": "ZAc"
+    },
+    "CLSD": {
+      "name": "Clearside Biomedical, Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CMPX": {
+      "name": "Compass Therapeutics Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -1573,6 +2951,46 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CNTA": {
+      "name": "Centessa Pharmaceuticals PLC - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
+    "CNTX": {
+      "name": "Context Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "COCP": {
+      "name": "Cocrystal Pharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "COGT": {
+      "name": "Cogent Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -1646,6 +3064,26 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "CORT": {
+      "name": "Corcept Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "COYA": {
+      "name": "Coya Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "CP": {
       "name": "Canadian Pacific Kansas City Ltd",
       "sector": "Industrials",
@@ -1676,6 +3114,36 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "CPRX": {
+      "name": "Catalyst Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CRBP": {
+      "name": "Corbus Pharmaceuticals Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CRIS": {
+      "name": "Curis Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "CRL": {
       "name": "Charles River Lbrtrs ntrntl Inc",
       "sector": "Healthcare Services",
@@ -1696,6 +3164,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "CRMD": {
+      "name": "CorMedix Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "CRNO-B.ST": {
       "name": "Cereno Scientific AB (publ)",
       "sector": "Biopharma",
@@ -1705,6 +3183,16 @@
       "exchange": "OMX Stockholm",
       "country_hq": "Sweden",
       "currency": "SEK"
+    },
+    "CRNX": {
+      "name": "Crinetics Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
     },
     "CROX": {
       "name": "Crocs Inc",
@@ -1716,6 +3204,36 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "CRSP": {
+      "name": "Crispr Therapeutics AG",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Switzerland",
+      "currency": "USD"
+    },
+    "CRVO": {
+      "name": "CervoMed Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CRVS": {
+      "name": "Corvus Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "CRWD": {
       "name": "CrowdStrike Holdings, Inc.",
       "sector": "Tech",
@@ -1723,6 +3241,16 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CSL": {
+      "name": "CSL Ltd",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -1756,6 +3284,26 @@
       "country_hq": "United Kingdom",
       "currency": "GBp"
     },
+    "CTMX": {
+      "name": "CytomX Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CTNM": {
+      "name": "Contineum Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "CTRE": {
       "name": "Caretrust REIT Inc",
       "sector": "Healthcare Services",
@@ -1763,6 +3311,46 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CTSO": {
+      "name": "Cytosorbents Corp",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CTX.WA": {
+      "name": "Captor Therapeutics Spolka Akcyjna",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "WSE",
+      "country_hq": "Poland",
+      "currency": "PLN"
+    },
+    "CTXR": {
+      "name": "Citius Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CUE": {
+      "name": "Cue Biopharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -1775,6 +3363,46 @@
       "exchange": "SIX",
       "country_hq": "Switzerland",
       "currency": "CHF"
+    },
+    "CUV.AX": {
+      "name": "Clinuvel Pharmaceuticals Limited",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "ASX",
+      "country_hq": "Australia",
+      "currency": "AUD"
+    },
+    "CVAC": {
+      "name": "CureVac N.V.",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Germany",
+      "currency": "USD"
+    },
+    "CVKD": {
+      "name": "Cadrenal Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CVM": {
+      "name": "CEL-SCI Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
     },
     "CVNA": {
       "name": "Carvana Co",
@@ -1826,6 +3454,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "CYBN": {
+      "name": "Cybin Inc",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
     "CYBR": {
       "name": "CyberArk Software Ltd",
       "sector": "Tech",
@@ -1836,6 +3474,16 @@
       "country_hq": "Israel",
       "currency": "USD"
     },
+    "CYCN": {
+      "name": "Cyclerion Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "CYH": {
       "name": "Community Health Systems Inc",
       "sector": "Healthcare Services",
@@ -1843,6 +3491,26 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CYTK": {
+      "name": "Cytokinetics, Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "CYTO": {
+      "name": "Cytophage Technologies Ltd",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -1856,6 +3524,16 @@
       "country_hq": "Switzerland",
       "currency": "CHF"
     },
+    "DARE": {
+      "name": "Dare Bioscience Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "DAY": {
       "name": "NASDAQ US Dividend Achievers 50 Index",
       "sector": "SaaS",
@@ -1864,6 +3542,16 @@
       "core": "",
       "exchange": "NYSE",
       "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DBVT": {
+      "name": "DBV Technologies SA - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "France",
       "currency": "USD"
     },
     "DBX": {
@@ -1976,6 +3664,26 @@
       "country_hq": "India",
       "currency": "INR"
     },
+    "DNA": {
+      "name": "Ginkgo Bioworks Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DNLI": {
+      "name": "Denali Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "DOC": {
       "name": "Healthpeak Properties Inc",
       "sector": "Healthcare Services",
@@ -1985,6 +3693,16 @@
       "exchange": "NYSE",
       "country_hq": "United States",
       "currency": "USD"
+    },
+    "DOCM.SW": {
+      "name": "DocMorris AG",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
     },
     "DOCN": {
       "name": "DigitalOcean Holdings Inc",
@@ -2026,6 +3744,26 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "DRUG": {
+      "name": "Bright Minds Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DSGN": {
+      "name": "Design Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "DSP": {
       "name": "Viant Technology Inc",
       "sector": "SaaS",
@@ -2043,6 +3781,16 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "DTIL": {
+      "name": "Precision BioSciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -2086,6 +3834,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "DYN": {
+      "name": "Dyne Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "EAPI.PA": {
       "name": "Euroapi S.A.",
       "sector": "Biopharma",
@@ -2106,6 +3864,36 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ECOR": {
+      "name": "electroCore, Inc.",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EDIT": {
+      "name": "Editas Medicine Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EFTR": {
+      "name": "eFFECTOR Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "EGRX": {
       "name": "Eagle Pharmaceuticals Inc",
       "sector": "Biopharma",
@@ -2113,16 +3901,6 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "OTC",
-      "country_hq": "United States",
-      "currency": "USD"
-    },
-    "EHAB": {
-      "name": "Enhabit Inc",
-      "sector": "Healthcare Services",
-      "subsector": "Post-Acute",
-      "sub_subsector": "",
-      "core": "Y",
-      "exchange": "NYSE",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -2136,6 +3914,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "EIKN": {
+      "name": "Eikon Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "ELAN": {
       "name": "Elanco Animal Health Incorporated",
       "sector": "MedTech",
@@ -2143,6 +3931,16 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ELDN": {
+      "name": "Eledon Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -2156,6 +3954,26 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ELVN": {
+      "name": "Enliven Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ENGN": {
+      "name": "enGene Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
     "ENOV": {
       "name": "Enovis Corporation",
       "sector": "MedTech",
@@ -2163,6 +3981,16 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ENSC": {
+      "name": "Ensysce Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -2176,10 +4004,50 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ENTA": {
+      "name": "Enanta Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ENTX": {
+      "name": "Entera Bio Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
     "EOLS": {
       "name": "Evolus Inc",
       "sector": "Biopharma",
       "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EQ": {
+      "name": "Equillium Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ERAS": {
+      "name": "Erasca Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -2195,6 +4063,16 @@
       "exchange": "Euronext Paris",
       "country_hq": "Luxembourg",
       "currency": "EUR"
+    },
+    "ERNA": {
+      "name": "Ernexa Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
     },
     "ESPR": {
       "name": "Esperion Therapeutics Inc",
@@ -2226,12 +4104,32 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "EVFM": {
+      "name": "Evofem Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "EVH": {
       "name": "Evolent Health Inc",
       "sector": "Healthcare Services",
       "subsector": "VBC",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EVMN": {
+      "name": "Evommune Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NYSE",
       "country_hq": "United States",
       "currency": "USD"
@@ -2246,6 +4144,16 @@
       "country_hq": "Germany",
       "currency": "USD"
     },
+    "EVOK": {
+      "name": "Evoke PLC",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "EW": {
       "name": "Edwards Lifesciences Corp",
       "sector": "MedTech",
@@ -2256,10 +4164,40 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "EXEL": {
+      "name": "Exelixis Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "EXFY": {
       "name": "Expensify Inc",
       "sector": "SaaS",
       "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EXOZ": {
+      "name": "eXoZymes Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "EYPT": {
+      "name": "EyePoint Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -2286,6 +4224,26 @@
       "country_hq": "Belgium",
       "currency": "EUR"
     },
+    "FATE": {
+      "name": "Fate Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FBIO": {
+      "name": "Fortress Biotech Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "FDC.NS": {
       "name": "FDC Limited",
       "sector": "Biopharma",
@@ -2295,6 +4253,16 @@
       "exchange": "NSE",
       "country_hq": "India",
       "currency": "INR"
+    },
+    "FDMT": {
+      "name": "4D Molecular Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
     },
     "FDX": {
       "name": "FedEx Corp",
@@ -2324,6 +4292,26 @@
       "core": "Y",
       "exchange": "NASDAQ",
       "country_hq": "Netherlands",
+      "currency": "USD"
+    },
+    "FGEN": {
+      "name": "FibroGen Inc.",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FHTX": {
+      "name": "Foghorn Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
       "currency": "USD"
     },
     "FI": {
@@ -2466,6 +4454,36 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "FULC": {
+      "name": "Fulcrum Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "FUM.L": {
+      "name": "Futura Medical plc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "LSE",
+      "country_hq": "United Kingdom",
+      "currency": "GBp"
+    },
+    "FYB.DE": {
+      "name": "Formycon AG",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "XETRA",
+      "country_hq": "Germany",
+      "currency": "EUR"
+    },
     "GALD.SW": {
       "name": "Galderma Group AG",
       "sector": "Biopharma",
@@ -2476,6 +4494,46 @@
       "country_hq": "Switzerland",
       "currency": "CHF"
     },
+    "GALE.SW": {
+      "name": "Galenica AG",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
+    "GALT": {
+      "name": "Galectin Therapeutics Inc. Common Stock",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GBIO": {
+      "name": "Generation Bio Co.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GBT.PA": {
+      "name": "Guerbet SA",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Euronext Paris",
+      "country_hq": "France",
+      "currency": "EUR"
+    },
     "GDRX": {
       "name": "Goodrx Holdings Inc",
       "sector": "Healthcare Services",
@@ -2484,6 +4542,16 @@
       "core": "Y",
       "exchange": "NASDAQ",
       "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GDTC": {
+      "name": "CytoMed Therapeutics Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Singapore",
       "currency": "USD"
     },
     "GEHC": {
@@ -2516,6 +4584,26 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "GENB": {
+      "name": "Generate Biomedicines Inc",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GERN": {
+      "name": "Geron Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "GETIB SS": {
       "name": "Getinge AB",
       "sector": "MedTech",
@@ -2534,6 +4622,16 @@
       "core": "Y",
       "exchange": "NASDAQ",
       "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GHRS": {
+      "name": "GH Research PLC",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Ireland",
       "currency": "USD"
     },
     "GILD": {
@@ -2576,6 +4674,56 @@
       "country_hq": "India",
       "currency": "INR"
     },
+    "GLMD": {
+      "name": "Galmed Pharmaceuticals Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "GLPG": {
+      "name": "Galapagos NV - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Belgium",
+      "currency": "USD"
+    },
+    "GLSI": {
+      "name": "Greenwich Lifesciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GLUE": {
+      "name": "Monte Rosa Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GMAB": {
+      "name": "Genmab A/S - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Denmark",
+      "currency": "USD"
+    },
     "GMED": {
       "name": "Globus Medical Inc",
       "sector": "MedTech",
@@ -2606,10 +4754,70 @@
       "country_hq": "Denmark",
       "currency": "DKK"
     },
+    "GNFT": {
+      "name": "Genfit SA",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Euronext Paris",
+      "country_hq": "France",
+      "currency": "EUR"
+    },
+    "GNLX": {
+      "name": "Genelux Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GNPX": {
+      "name": "Genprex Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GNTA": {
+      "name": "Genenta Science SPA",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Italy",
+      "currency": "USD"
+    },
     "GOOG": {
       "name": "Alphabet Inc Class C",
       "sector": "Tech",
       "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GOSS": {
+      "name": "Gossamer Bio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "GPCR": {
+      "name": "Structure Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -2635,6 +4843,16 @@
       "exchange": "NSE",
       "country_hq": "India",
       "currency": "INR"
+    },
+    "GRCE": {
+      "name": "Grace Therapeutics, Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
     },
     "GRFS": {
       "name": "Grifols SA - ADR ADR Class B",
@@ -2675,6 +4893,16 @@
       "exchange": "NASDAQ",
       "country_hq": "Germany",
       "currency": "EUR"
+    },
+    "GYRE": {
+      "name": "Gyre Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
     },
     "HAE": {
       "name": "Haemonetics Corporation",
@@ -2743,6 +4971,16 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HEPA": {
+      "name": "Hepion Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OQB",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -2816,6 +5054,36 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "HOOK": {
+      "name": "Hookipa Pharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HOTH": {
+      "name": "Hoth Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HOWL": {
+      "name": "Werewolf Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "HR": {
       "name": "Healthcare Realty Trust Inc",
       "sector": "Healthcare Services",
@@ -2826,10 +5094,30 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "HRMY": {
+      "name": "Harmony Biosciences Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "HROW": {
       "name": "Harrow Inc",
       "sector": "Biopharma",
       "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "HRTX": {
+      "name": "Heron Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -2896,6 +5184,46 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "IBIO": {
+      "name": "Ibio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IBRX": {
+      "name": "Immunitybio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IBT-B.ST": {
+      "name": "Infant Bacterial Therapeutics AB (publ)",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OMX Stockholm",
+      "country_hq": "Sweden",
+      "currency": "SEK"
+    },
+    "ICAD": {
+      "name": "Icade SA",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Euronext Paris",
+      "country_hq": "France",
+      "currency": "EUR"
+    },
     "ICLR": {
       "name": "ICON PLC",
       "sector": "Healthcare Services",
@@ -2916,6 +5244,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "IDIA.SW": {
+      "name": "Idorsia Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
     "IDXX": {
       "name": "IDEXX Laboratories Inc",
       "sector": "Healthcare Services",
@@ -2926,12 +5264,162 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "IDYA": {
+      "name": "Ideaya Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IFRX": {
+      "name": "Inflarx NV",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Germany",
+      "currency": "USD"
+    },
+    "ILM1.DE": {
+      "name": "Medios AG",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "XETRA",
+      "country_hq": "Germany",
+      "currency": "EUR"
+    },
     "ILMN": {
       "name": "Illumina, Inc.",
       "sector": "MedTech",
       "subsector": "Diagnostics",
       "sub_subsector": "NextGen Sequencing",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IMA": {
+      "name": "ImageneBio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IMCR": {
+      "name": "Immunocore Holdings PLC - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
+    "IMMP": {
+      "name": "Immutep Ltd - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Australia",
+      "currency": "USD"
+    },
+    "IMMX": {
+      "name": "Immix Biopharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IMNM": {
+      "name": "Immunome Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IMNN": {
+      "name": "Imunon Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IMRX": {
+      "name": "Immuneering Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IMTX": {
+      "name": "Immatics NV",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Germany",
+      "currency": "USD"
+    },
+    "IMU.AX": {
+      "name": "Imugene Limited",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "ASX",
+      "country_hq": "Australia",
+      "currency": "AUD"
+    },
+    "IMUX": {
+      "name": "Immunic Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IMVT": {
+      "name": "Immunovant Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "INBX": {
+      "name": "Inhibrx Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -2944,6 +5432,16 @@
       "core": "",
       "exchange": "NASDAQ",
       "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "INCY": {
+      "name": "Incyte Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
       "currency": "USD"
     },
     "INDOCO.NS": {
@@ -2976,6 +5474,26 @@
       "country_hq": "Austria",
       "currency": "USD"
     },
+    "INKT": {
+      "name": "Mink Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "INMB": {
+      "name": "INmune Bio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "INMD": {
       "name": "InMode Ltd.",
       "sector": "MedTech",
@@ -2986,6 +5504,26 @@
       "country_hq": "Israel",
       "currency": "USD"
     },
+    "INO": {
+      "name": "Inovio Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "INSM": {
+      "name": "Insmed Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "INSP": {
       "name": "Inspire Medical Systems, Inc.",
       "sector": "MedTech",
@@ -2993,6 +5531,56 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "INTS": {
+      "name": "Intensity Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "INVA": {
+      "name": "Innoviva Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IOBT": {
+      "name": "IO Biotech Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Denmark",
+      "currency": "USD"
+    },
+    "IONS": {
+      "name": "Ionis Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IOVA": {
+      "name": "Iovance Biotherapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -3006,6 +5594,26 @@
       "country_hq": "India",
       "currency": "INR"
     },
+    "IPHA": {
+      "name": "Innate Pharma SA",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "France",
+      "currency": "USD"
+    },
+    "IPN": {
+      "name": "Ipsen SA",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE Arca",
+      "country_hq": "France",
+      "currency": "USD"
+    },
     "IQV": {
       "name": "IQVIA Holdings Inc.",
       "sector": "Healthcare Services",
@@ -3013,6 +5621,16 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "IRON": {
+      "name": "Disc Medicine Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -3056,6 +5674,36 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ITRM": {
+      "name": "Iterum Therapeutics PLC",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Ireland",
+      "currency": "USD"
+    },
+    "IVA": {
+      "name": "Inventiva ADR Representing Ord Shs",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "France",
+      "currency": "USD"
+    },
+    "IVVD": {
+      "name": "Invivyd Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "IXHL": {
       "name": "Incannex Healthcare Inc",
       "sector": "Biopharma",
@@ -3066,6 +5714,16 @@
       "country_hq": "Australia",
       "currency": "USD"
     },
+    "JAGX": {
+      "name": "Jaguar Health Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "JAN": {
       "name": "Janus Living Inc",
       "sector": "Healthcare Services",
@@ -3074,6 +5732,26 @@
       "core": "",
       "exchange": "NYSE",
       "country_hq": "United States",
+      "currency": "USD"
+    },
+    "JANX": {
+      "name": "Janux Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "JAZZ": {
+      "name": "Jazz Pharmaceuticals PLC",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Ireland",
       "currency": "USD"
     },
     "JNJ": {
@@ -3096,6 +5774,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "JSPR": {
+      "name": "Jasper Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "JUBLPHARMA.NS": {
       "name": "Jubilant Pharmova Limited",
       "sector": "Biopharma",
@@ -3105,6 +5793,36 @@
       "exchange": "NSE",
       "country_hq": "India",
       "currency": "INR"
+    },
+    "JULPHAR.AE": {
+      "name": "Julphar (Gulf Pharmaceutical Industries)",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "ADX",
+      "country_hq": "United Arab Emirates",
+      "currency": "AED"
+    },
+    "KALA": {
+      "name": "KALA BIO Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "KALV": {
+      "name": "Kalvista Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
     },
     "KIDS": {
       "name": "OrthoPediatrics Corp.",
@@ -3123,6 +5841,16 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "KLRA": {
+      "name": "Kailera Therapeutics, Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -3156,6 +5884,26 @@
       "country_hq": "United Kingdom",
       "currency": "USD"
     },
+    "KOD": {
+      "name": "Kodiak Sciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "KPTI": {
+      "name": "Karyopharm Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "KRC": {
       "name": "Kilroy Realty Corporation",
       "sector": "Healthcare Services",
@@ -3166,6 +5914,46 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "KROS": {
+      "name": "Keros Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "KRRO": {
+      "name": "Korro Bio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "KRYS": {
+      "name": "Krystal Biotech Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "KURA": {
+      "name": "Kura Oncology Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "KVYO": {
       "name": "Klaviyo Inc",
       "sector": "SaaS",
@@ -3173,6 +5961,36 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "KYMR": {
+      "name": "Kymera Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "KYTX": {
+      "name": "Kyverna Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "KZR": {
+      "name": "Kezar Life Sciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -3206,6 +6024,36 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "LCTX": {
+      "name": "Lineage Cell Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LEGN": {
+      "name": "Legend Biotech Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LENZ": {
+      "name": "Lenz Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "LFCR": {
       "name": "Lifecore Biomedical Inc",
       "sector": "Biopharma",
@@ -3226,6 +6074,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "LGVN": {
+      "name": "Longeveron Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "LH": {
       "name": "Labcorp Holdings Inc",
       "sector": "Healthcare Services",
@@ -3236,6 +6094,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "LIAN": {
+      "name": "LianBio",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "China",
+      "currency": "USD"
+    },
     "LIN": {
       "name": "Linde plc",
       "sector": "Materials",
@@ -3244,6 +6112,16 @@
       "core": "Y",
       "exchange": "NASDAQ",
       "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
+    "LIPO": {
+      "name": "Lipella Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
+      "country_hq": "United States",
       "currency": "USD"
     },
     "LIVN": {
@@ -3286,6 +6164,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "LONA": {
+      "name": "LeonaBio Inc (fka Athira Pharma)",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "LONN CH": {
       "name": "Lonza Group AG",
       "sector": "MedTech",
@@ -3295,6 +6183,16 @@
       "exchange": "SIX",
       "country_hq": "Switzerland",
       "currency": "CHF"
+    },
+    "LPCN": {
+      "name": "Lipocine Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
     },
     "LPSN": {
       "name": "LivePerson Inc",
@@ -3316,6 +6214,26 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "LRMR": {
+      "name": "Larimar Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LSB": {
+      "name": "LakeShore Biopharma Co., Ltd",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "China",
+      "currency": "USD"
+    },
     "LTC": {
       "name": "LTC Properties Inc",
       "sector": "Healthcare Services",
@@ -3323,6 +6241,16 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LTRN": {
+      "name": "Lantern Pharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -3346,12 +6274,62 @@
       "country_hq": "India",
       "currency": "INR"
     },
+    "LXEO": {
+      "name": "Lexeo Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LXRX": {
+      "name": "Lexicon Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LYEL": {
+      "name": "Lyell Immunopharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "LYRA": {
+      "name": "Lyra Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "MA": {
       "name": "Mastercard Inc",
       "sector": "Financials",
       "subsector": "",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MAIA": {
+      "name": "Maia Biotechnology Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NYSE",
       "country_hq": "United States",
       "currency": "USD"
@@ -3396,6 +6374,26 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "MAZE": {
+      "name": "Maze Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MBX": {
+      "name": "MBX Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "MCK": {
       "name": "McKesson Corp",
       "sector": "Healthcare Services",
@@ -3413,6 +6411,16 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MCRB": {
+      "name": "Seres Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -3440,6 +6448,16 @@
       "name": "Mongodb Inc",
       "sector": "Tech",
       "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MDGL": {
+      "name": "Madrigal Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -3476,6 +6494,16 @@
       "country_hq": "Ireland",
       "currency": "USD"
     },
+    "MDWD": {
+      "name": "Mediwound Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
     "MED": {
       "name": "Medartis Holding AG",
       "sector": "MedTech",
@@ -3496,10 +6524,90 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "MESO": {
+      "name": "Mesoblast Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Australia",
+      "currency": "USD"
+    },
     "META": {
       "name": "Meta Platforms Inc",
       "sector": "Tech",
       "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MGNX": {
+      "name": "MacroGenics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MGRX": {
+      "name": "Mangoceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MGTX": {
+      "name": "MeiraGTx Holdings PLC",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MIRM": {
+      "name": "Mirum Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MIST": {
+      "name": "Milestone Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
+    "MLTX": {
+      "name": "MoonLake Immunotherapeutics",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Switzerland",
+      "currency": "USD"
+    },
+    "MLYS": {
+      "name": "Mineralys Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -3536,6 +6644,56 @@
       "country_hq": "Israel",
       "currency": "USD"
     },
+    "MNK": {
+      "name": "Mallinckrodt plc",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "Ireland",
+      "currency": "USD"
+    },
+    "MNKD": {
+      "name": "MannKind Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MNMD": {
+      "name": "Mind Medicine (MindMed) Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MNOV": {
+      "name": "Medicinova Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MNPR": {
+      "name": "Monopar Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "MOBI": {
       "name": "Mobia Medical, Inc.",
       "sector": "MedTech",
@@ -3566,12 +6724,32 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "MOLN": {
+      "name": "Molecular Partners AG",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Switzerland",
+      "currency": "USD"
+    },
     "MOVE": {
       "name": "Medacta Group SA",
       "sector": "MedTech",
       "subsector": "Orthopedics",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MPLT": {
+      "name": "MapLight Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -3586,6 +6764,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "MREO": {
+      "name": "Mereo BioPharma Group plc - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
     "MRK": {
       "name": "Merck & Co Inc",
       "sector": "Biopharma",
@@ -3593,6 +6781,26 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MRNA": {
+      "name": "Moderna Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MRSN": {
+      "name": "Mersana Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -3626,6 +6834,26 @@
       "country_hq": "Switzerland",
       "currency": "USD"
     },
+    "MTNB": {
+      "name": "Matinas BioPharma Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MXCT": {
+      "name": "MaxCyte Inc",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "MYGN": {
       "name": "Myriad Genetics, Inc.",
       "sector": "MedTech",
@@ -3634,6 +6862,26 @@
       "core": "Y",
       "exchange": "NASDAQ",
       "country_hq": "United States",
+      "currency": "USD"
+    },
+    "MYX.AX": {
+      "name": "Mayne Pharma Group Limited",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "ASX",
+      "country_hq": "Australia",
+      "currency": "AUD"
+    },
+    "NAMS": {
+      "name": "NewAmsterdam Pharma Company NV",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Netherlands",
       "currency": "USD"
     },
     "NANEXA.ST": {
@@ -3646,6 +6894,16 @@
       "country_hq": "Sweden",
       "currency": "SEK"
     },
+    "NANOFS.ST": {
+      "name": "Nanoform Finland Oyj",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OMX Stockholm",
+      "country_hq": "Finland",
+      "currency": "SEK"
+    },
     "NATCOPHARM.NS": {
       "name": "NATCO Pharma Limited",
       "sector": "Biopharma",
@@ -3656,6 +6914,16 @@
       "country_hq": "India",
       "currency": "INR"
     },
+    "NAUT": {
+      "name": "Nautilus Biotechnology Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "NBIX": {
       "name": "Neurocrine Biosciences Inc",
       "sector": "Biopharma",
@@ -3664,6 +6932,36 @@
       "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NBP": {
+      "name": "NovaBridge Biosciences",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NBTX": {
+      "name": "Nanobiotix SA - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "France",
+      "currency": "USD"
+    },
+    "NCNA": {
+      "name": "NuCana PLC",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
       "currency": "USD"
     },
     "NCNO": {
@@ -3696,6 +6994,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "NERV": {
+      "name": "Minerva Neurosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "NET": {
       "name": "Cloudflare Inc",
       "sector": "Tech",
@@ -3705,6 +7013,16 @@
       "exchange": "NYSE",
       "country_hq": "United States",
       "currency": "USD"
+    },
+    "NEU.AX": {
+      "name": "Neuren Pharmaceuticals Limited",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "ASX",
+      "country_hq": "Australia",
+      "currency": "AUD"
     },
     "NEULANDLAB.NS": {
       "name": "Neuland Laboratories Limited",
@@ -3716,12 +7034,42 @@
       "country_hq": "India",
       "currency": "INR"
     },
+    "NEUP": {
+      "name": "Neuphoria Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "NFLX": {
       "name": "Netflix Inc",
       "sector": "Tech",
       "subsector": "",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NGEN.V": {
+      "name": "NervGen Pharma Corp.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "TSXV",
+      "country_hq": "Canada",
+      "currency": "CAD"
+    },
+    "NGNE": {
+      "name": "Neurogene Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -3746,6 +7094,36 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "NKTR": {
+      "name": "Nektar Therapeutics",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NKTX": {
+      "name": "Nkarta Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NMRA": {
+      "name": "Neumora Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "NNOX": {
       "name": "Nano-X Imaging Ltd.",
       "sector": "MedTech",
@@ -3754,6 +7132,26 @@
       "core": "Y",
       "exchange": "NASDAQ",
       "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "NNVC": {
+      "name": "NanoViricides, Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NOTV": {
+      "name": "Inotiv Inc",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
       "currency": "USD"
     },
     "NOVT": {
@@ -3776,6 +7174,46 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "NRIX": {
+      "name": "Nurix Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NRXP": {
+      "name": "NRX Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NSIS-B.CO": {
+      "name": "Novonesis A/S (fka Novozymes)",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OMX Copenhagen",
+      "country_hq": "Denmark",
+      "currency": "DKK"
+    },
+    "NTLA": {
+      "name": "Intellia Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "NTRA": {
       "name": "Natera, Inc.",
       "sector": "MedTech",
@@ -3786,12 +7224,52 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "NUVB": {
+      "name": "Nuvation Bio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NUVL": {
+      "name": "Nuvalent Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NVAX": {
+      "name": "Novavax Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "NVCR": {
       "name": "Novocure Limited",
       "sector": "MedTech",
       "subsector": "Diversified MedTech",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "NVCT": {
+      "name": "Nuvectis Pharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -3836,6 +7314,76 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "NWRN.SW": {
+      "name": "Newron Pharmaceuticals S.p.A.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SIX",
+      "country_hq": "Italy",
+      "currency": "CHF"
+    },
+    "NYKD.OL": {
+      "name": "Nykode Therapeutics AS",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Oslo Bors",
+      "country_hq": "Norway",
+      "currency": "NOK"
+    },
+    "OABI": {
+      "name": "OmniAb Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OBIO": {
+      "name": "Orchestra Biomed Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OCEA": {
+      "name": "Ocean Biomedical Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OCGN": {
+      "name": "Ocugen Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OCS": {
+      "name": "Oculis Holding AG",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Switzerland",
+      "currency": "USD"
+    },
     "OCTV": {
       "name": "Octave Intelligence plc",
       "sector": "SaaS",
@@ -3846,6 +7394,16 @@
       "country_hq": "Sweden",
       "currency": "USD"
     },
+    "OCUL": {
+      "name": "Ocular Therapeutix Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "OFIX": {
       "name": "Orthofix Medical Inc.",
       "sector": "MedTech",
@@ -3853,6 +7411,16 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OGEN": {
+      "name": "Oragenics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -3886,6 +7454,36 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "OKUR": {
+      "name": "Onkure Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OKYO": {
+      "name": "OKYO Pharma Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
+    "OLMA": {
+      "name": "Olema Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "OMCL": {
       "name": "Omnicell, Inc.",
       "sector": "MedTech",
@@ -3906,6 +7504,36 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "OMER": {
+      "name": "Omeros Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ONC": {
+      "name": "BeOne Medicines AG",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Switzerland",
+      "currency": "USD"
+    },
+    "ONCY": {
+      "name": "Oncolytics Biotech Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
     "ONT.L": {
       "name": "Oxford Nanopore Technologies PLC",
       "sector": "MedTech",
@@ -3915,16 +7543,6 @@
       "exchange": "LSE",
       "country_hq": "United Kingdom",
       "currency": "GBP"
-    },
-    "ONTF": {
-      "name": "ON24 Inc",
-      "sector": "SaaS",
-      "subsector": "",
-      "sub_subsector": "",
-      "core": "",
-      "exchange": "NYSE",
-      "country_hq": "United States",
-      "currency": "USD"
     },
     "OPCH": {
       "name": "Option Care Health Inc",
@@ -3936,6 +7554,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "OPT": {
+      "name": "Optima Health PLC",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "LSE",
+      "country_hq": "United Kingdom",
+      "currency": "GBP"
+    },
     "ORCL": {
       "name": "Oracle Corp",
       "sector": "Tech",
@@ -3943,6 +7571,26 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ORIC": {
+      "name": "ORIC Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ORMP": {
+      "name": "Oramed Pharmaceuticals, Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -3956,15 +7604,15 @@
       "country_hq": "Finland",
       "currency": "EUR"
     },
-    "OS": {
-      "name": "OneStream Inc",
-      "sector": "SaaS",
-      "subsector": "",
+    "ORY.MC": {
+      "name": "Oryzon Genomics S.A.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
-      "exchange": "NASDAQ",
-      "country_hq": "United States",
-      "currency": "USD"
+      "exchange": "BME Madrid",
+      "country_hq": "Spain",
+      "currency": "EUR"
     },
     "OSCR": {
       "name": "Oscar Health Inc",
@@ -3976,6 +7624,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "OSE.PA": {
+      "name": "OSE Immunotherapeutics SA",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Euronext Paris",
+      "country_hq": "France",
+      "currency": "EUR"
+    },
     "OSSFF": {
       "name": "Embla Medical hf.",
       "sector": "MedTech",
@@ -3985,6 +7643,46 @@
       "exchange": "OTC",
       "country_hq": "Iceland",
       "currency": "USD"
+    },
+    "OSTX": {
+      "name": "OS Therapies Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OTLK": {
+      "name": "Outlook Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OVID": {
+      "name": "Ovid Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "OXB.L": {
+      "name": "Oxford Biomedica plc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "LSE",
+      "country_hq": "United Kingdom",
+      "currency": "GBp"
     },
     "PACB": {
       "name": "Pacific Biosciences of California, Inc.",
@@ -4026,6 +7724,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "PASG": {
+      "name": "Passage Bio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "PAYC": {
       "name": "Paycom Software Inc",
       "sector": "SaaS",
@@ -4044,6 +7752,16 @@
       "core": "",
       "exchange": "NASDAQ",
       "country_hq": "Japan",
+      "currency": "USD"
+    },
+    "PBYI": {
+      "name": "Puma Biotechnology Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
       "currency": "USD"
     },
     "PCOR": {
@@ -4066,6 +7784,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "PCVX": {
+      "name": "Vaxcyte Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "PD": {
       "name": "Pagerduty Inc",
       "sector": "SaaS",
@@ -4076,6 +7804,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "PDSB": {
+      "name": "PDS Biotechnology Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "PEN": {
       "name": "Penumbra, Inc.",
       "sector": "MedTech",
@@ -4083,6 +7821,16 @@
       "sub_subsector": "Peripheral",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PEPG": {
+      "name": "PepGen Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -4106,12 +7854,42 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "PGEN": {
+      "name": "Precigen Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "PGNY": {
       "name": "Progyny Inc",
       "sector": "Healthcare Services",
       "subsector": "Benefits",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PHAR": {
+      "name": "Pharming Group N V ADS each representing 10 Ord Shs",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Netherlands",
+      "currency": "USD"
+    },
+    "PHAT": {
+      "name": "Phathom Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -4125,6 +7903,26 @@
       "exchange": "NYSE",
       "country_hq": "Netherlands",
       "currency": "USD"
+    },
+    "PHIO": {
+      "name": "Phio Pharmaceuticals Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PHM.MC": {
+      "name": "Pharma Mar, S.A.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "BME Madrid",
+      "country_hq": "Spain",
+      "currency": "EUR"
     },
     "PHN.MI": {
       "name": "Pharmanutra S.p.A.",
@@ -4146,12 +7944,52 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "PHVS": {
+      "name": "Pharvaris NV",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Switzerland",
+      "currency": "USD"
+    },
+    "PLRX": {
+      "name": "Pliant Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "PLSE": {
       "name": "Pulse Biosciences Inc",
       "sector": "MedTech",
       "subsector": "Diversified MedTech",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PLX": {
+      "name": "Protalix Biotherapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PMVP": {
+      "name": "PMV Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -4176,6 +8014,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "PPCB": {
+      "name": "Propanc Biopharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Australia",
+      "currency": "USD"
+    },
     "PPGN.SW": {
       "name": "PolyPeptide Group AG",
       "sector": "Biopharma",
@@ -4195,6 +8043,16 @@
       "exchange": "NSE",
       "country_hq": "India",
       "currency": "INR"
+    },
+    "PRAX": {
+      "name": "Praxis Precision Medicines Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
     },
     "PRCT": {
       "name": "PROCEPT BioRobotics Corporation",
@@ -4226,6 +8084,66 @@
       "country_hq": "Ireland",
       "currency": "USD"
     },
+    "PRLD": {
+      "name": "Prelude Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PRME": {
+      "name": "Prime Medicine Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PROK": {
+      "name": "ProKidney Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PRQR": {
+      "name": "ProQR Therapeutics NV",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Netherlands",
+      "currency": "USD"
+    },
+    "PRTA": {
+      "name": "Prothena Corporation PLC",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Ireland",
+      "currency": "USD"
+    },
+    "PRTC": {
+      "name": "PureTech Health PLC",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "PRVA": {
       "name": "Privia Health Group Inc",
       "sector": "Healthcare Services",
@@ -4235,6 +8153,16 @@
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
+    },
+    "PSG.DE": {
+      "name": "Pharma SGP SE",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "XETRA",
+      "country_hq": "Germany",
+      "currency": "EUR"
     },
     "PTC": {
       "name": "PTC Inc",
@@ -4246,6 +8174,36 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "PTCT": {
+      "name": "PTC Therapeutics, Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PTGX": {
+      "name": "Protagonist Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PTN": {
+      "name": "Palatin Technologies Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "PTPI": {
       "name": "Petros Pharmaceuticals Inc",
       "sector": "Biopharma",
@@ -4253,6 +8211,36 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "OTC",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PULM": {
+      "name": "Pulmatrix Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PXMD": {
+      "name": "Kuvatris Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "PYXS": {
+      "name": "Pyxis Oncology Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -4296,10 +8284,40 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "QNCX": {
+      "name": "Quince Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "QNRX": {
+      "name": "Quoin Pharmaceuticals Ltd - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "QNT": {
       "name": "Quantinuum Inc.",
       "sector": "Tech",
       "subsector": "Quantum Computing",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "QTTB": {
+      "name": "Q32 Bio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -4316,6 +8334,26 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "QURE": {
+      "name": "Uniqure NV",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Netherlands",
+      "currency": "USD"
+    },
+    "RAC.AX": {
+      "name": "Racura Oncology Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "ASX",
+      "country_hq": "Australia",
+      "currency": "AUD"
+    },
     "RAMP": {
       "name": "Liveramp Holdings Inc",
       "sector": "SaaS",
@@ -4326,6 +8364,36 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "RANI": {
+      "name": "Rani Therapeutics Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RAPP": {
+      "name": "Rapport Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RARE": {
+      "name": "Ultragenyx Pharmaceutical Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "RBLX": {
       "name": "Roblox Corp",
       "sector": "Tech",
@@ -4333,6 +8401,16 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RCKT": {
+      "name": "Rocket Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -4386,6 +8464,46 @@
       "country_hq": "Italy",
       "currency": "EUR"
     },
+    "REGN": {
+      "name": "Regeneron Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RENB": {
+      "name": "Lunai Bioworks Inc.",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "REPL": {
+      "name": "Replimune Group Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RFL": {
+      "name": "Rafael Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "RGC": {
       "name": "Regencell Bioscience Holdings Ltd",
       "sector": "Biopharma",
@@ -4406,6 +8524,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "RGNX": {
+      "name": "Regenxbio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "RIG2.F": {
       "name": "Gedeon Richter PLC",
       "sector": "Biopharma",
@@ -4416,6 +8544,16 @@
       "country_hq": "Hungary",
       "currency": "EUR"
     },
+    "RIGL": {
+      "name": "Rigel Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "RJF.MC": {
       "name": "Laboratorio Reig Jofre, S.A.",
       "sector": "Biopharma",
@@ -4425,6 +8563,36 @@
       "exchange": "BME Madrid",
       "country_hq": "Spain",
       "currency": "EUR"
+    },
+    "RLAY": {
+      "name": "Relay Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RLF.SW": {
+      "name": "Relief Therapeutics Holding SA",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
+    "RLMD": {
+      "name": "Relmada Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
     },
     "RMD": {
       "name": "Resmed Inc",
@@ -4446,6 +8614,26 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "RNA": {
+      "name": "Atrium Therapeutics, Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RNAC": {
+      "name": "Cartesian Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "RNG": {
       "name": "RingCentral Inc",
       "sector": "SaaS",
@@ -4453,6 +8641,16 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RNTX": {
+      "name": "Rein Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -4475,6 +8673,16 @@
       "exchange": "SIX",
       "country_hq": "Switzerland",
       "currency": "CHF"
+    },
+    "ROIV": {
+      "name": "Roivant Sciences Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
     },
     "ROVI.MC": {
       "name": "Laboratorios Farmaceuticos Rovi, S.A.",
@@ -4506,6 +8714,36 @@
       "country_hq": "India",
       "currency": "INR"
     },
+    "RPRX": {
+      "name": "Royalty Pharma plc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
+    "RPTX": {
+      "name": "Repare Therapeutics Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
+    "RVMD": {
+      "name": "Revolution Medicines Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "RVTY": {
       "name": "Revvity, Inc.",
       "sector": "MedTech",
@@ -4516,12 +8754,42 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "RXRX": {
+      "name": "Recursion Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "RXST": {
       "name": "RxSight, Inc.",
       "sector": "MedTech",
       "subsector": "Ophthalmology",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RYTM": {
+      "name": "Rhythm Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "RZLT": {
+      "name": "Rezolute Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -4555,6 +8823,26 @@
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
+    },
+    "SANA": {
+      "name": "Sana Biotechnology Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SANN.SW": {
+      "name": "Santhera Pharmaceuticals Holding AG",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "SIX",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
     },
     "SANOFI.NS": {
       "name": "Sanofi India Limited",
@@ -4606,6 +8894,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "SCNX": {
+      "name": "Scienture Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "SCYX": {
       "name": "SCYNEXIS Inc",
       "sector": "Biopharma",
@@ -4626,6 +8924,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "SDZ": {
+      "name": "Sandoz Group AG",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Switzerland",
+      "currency": "CHF"
+    },
     "SEM": {
       "name": "Select Medical Holdings Corp",
       "sector": "Healthcare Services",
@@ -4636,13 +8944,13 @@
       "country_hq": "United States",
       "currency": "USD"
     },
-    "SEMR": {
-      "name": "Semrush",
-      "sector": "SaaS",
-      "subsector": "",
+    "SEPN": {
+      "name": "Septerna Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
-      "exchange": "NYSE",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -4655,6 +8963,16 @@
       "exchange": "NSE",
       "country_hq": "India",
       "currency": "INR"
+    },
+    "SER": {
+      "name": "Serina Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
     },
     "SFZN.SW": {
       "name": "Siegfried Holding AG",
@@ -4682,6 +9000,26 @@
       "subsector": "Ophthalmology",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SGMO": {
+      "name": "Sangamo Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SGMT": {
+      "name": "Sagimet Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -4756,6 +9094,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "SIGHT.PA": {
+      "name": "GenSight Biologics S.A.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Euronext Paris",
+      "country_hq": "France",
+      "currency": "EUR"
+    },
     "SILA": {
       "name": "Sila Realty Trust Inc",
       "sector": "Healthcare Services",
@@ -4763,6 +9111,86 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SION": {
+      "name": "Sionna Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SKYE": {
+      "name": "Skye Bioscience Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SLDB": {
+      "name": "Solid Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SLGL": {
+      "name": "Sol Gel Technologies Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Israel",
+      "currency": "USD"
+    },
+    "SLN": {
+      "name": "Silence Therapeutics PLC - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
+    "SLS": {
+      "name": "Sellas Life Sciences Group Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SLV.WA": {
+      "name": "Selvita S.A.",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "WSE",
+      "country_hq": "Poland",
+      "currency": "PLN"
+    },
+    "SMMT": {
+      "name": "Summit Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -4780,6 +9208,26 @@
       "name": "Synchronoss Technologies, Inc.",
       "sector": "SaaS",
       "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SNDX": {
+      "name": "Syndax Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SNGX": {
+      "name": "Soligenix, Inc. Common Stock",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -4813,6 +9261,16 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SNTI": {
+      "name": "Senti Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -4896,6 +9354,36 @@
       "country_hq": "Luxembourg",
       "currency": "USD"
     },
+    "SPRB": {
+      "name": "Spruce Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SPRO": {
+      "name": "Spero Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SPRY": {
+      "name": "ARS Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "SPSC": {
       "name": "SPS Commerce Inc",
       "sector": "SaaS",
@@ -4910,6 +9398,26 @@
       "name": "Sprout Social Inc",
       "sector": "SaaS",
       "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SRPT": {
+      "name": "Sarepta Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SRRK": {
+      "name": "Scholar Rock Holding Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -4966,6 +9474,26 @@
       "country_hq": "Switzerland",
       "currency": "CHF"
     },
+    "STOK": {
+      "name": "Stoke Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "STRO": {
+      "name": "Sutro Biopharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "STRW": {
       "name": "Strawberry Fields Reit Inc",
       "sector": "Healthcare Services",
@@ -4973,6 +9501,16 @@
       "sub_subsector": "",
       "core": "",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "STTK": {
+      "name": "Shattuck Labs Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -4986,6 +9524,16 @@
       "country_hq": "Italy",
       "currency": "USD"
     },
+    "SUNPHARMA": {
+      "name": "Sun Pharmaceutical Industries Ltd",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NSE",
+      "country_hq": "India",
+      "currency": "INR"
+    },
     "SUPN": {
       "name": "Supernus Pharmaceuticals Inc",
       "sector": "Biopharma",
@@ -4996,6 +9544,36 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "SVE.WA": {
+      "name": "Synthaverse S.A.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "WSE",
+      "country_hq": "Poland",
+      "currency": "PLN"
+    },
+    "SVRA": {
+      "name": "Savara Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SYBX": {
+      "name": "Synlogic Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "SYK": {
       "name": "Stryker Corp",
       "sector": "MedTech",
@@ -5003,6 +9581,26 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SYRE": {
+      "name": "Spyre Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "SYRS": {
+      "name": "Syros Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -5036,12 +9634,62 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "TARA": {
+      "name": "Protara Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TARS": {
+      "name": "Tarsus Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TBPH": {
+      "name": "Theravance Biopharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "TCMD": {
       "name": "Tactile Systems Technology Inc",
       "sector": "MedTech",
       "subsector": "Diversified MedTech",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TCRT": {
+      "name": "Alaunos Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TCRX": {
+      "name": "Tscan Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -5072,6 +9720,26 @@
       "subsector": "Life Science Tools",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TECX": {
+      "name": "Tectonic Therapeutic Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TELO": {
+      "name": "Telomir Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -5116,6 +9784,26 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "TGTX": {
+      "name": "TG Therapeutics Inc common stock",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "THAR": {
+      "name": "Canton Strategic Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "THC": {
       "name": "Tenet Healthcare Corp",
       "sector": "Healthcare Services",
@@ -5123,6 +9811,26 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TIL": {
+      "name": "Instil Bio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TLIS": {
+      "name": "Talis Biomedical Corporation",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -5145,6 +9853,26 @@
       "exchange": "NASDAQ",
       "country_hq": "Canada",
       "currency": "USD"
+    },
+    "TLSA": {
+      "name": "Tiziana Life Sciences Ltd - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United Kingdom",
+      "currency": "USD"
+    },
+    "TLX.AX": {
+      "name": "Telix Pharmaceuticals Limited",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "ASX",
+      "country_hq": "Australia",
+      "currency": "AUD"
     },
     "TMDX": {
       "name": "TransMedics Group Inc",
@@ -5176,6 +9904,46 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "TNG.PA": {
+      "name": "Transgene SA",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "Euronext Paris",
+      "country_hq": "France",
+      "currency": "EUR"
+    },
+    "TNGX": {
+      "name": "Tango Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TNXP": {
+      "name": "Tonix Pharmaceuticals Holding Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TNYA": {
+      "name": "Tenaya Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "TORNTPHARM.NS": {
       "name": "Torrent Pharmaceuticals Limited",
       "sector": "Biopharma",
@@ -5196,6 +9964,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "TPST": {
+      "name": "Tempest Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "TRAK": {
       "name": "Repositrak Inc",
       "sector": "SaaS",
@@ -5206,10 +9984,50 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "TRDA": {
+      "name": "Entrada Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "TRUP": {
       "name": "Trupanion, Inc.",
       "sector": "Consumer",
       "subsector": "Animal Health",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TRVI": {
+      "name": "Trevi Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TRVN": {
+      "name": "Trevena Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TSHA": {
+      "name": "Taysha Gene Therapies Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -5230,6 +10048,46 @@
       "name": "ServiceTitan Inc",
       "sector": "SaaS",
       "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TTRX": {
+      "name": "Turn Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TUB": {
+      "name": "Financiere de Tubize SA",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Belgium",
+      "currency": "EUR"
+    },
+    "TVGN": {
+      "name": "Tevogen Bio Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "TVTX": {
+      "name": "Travere Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -5286,12 +10144,32 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "TYRA": {
+      "name": "Tyra Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "U": {
       "name": "Unity Software Inc",
       "sector": "Tech",
       "subsector": "",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "UCB": {
+      "name": "UCB SA",
+      "sector": "Biopharma",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NYSE",
       "country_hq": "United States",
       "currency": "USD"
@@ -5336,6 +10214,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "UPB": {
+      "name": "Upstream Bio Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "UPLD": {
       "name": "Upland Software Inc",
       "sector": "SaaS",
@@ -5353,6 +10241,16 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "URGN": {
+      "name": "Urogen Pharma Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -5386,6 +10284,46 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "VALN": {
+      "name": "Valneva SE",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "France",
+      "currency": "USD"
+    },
+    "VANI": {
+      "name": "Vivani Medical Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VAXX": {
+      "name": "Vaxxinity Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VCEL": {
+      "name": "Vericel Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "VCEl": {
       "name": "Vericel Corporation",
       "sector": "MedTech",
@@ -5393,6 +10331,16 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VCNX": {
+      "name": "Vaccinex Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OTC",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -5413,6 +10361,26 @@
       "sub_subsector": "",
       "core": "Y",
       "exchange": "NYSE",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VERA": {
+      "name": "Vera Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VERU": {
+      "name": "Veru Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
     },
@@ -5446,6 +10414,16 @@
       "country_hq": "Norway",
       "currency": "NOK"
     },
+    "VKTX": {
+      "name": "Viking Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "VLTO": {
       "name": "Veralto Corp",
       "sector": "Industrials",
@@ -5466,12 +10444,72 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "VNDA": {
+      "name": "Vanda Pharmaceuticals Inc.",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VOR": {
+      "name": "Vor Biopharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VRCA": {
+      "name": "Verrica Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VRDN": {
+      "name": "Viridian Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "VREX": {
       "name": "Varex Imaging Corporation",
       "sector": "MedTech",
       "subsector": "Hospital Supply & Equipment",
       "sub_subsector": "",
       "core": "Y",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VRTX": {
+      "name": "Vertex Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VSTM": {
+      "name": "Verastem Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
       "exchange": "NASDAQ",
       "country_hq": "United States",
       "currency": "USD"
@@ -5484,6 +10522,16 @@
       "core": "",
       "exchange": "NYSE",
       "country_hq": "Cayman Islands",
+      "currency": "USD"
+    },
+    "VTGN": {
+      "name": "Vistagen Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
       "currency": "USD"
     },
     "VTR": {
@@ -5500,6 +10548,46 @@
       "name": "Viatris Inc",
       "sector": "Biopharma",
       "subsector": "Specialty & Generic Pharma",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VTVT": {
+      "name": "vTv Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VXRT": {
+      "name": "Vaxart Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OQX",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VYGR": {
+      "name": "Voyager Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "VYNE": {
+      "name": "Vyne Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -5546,6 +10634,16 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "WHWK": {
+      "name": "Whitehawk Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "WK": {
       "name": "Workiva Inc",
       "sector": "SaaS",
@@ -5586,10 +10684,100 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "WVE": {
+      "name": "Wave Life Sciences Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Singapore",
+      "currency": "USD"
+    },
+    "XBIO": {
+      "name": "Xenetic Biosciences Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "XBIT": {
+      "name": "XBiotech Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "XE": {
       "name": "X-Energy, Inc.",
       "sector": "Energy",
       "subsector": "Clean Energy / Nuclear SMR",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "XENE": {
+      "name": "Xenon Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "Canada",
+      "currency": "USD"
+    },
+    "XERS": {
+      "name": "Xeris Biopharma Holdings Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "XFOR": {
+      "name": "X4 Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "XLO": {
+      "name": "Xilio Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "XNCR": {
+      "name": "Xencor Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "XOMA": {
+      "name": "XOMA Royalty Corp",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
       "sub_subsector": "",
       "core": "",
       "exchange": "NASDAQ",
@@ -5656,6 +10844,26 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ZBIO": {
+      "name": "Zenas Biopharma Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ZEAL.CO": {
+      "name": "Zealand Pharma A/S",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "OMX Copenhagen",
+      "country_hq": "Denmark",
+      "currency": "DKK"
+    },
     "ZEN": {
       "name": "Zentek Ltd",
       "sector": "SaaS",
@@ -5676,9 +10884,39 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ZLAB": {
+      "name": "Zai Lab Ltd - ADR",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "China",
+      "currency": "USD"
+    },
     "ZM": {
       "name": "Zoom Communications, Inc.",
       "sector": "Tech",
+      "subsector": "",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ZNTL": {
+      "name": "Zentalis Pharmaceuticals Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ZOM": {
+      "name": "Zomedica Corp.",
+      "sector": "Biopharma",
       "subsector": "",
       "sub_subsector": "",
       "core": "",
@@ -5706,6 +10944,26 @@
       "country_hq": "United States",
       "currency": "USD"
     },
+    "ZURA": {
+      "name": "Zura Bio Ltd",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
+    "ZVRA": {
+      "name": "Zevra Therapeutics Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
+    },
     "ZYDUSLIFE.NS": {
       "name": "Zydus Lifesciences Limited",
       "sector": "Biopharma",
@@ -5715,6 +10973,16 @@
       "exchange": "NSE",
       "country_hq": "India",
       "currency": "INR"
+    },
+    "ZYME": {
+      "name": "Zymeworks Inc",
+      "sector": "Biopharma",
+      "subsector": "Biotech",
+      "sub_subsector": "",
+      "core": "",
+      "exchange": "NASDAQ",
+      "country_hq": "United States",
+      "currency": "USD"
     }
   }
 }

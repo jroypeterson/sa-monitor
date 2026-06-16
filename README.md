@@ -17,24 +17,26 @@ sa-monitor recreates the *whole* StreetAccount editorial product, phase by phase
 |:--:|---|:--:|:--:|
 | **1** | **Trade halts / resumes** (basic, Note-context, news cross-ref, resume, foreign/ADR) | ✅ Locked (§1–9) | ✅ **LIVE** |
 | **2** | **Halt enrichment** — editorial "Note:" preface, press-release cross-ref, calendar context | ✅ Locked | 🟡 **Partly live** — cross-ref + calendar live; Follow-up generation, CORRECTION auto-handling, biotech re-inclusion not built |
-| **3** | **Clinical/regulatory events** — trial readouts + FDA decisions | ✅ Locked (§15–16) | ❌ Not built — **next phase here; plan in `PHASE3_PLAN.md`** |
+| **3** | **Halt→triage hand-off** — biotech now in-universe (so halts cover it) + a Slack CTA nudging a triage on a halted name | n/a | 🟡 biotech re-include ✅ done; Slack-CTA next |
 | **4** | **Weekly data products** — GLP-1 Rx Tracker (`^GLP1`), Notable Drug Events (`^BIOEVENTS`) | ✅ Locked (§17–18) | ❌ Not built |
 | **5** | **Morning brief / weekly digests** | ◻️ Skeleton | ❌ Not built |
 
-> **The earnings cycle is owned by sibling projects, not sa-monitor** (JP decision
-> 2026-06-15): EPS/Sales print + Metrics Recap → `earnings_agent`; per-call
-> Transcript Intelligence → `transcripts`; Street Takeaways → parked (no sell-side
-> source). The StreetAccount recreation is a **distributed system** across the
-> fleet, with `#street-account` as the optional consolidated destination.
-> sa-monitor's lane is **real-time market events** (halts + clinical/regulatory
-> catalysts). See `PHASE3_PLAN.md`.
+> **The StreetAccount recreation is a distributed system across the fleet** (JP
+> decisions 2026-06-15/16) — sa-monitor does **not** own the editorial content:
+> earnings EPS/print + Metrics Recap → `earnings_agent`; per-call Transcript
+> Intelligence → `transcripts`; **clinical/regulatory events (trial readouts, FDA)
+> → `catalyst_watch`**; Street Takeaways → parked (no sell-side source).
+> **sa-monitor's lane is real-time *halts*** — and it now also covers **biotech**
+> (re-included 2026-06-16), feeding the biotech catalyst/triage loop. Full design:
+> root **`biotech_catalyst_architecture_plan.md`**; the local `PHASE3_PLAN.md` is
+> superseded by it.
 
 **Current operational scope = Phase 1 + Phase 2.** Everything below this section documents the live halt feed unless a heading says otherwise. For the full Phase 1 routing decisions see `phase1-data-sources.md`; for the canonical SA template grammar every phase consumes see `template-library.md`; for the Phase 3 build plan see `PHASE3_PLAN.md`.
 
 ### What the live halt feed does (Phase 1)
 
 1. **Polls** Nasdaq Trader Trade Halt RSS (`nasdaqtrader.com/rss.aspx?feed=tradehalts`) and NYSE Trade Halt CSV (`nyse.com/api/trade-halts/current/download`) every 5 seconds during market hours.
-2. **Filters** halt events to the sa-monitor coverage universe: 554 tickers covering Healthcare Services, MedTech, Large Pharma + Specialty/Generic Pharma, plus all non-healthcare sectors. Biotech is excluded today; **re-inclusion is the first Phase 3 step** (JP decision 2026-06-15 — biotech will then be covered by both halts and events; see `PHASE3_PLAN.md` §4).
+2. **Filters** halt events to the sa-monitor coverage universe: **~1,095 tickers** covering Biopharma (incl. **biotech, re-included 2026-06-16**), Healthcare Services, MedTech, Pharma, plus all non-healthcare sectors. (Phase 1 excluded biotech; that was reversed to feed the biotech catalyst/triage loop — root `biotech_catalyst_architecture_plan.md`.)
 3. **Dedupes** by `(symbol, halt_date, halt_time)` across both feeds — the same halt event reported by Nasdaq and NYSE simultaneously emits once.
 4. **Renders** halt + resume notifications using the sa-monitor template variant (sector tag from Coverage Manager taxonomy + raw exchange reason code, both improvements over SA's editorial output).
 5. **Posts** to Slack `#street-account` channel using Block Kit format, plus a JSONL event log for audit.

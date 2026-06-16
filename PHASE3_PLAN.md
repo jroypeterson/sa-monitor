@@ -1,10 +1,16 @@
 # Phase 3 Plan — Clinical/Regulatory Event Alerts
 
-> **Status: PLAN (refocused after JP review 2026-06-15) — for final sign-off
-> before build.** The earlier draft scoped the whole earnings cycle here; review
-> distributed most of it to the projects that own the data (see Decisions below),
-> leaving sa-monitor's Phase 3 as **clinical/regulatory event alerts only**.
-> Template grammar is LOCKED in `template-library.md` §15–16.
+> **⚠️ SUPERSEDED 2026-06-16 — see `../biotech_catalyst_architecture_plan.md` (root).**
+> JP decided the clinical/regulatory **event** lane lives in **`catalyst_watch`**,
+> not sa-monitor (it owns the catalyst classifier + taxonomy; biotech_triage
+> consumes the signals). **sa-monitor's actual Phase 3 narrows to two things:**
+> (1) ✅ **biotech re-included in the universe** (done 2026-06-16 — so halts now
+> cover biotech), and (2) a lean **Slack CTA on a biotech halt** that nudges a
+> triage (the halt→triage hand-off; no event generator built here).
+> The earnings-cycle routing and the §15/§16 event-template reuse below are still
+> accurate *as reference for catalyst_watch* — but the "build the events lane in
+> sa-monitor" framing in §1/§3/§5 is **no longer the plan**. Read the root
+> cross-project plan for the live design.
 
 ---
 

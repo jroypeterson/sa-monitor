@@ -4,7 +4,7 @@ from src.coverage import Universe
 
 def test_universe_loads_from_default_path():
     u = Universe()
-    assert len(u) >= 500  # Phase 1 expects 554
+    assert len(u) >= 1000  # 2026-06-16: biotech re-included (~1095); was ~554 in Phase 1
     # Spot-check a known ticker
     assert "IDXX" in u
     meta = u.get("IDXX")
@@ -12,10 +12,13 @@ def test_universe_loads_from_default_path():
     assert meta.sector == "Healthcare Services"
 
 
-def test_universe_excludes_biotech():
-    """VRTX (Biotech subsector) was deliberately excluded by the Phase 1 filter."""
+def test_universe_includes_biotech():
+    """Biotech re-included 2026-06-16 (was excluded in Phase 1) — VRTX now present."""
     u = Universe()
-    assert "VRTX" not in u
+    assert "VRTX" in u
+    meta = u.get("VRTX")
+    assert meta is not None
+    assert meta.subsector == "Biotech"
 
 
 def test_universe_keeps_large_pharma():
