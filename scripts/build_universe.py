@@ -96,7 +96,12 @@ def main() -> None:
     }
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT_PATH.write_text(json.dumps(out, indent=2, ensure_ascii=False))
+    # encoding="utf-8" is REQUIRED: ensure_ascii=False emits raw non-ASCII (accented
+    # European biotech names like "ALK-Abelló", "genOway Société"); without an explicit
+    # encoding, write_text() uses the Windows locale codepage (cp1252) when regenerated
+    # on JP's machine, planting bytes that crash the UTF-8 reader on the Linux runner
+    # (the 2026-06-16 → 06-23 100% halt-monitor outage). Pin it so it can't regress.
+    OUTPUT_PATH.write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Wrote {OUTPUT_PATH}", flush=True)
     print(f"  source rows: {len(rows)}", flush=True)
     print(f"  excluded (Biotech subsector): {excluded_subsector_count}", flush=True)

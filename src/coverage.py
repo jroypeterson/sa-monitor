@@ -45,7 +45,7 @@ class Universe:
                 f"sa-monitor universe not found at {self.path}. "
                 f"Run `python scripts/build_universe.py` to generate it."
             )
-        payload = json.loads(self.path.read_text())
+        payload = json.loads(self.path.read_text(encoding="utf-8"))
         self._meta_payload = {k: v for k, v in payload.items() if k != "tickers"}
         for symbol, meta in payload.get("tickers", {}).items():
             self._tickers[symbol.upper()] = TickerMeta(
