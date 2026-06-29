@@ -54,7 +54,7 @@ def test_halt_blocks_have_required_fields():
 def test_halt_blocks_include_ticker_and_name():
     payload = build_halt_blocks(make_event(), make_meta())
     text = payload["blocks"][0]["text"]["text"]
-    assert "*SA: VRDN*" in text
+    assert "*SA:* `VRDN`" in text
     assert "Viridian Therapeutics Inc" in text
 
 

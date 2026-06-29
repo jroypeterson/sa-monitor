@@ -63,7 +63,7 @@ def build_halt_blocks(event: HaltEvent, meta: Optional[TickerMeta],
     date_short = _format_date_short(event.halt_date)
     time_hhmm = _format_time_hhmm(event.halt_time)
 
-    headline = f":no_entry: *SA: {event.symbol}* — {name} halted, news pending"
+    headline = f":no_entry: *SA:* `{event.symbol}` — {name} halted, news pending"
     if event.last_price is not None:
         headline += f"  ·  {_format_price(event.last_price)}"
 
@@ -109,7 +109,7 @@ def build_resume_blocks(event: HaltEvent, meta: Optional[TickerMeta]) -> dict:
     resume_hhmm = _format_time_hhmm(event.resume_trade_time or "")
 
     headline = (
-        f":white_check_mark: *SA: {event.symbol}* — shares to resume trading "
+        f":white_check_mark: *SA:* `{event.symbol}` — shares to resume trading "
         f"at {resume_hhmm} ET"
     )
     detail = (
