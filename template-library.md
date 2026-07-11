@@ -375,6 +375,69 @@ Tickers mentioned in/related to this story; follow link for 100-day news history
 
 ---
 
+## 9A. Earnings Cycle Wave 1 — Consensus Metrics Preview ✅ LOCKED (added 2026-07-10)
+
+The **pre-earnings** setup alert — fires in the days BEFORE a covered name reports (unlike Wave 2, which fires T+0:01 after the print). Delivers the FactSet/StreetAccount consensus tree, the options-implied move, historical earnings-reaction stats, and a conference-call reminder. This is the first email of the earnings cycle; §10 (Wave 2) is the print, §11 the recap, §12 transcript intel, §13 Street Takeaways. Captured 2026-07-10 from the JPM golden email (`19f4d8243cb242ee`); was previously an undocumented hole in the library.
+
+**Subject pattern:**
+
+```
+SA: {TICKER} [StreetAccount Consensus Metrics Preview - {Company} Q? Earnings]
+```
+
+**Locked body skeleton:**
+
+```
+{HH:MM} ET {M/DD/YY} [StreetAccount] {TICKER} StreetAccount Consensus Metrics Preview - {Company} Q? Earnings (${last_price}{ ±change})
+- Scheduled to report Q? earnings on {DD-Mon} {before the open|after the close}
+  - FactSet and StreetAccount ({N} estimates for EPS/Revenue{, {a}-{b} for sub-metrics}):
+    - Revenue ${X}B
+      - {nested, SECTOR-SPECIFIC consensus line items — e.g. banks: NII (FTE/reported), noninterest income, IB fees breakdown, FICC, provisions, efficiency ratio, NIM, loans/deposits, book value}
+    - EPS ${X.XX}
+  - Price history for Q? (Since {DD-Mon} close): {TICKER} {±%} / S&P 500 {±%} / {sector ETF} {±%}
+  - Near term options imply a ~{X}% move
+  - Last 4 quarter % moves: {(x%), (x%), (x%), (x%)}
+  - Revenue has beaten consensus {M} of the past 20 quarters
+  - EPS has beaten consensus {M} of the past 20 quarters
+Earnings conference call reminder: {M/DD/YYYY} at {HH:MM} ET. ({dial-in / webcast})
+StreetAccount alert for portfolio(s): · {Portfolio} ({TICKER})
+Tickers mentioned in/related to this story; follow link for 100-day news history: {TICKER}
+```
+
+**Real capture (JPM 2026-07-10 15:29 ET — `19f4d8243cb242ee`):**
+
+```
+15:29 ET 7/10/26 [StreetAccount] JPM StreetAccount Consensus Metrics Preview - JPMorgan Chase Q2 Earnings ($336.39 +$0.92)
+- Scheduled to report Q2 earnings on 14-Jul before the open
+  - FactSet and StreetAccount (14 estimates for EPS/Revenue, 3-12 for Deposits/Loans/IB breakdown):
+    - Revenue $51.09B
+      - Net interest income: FTE $25.62B / Reported $25.36B; Noninterest income (reported) $24.77B
+      - IB Fees $2.82B (Advisory $1.11B, Equity underwriting $539.5M, Debt underwriting $1.18B); Equities $3.89B; FICC $6.22B
+      - Provision for credit losses $2.97B; Noninterest expense $26.39B; Efficiency ratio 52.3%
+    - EPS $5.59; NIM 2.46%; Average earning assets $4.144T
+      - Ending loans $1.512T; Ending deposits $2.668T; Book value $131.08; Tangible book value $111.47
+  - Price history for Q2 (Since 13-Apr close): JPM +7.5% / S&P 500 +9.5% / XLF +7.6%
+  - Near term options imply a ~3.8% move
+  - Last 4 quarter % moves: (1%), (4%), (2%), (1%)
+  - Revenue has beaten consensus 15 of the past 20 quarters
+  - EPS has beaten consensus 16 of the past 20 quarters
+Earnings conference call reminder: 7/14/2026 at 08:30 ET. (webcast)
+StreetAccount alert for portfolio(s): · Non-HC (JPM)
+Tickers mentioned in/related to this story; follow link for 100-day news history: JPM
+```
+
+**Key formatting rules:**
+- Fires **T-minus** (days before the report), not T+0 — it is the setup, not the reaction. Cadence peaks in the ~1-2 weeks before each covered name's report.
+- The consensus tree is **sector-specific**: the JPM (bank) example shows NII/IB-fees/loans/deposits; an industrial or biopharma name would show different nested KPIs. The estimate-count parenthetical (`{N} estimates for EPS/Revenue, {a}-{b} for sub-metrics`) always leads.
+- Four fixed analytic blocks always follow the consensus tree, in order: (1) quarter price history vs S&P 500 + sector ETF, (2) options-implied move, (3) last-4-quarter reaction moves, (4) 20-quarter beat rates for Revenue and EPS.
+- Always closes with a conference-call reminder line (date/time + dial-in/webcast).
+
+**Build note (feasibility):** COMPOSE from `earnings_agent`, not native to sa-monitor — earnings_agent already owns the reporting calendar (report date/time), consensus/estimates, and the covered universe. sa-monitor should receive this as a spec'd fixture. Recommended to hand off before Q2 season starts 2026-07-14. See `research/sa_monitor_reverse_engineering_2026-07-10.md` §E.
+
+**Token budget:** ~200–500 tokens. Fires once per covered name per quarter, clustered in the pre-report window.
+
+---
+
 ## 10. Earnings Cycle Wave 2 — Initial EPS/Sales Print ✅ LOCKED
 
 The first earnings-cycle alert that fires after a company reports. Subject and body convey the headline beat/miss vs FactSet consensus and the structured GAAP/non-GAAP financials. Lead time T+0:01 (first SA alert post-print).
