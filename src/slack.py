@@ -19,9 +19,19 @@ from typing import Optional
 import requests
 
 from .coverage import TickerMeta
+from .events.types import (
+    CLEARANCE,
+    CRL,
+    DIR_MET,
+    DIR_MISSED,
+    FDA_APPROVAL,
+    TRIAL_READOUT,
+    HCEvent,
+)
 from .feeds.types import HaltEvent
 from .news.types import NewsItem
 from .template import (
+    _NEWS_SOURCE_LABELS,
     _format_date_short,
     _format_price,
     _format_time_hhmm,
@@ -29,6 +39,9 @@ from .template import (
     followup_headline,
     followup_source_label,
     followup_when,
+    hc_event_cta_context,
+    hc_event_headline,
+    hc_event_when,
     is_biotech,
 )
 
@@ -182,6 +195,69 @@ def build_followup_blocks(halt: HaltEvent, item: NewsItem,
     }
 
 
+def _hc_event_emoji(event: HCEvent) -> str:
+    """Event-type emoji per design §5. Trial readouts split on direction so a
+    'met' and a 'missed' are visually distinct at a glance."""
+    if event.event_type == FDA_APPROVAL:
+        return ":pill:"
+    if event.event_type == CRL:
+        return ":x:"
+    if event.event_type == CLEARANCE:
+        return ":heavy_check_mark:"
+    if event.event_type == TRIAL_READOUT:
+        if event.direction == DIR_MISSED:
+            return ":small_red_triangle_down:"
+        if event.direction == DIR_MET:
+            return ":test_tube:"
+        return ":microscope:"  # topline, direction TBD
+    return ":pill:"
+
+
+def build_hc_event_blocks(event: HCEvent, meta: Optional[TickerMeta]) -> dict:
+    """Block Kit for an HC event-wire alert — an FDA action or clinical readout
+    on a covered name (design §5, templates §15/§16/§19). Single-section mrkdwn,
+    mirroring build_followup_blocks. Headline is the issuer's verbatim title;
+    the fact-dense efficacy body is a deferred LLM enhancement."""
+    symbol = event.symbol
+    headline = hc_event_headline(event.headline)
+    time_hhmm, date_short = hc_event_when(event.published_at)
+
+    header = f"{_hc_event_emoji(event)} *SA:* `{symbol}` — {headline}"
+
+    when = f"`{time_hhmm} ET {date_short}`" if time_hhmm else ""
+    detail_bits = [when] if when else []
+    if meta and meta.sector:
+        sector_str = meta.sector
+        if meta.subsector:
+            sector_str += f" / {meta.subsector}"
+        detail_bits.append(f"Sector: {sector_str}")
+    detail = "  ·  ".join(detail_bits)
+
+    label = _NEWS_SOURCE_LABELS.get(event.source, event.source)
+    source_line = f"_source: {label} press release"
+    if event.url:
+        source_line += f" · {event.url}"
+    source_line += "_"
+
+    lines = [header]
+    if detail:
+        lines.append(detail)
+    if meta and is_biotech(meta.subsector):
+        lines.append(biotech_triage_cta(symbol, context=hc_event_cta_context(event)))
+    lines.append(source_line)
+    text_block = "\n".join(lines)
+    fallback = f"SA: {symbol} — {headline}"
+    return {
+        "blocks": [
+            {
+                "type": "section",
+                "text": {"type": "mrkdwn", "text": text_block[:SLACK_SECTION_TEXT_LIMIT]},
+            }
+        ],
+        "text": fallback,
+    }
+
+
 def build_dm_blocks(message: str, *, level: str = "warning") -> dict:
     emoji = {"ok": ":white_check_mark:", "warning": ":warning:", "error": ":x:"}.get(
         level, ":warning:"
@@ -252,6 +328,18 @@ def post_followup(halt: HaltEvent, item: NewsItem, meta: Optional[TickerMeta], *
     payload = build_followup_blocks(halt, item, meta, last_price=last_price)
     if dry_run:
         log.info("slack[dry-run] followup payload for %s:\n%s", halt.symbol,
+                 json.dumps(payload, indent=2))
+        return payload
+    post_payload(payload, webhook_url=webhook_url)
+    return payload
+
+
+def post_hc_event(event: HCEvent, meta: Optional[TickerMeta], *,
+                  webhook_url: Optional[str] = None,
+                  dry_run: bool = False) -> Optional[dict]:
+    payload = build_hc_event_blocks(event, meta)
+    if dry_run:
+        log.info("slack[dry-run] hc_event payload for %s:\n%s", event.symbol,
                  json.dumps(payload, indent=2))
         return payload
     post_payload(payload, webhook_url=webhook_url)

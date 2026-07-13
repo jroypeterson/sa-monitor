@@ -22,7 +22,7 @@ import logging
 import signal
 import sys
 import time
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
@@ -32,12 +32,14 @@ from .calendars import AnalystDayCalendar, EarningsCalendar
 from .coverage import Universe
 from .dedup import HaltTracker
 from .enrichment import build_note_context, cross_ref_match, find_followup_news
+from .events.classify import classify
 from .feeds import nasdaq, nyse
 from .feeds.types import HaltEvent
 from .news import bw, gnw, prnewswire
 from .news.cache import NewsCache
+from .news.types import NewsItem
 from .reason_codes import is_phase1_emit_code
-from .template import render_followup, render_halt, render_resume
+from .template import render_followup, render_halt, render_hc_event, render_resume
 
 logging.basicConfig(
     level=logging.INFO,
@@ -74,6 +76,7 @@ class RunStats:
     halts_emitted: int = 0
     resumes_emitted: int = 0
     followups_emitted: int = 0
+    hc_events_emitted: int = 0
     halts_filtered_out_of_universe: int = 0
     halts_filtered_non_emit_code: int = 0
     halts_enriched_with_note: int = 0
@@ -337,6 +340,116 @@ def _emit_followups(
                             note_context=f"Follow-up: {item.title}")
 
 
+def _emit_hc_events(
+    news_items: list[NewsItem],
+    universe: Universe,
+    tracker: HaltTracker,
+    log_path: Optional[Path],
+    *,
+    stats: RunStats,
+    slack_mode: str = "off",
+    slack_webhook_url: Optional[str] = None,
+) -> None:
+    """Detect + emit HC event-wire alerts (FDA actions + clinical readouts).
+
+    v1 CONSUMES the PR-wire NewsItems already fetched this poll: classify each,
+    and — for items whose issuer-embedded tickers are in the covered universe —
+    post an SA-faithful alert (design of record §4).
+
+    Attribution is HIGH-confidence by construction: the ticker was written into
+    the issuer's own release and extracted by the news parsers, so there is no
+    name-matching / misattribution risk (the openFDA sponsor→ticker resolver is
+    deferred to session 2).
+
+    Dedup key: f"{news_id}|{symbol}|{event_type}" in tracker.hc_events_emitted —
+    one alert per (press release, covered ticker, event type), ever. Post-then-
+    mark, identical gating to _emit_followups:
+      off      → stdout emit is the delivery → mark
+      live     → mark only on a successful post
+      dry-run  → render only, never post, never mark (re-testable)
+    """
+    for item in news_items:
+        ev = classify(item)
+        if ev is None:
+            continue
+        # v1 universe filter = issuer-extracted tickers ∩ covered Universe.
+        # (session 2 adds the sponsor→ticker resolver fallback here.)
+        covered = [t for t in item.tickers if universe.get(t)]
+        if not covered:
+            continue
+        for symbol in covered:
+            dedup_key = f"{item.news_id}|{symbol}|{ev.event_type}"
+            if dedup_key in tracker.hc_events_emitted:
+                continue  # one alert per (PR, ticker, type), ever
+            meta = universe.get(symbol)
+            event = replace(ev, symbol=symbol)
+
+            rendered = render_hc_event(
+                event, sector=(meta.sector if meta else ""),
+                subsector=(meta.subsector if meta else ""),
+            )
+            print()
+            print("=" * 60)
+            print(rendered)
+            print("=" * 60)
+            sys.stdout.flush()
+
+            # dry-run: render only — never post, never mark (re-testable).
+            if slack_mode == "dry-run":
+                try:
+                    slack.post_hc_event(event, meta,
+                                        webhook_url=slack_webhook_url, dry_run=True)
+                except Exception as exc:
+                    log.error("hc-event dry-run render failed for %s: %s",
+                              symbol, exc)
+                continue
+
+            posted = True
+            if slack_mode == "live":
+                try:
+                    slack.post_hc_event(event, meta,
+                                        webhook_url=slack_webhook_url, dry_run=False)
+                    stats.slack_posts_succeeded += 1
+                except Exception as exc:
+                    posted = False
+                    stats.slack_posts_failed += 1
+                    log.error("slack hc-event post failed for %s: %s", symbol, exc)
+
+            # off: stdout emit is the delivery → mark. live: mark only on post ok.
+            if posted:
+                tracker.hc_events_emitted.add(dedup_key)
+                stats.hc_events_emitted += 1
+                log.info("hc-event emitted for %s [%s/%s]: %s",
+                         symbol, event.event_type, event.direction, event.headline)
+                if log_path:
+                    _append_hc_log(log_path, event, meta)
+
+
+def _append_hc_log(log_path: Path, event, meta) -> None:
+    """Structured JSONL audit record for a delivered HC event (mirrors
+    _append_log; HCEvent has a different shape than HaltEvent so it gets its
+    own writer rather than being coerced)."""
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    record = {
+        "ts_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "kind": "hc_event",
+        "emitted": True,
+        "symbol": event.symbol,
+        "event_type": event.event_type,
+        "direction": event.direction,
+        "phase": event.phase,
+        "headline": event.headline,
+        "source": event.source,
+        "url": event.url,
+        "published_at": event.published_at,
+        "confidence": event.confidence,
+        "sector": meta.sector if meta else None,
+        "subsector": meta.subsector if meta else None,
+    }
+    with log_path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+
 def _append_log(log_path: Path, kind: str, event: HaltEvent, meta,
                 *, emitted: bool, note_context: Optional[str] = None) -> None:
     log_path.parent.mkdir(parents=True, exist_ok=True)
@@ -375,6 +488,7 @@ def _post_health_heartbeat(stats: RunStats, slack_mode: str,
         f"halts={stats.halts_emitted}",
         f"resumes={stats.resumes_emitted}",
         f"followups={stats.followups_emitted}",
+        f"hc_events={stats.hc_events_emitted}",
         f"slack_ok/fail={stats.slack_posts_succeeded}/{stats.slack_posts_failed}",
         f"fetch_errors={stats.fetch_errors}",
     ]
@@ -420,6 +534,7 @@ def run(
     analyst_days_calendar_path: Optional[Path] = None,
     enable_news_cross_ref: bool = False,
     news_window_minutes: int = 60,
+    hc_events_enabled: bool = False,
 ) -> RunStats:
     universe = Universe(universe_path) if universe_path else Universe()
     log.info("loaded universe: %d tickers (%s)", len(universe), universe.filter_rule)
@@ -443,6 +558,8 @@ def run(
     )
     if news_cache is not None:
         log.info("news cross-ref enabled (window=%dm, sources=PRN/BW/GNW)", news_window_minutes)
+    if hc_events_enabled:
+        log.info("HC event-wire enabled (FDA actions + clinical readouts → #street-account)")
 
     if persist_state:
         state.cleanup_old()
@@ -478,20 +595,31 @@ def run(
 
             # News-feed poll (slower cadence than halt feeds — every Nth tick).
             # Run BEFORE halt emit so a halt fired this tick can cross-ref news
-            # already in the cache from this poll.
-            if news_cache is not None and stats.polls_completed % NEWS_POLL_EVERY == 0:
+            # already in the cache from this poll. Fetched when EITHER the
+            # cross-ref cache OR the HC event-wire is enabled (both consume the
+            # same freshly-fetched news_items).
+            if ((news_cache is not None or hc_events_enabled)
+                    and stats.polls_completed % NEWS_POLL_EVERY == 0):
                 news_items: list = []
                 for label, mod in [("news_prnewswire", prnewswire),
                                     ("news_businesswire", bw),
                                     ("news_globenewswire", gnw)]:
                     news_items.extend(_safe_fetch(label, mod.fetch, stats, health, slack_mode))
-                added = news_cache.ingest(news_items)
-                stats.news_polls_completed += 1
-                stats.news_items_ingested += added
-                # tickers_indexed reflects items currently in the lookback
-                # window (i.e. cross-refable). news_items_ingested is the
-                # cumulative count for dedup auditing.
-                stats.news_cache_size = news_cache.tickers_indexed
+                if news_cache is not None:
+                    added = news_cache.ingest(news_items)
+                    stats.news_polls_completed += 1
+                    stats.news_items_ingested += added
+                    # tickers_indexed reflects items currently in the lookback
+                    # window (i.e. cross-refable). news_items_ingested is the
+                    # cumulative count for dedup auditing.
+                    stats.news_cache_size = news_cache.tickers_indexed
+                # HC event-wire: classify the freshly-fetched PR-wire items and
+                # emit alerts for covered names (additive; does not touch the
+                # halt/resume/follow-up paths above).
+                if hc_events_enabled:
+                    _emit_hc_events(news_items, universe, tracker, log_path,
+                                    stats=stats, slack_mode=slack_mode,
+                                    slack_webhook_url=slack_webhook_url)
 
             for kind, event in tracker.ingest(nasdaq_events + nyse_events):
                 _emit(kind, event, universe, log_path,
@@ -573,6 +701,9 @@ def main(argv: Optional[list[str]] = None) -> int:
                         help="enable PRN/BW/GNW news cross-ref enrichment (Phase 2 slice 2B)")
     parser.add_argument("--news-window-minutes", type=int, default=60,
                         help="lookback window for news cross-ref (default 60min)")
+    parser.add_argument("--hc-events", action="store_true",
+                        help="enable the HC event-wire lane (FDA approvals/CRLs + "
+                             "clinical-trial readouts on covered names → #street-account)")
     args = parser.parse_args(argv)
 
     stats = run(
@@ -584,6 +715,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         analyst_days_calendar_path=args.analyst_days_calendar,
         enable_news_cross_ref=args.news_cross_ref,
         news_window_minutes=args.news_window_minutes,
+        hc_events_enabled=args.hc_events,
     )
     print(json.dumps(asdict(stats), indent=2))
     return 0

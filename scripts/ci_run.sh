@@ -120,6 +120,13 @@ if [ "${DISABLE_NEWS_CROSS_REF:-0}" != "1" ]; then
   EXTRA_ARGS+=(--news-cross-ref)
 fi
 
+# HC event-wire: classify the already-fetched PR wire for FDA actions +
+# clinical readouts on covered names. Consumes the same news poll (no new
+# HTTP). Opt-out via DISABLE_HC_EVENTS=1.
+if [ "${DISABLE_HC_EVENTS:-0}" != "1" ]; then
+  EXTRA_ARGS+=(--hc-events)
+fi
+
 python -m src.halt_monitor \
   --slack live \
   --duration "${DURATION}" \

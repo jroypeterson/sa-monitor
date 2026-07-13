@@ -64,6 +64,7 @@ def save(tracker: HaltTracker, *, state_dir: Path = DEFAULT_STATE_DIR,
         "resumes_emitted": [list(hid) for hid in tracker.resumes_emitted],
         "emitted_halts": [list(hid) for hid in tracker.emitted_halts],
         "followed_up": [list(hid) for hid in tracker.followed_up],
+        "hc_events_emitted": sorted(tracker.hc_events_emitted),
     }
 
     # Atomic write: tmp file → rename
@@ -106,6 +107,8 @@ def load(*, state_dir: Path = DEFAULT_STATE_DIR, day_key: str = "") -> HaltTrack
     # simply lack them and rehydrate to empty sets.
     emitted_halts = {tuple(e) for e in payload.get("emitted_halts", [])}
     followed_up = {tuple(f) for f in payload.get("followed_up", [])}
+    # HC event-wire delivery-dedup — string keys, not HaltId tuples.
+    hc_events_emitted = set(payload.get("hc_events_emitted", []))
 
     # Pre-fill seen_halts with placeholder HaltEvents — we only need the
     # halt_ids to be populated so dedup works; the full event history isn't
@@ -124,9 +127,12 @@ def load(*, state_dir: Path = DEFAULT_STATE_DIR, day_key: str = "") -> HaltTrack
     tracker.resumes_emitted = resumes
     tracker.emitted_halts = emitted_halts
     tracker.followed_up = followed_up
+    tracker.hc_events_emitted = hc_events_emitted
     log.info(
-        "state: rehydrated from %s (%d halts, %d resumes, %d emitted, %d followed_up)",
+        "state: rehydrated from %s (%d halts, %d resumes, %d emitted, "
+        "%d followed_up, %d hc_events)",
         path, len(halts), len(resumes), len(emitted_halts), len(followed_up),
+        len(hc_events_emitted),
     )
     return tracker
 

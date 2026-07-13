@@ -43,6 +43,12 @@ class HaltTracker:
     # ever. Persisted alongside seen_halts so a mid-session restart never
     # re-emits a follow-up.
     followed_up: set[HaltId] = field(default_factory=set)
+    # Delivery-dedup for the HC event-wire lane. Keys are strings of the form
+    # f"{news_id}|{symbol}|{event_type}" — one alert per (press release,
+    # covered ticker, event type), ever. Persisted like followed_up so a
+    # mid-session restart never re-emits an HC event. (Mirrors emitted_halts /
+    # followed_up exactly; unlike them, keyed by string not HaltId.)
+    hc_events_emitted: set[str] = field(default_factory=set)
 
     def ingest(self, events: list[HaltEvent]) -> Iterator[tuple[str, HaltEvent]]:
         """Diff `events` against state and yield (kind, event) for new ones.
@@ -85,3 +91,4 @@ class HaltTracker:
         self.resumes_emitted.clear()
         self.emitted_halts.clear()
         self.followed_up.clear()
+        self.hc_events_emitted.clear()

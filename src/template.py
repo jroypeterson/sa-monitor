@@ -68,14 +68,18 @@ def is_biotech(subsector: str) -> bool:
     return (subsector or "").strip().casefold() == "biotech"
 
 
-def biotech_triage_cta(symbol: str) -> str:
-    """Lean halt->triage hand-off nudge for a biotech halt (option A, 2026-06-16).
+def biotech_triage_cta(symbol: str, context: str = "halt") -> str:
+    """Lean ->triage hand-off nudge for a biotech name (option A, 2026-06-16).
 
     sa-monitor can't auto-invoke the Claude-driven biotech_triage, so instead of
     pretending to trigger it we surface a copy-pasteable command. See the root
     biotech_catalyst_architecture_plan.md (§3) for why this is human-mediated.
+
+    `context` names what triggered the nudge — "halt" (default, preserves the
+    halt/resume wording verbatim) or an HC-event label ("readout"/"approval"/…)
+    so a non-halt HC event doesn't misleadingly read "Biotech halt".
     """
-    return f":dna: Biotech halt — triage this name?  ->  `triage {symbol}`"
+    return f":dna: Biotech {context} — triage this name?  ->  `triage {symbol}`"
 
 
 def render_halt(event: HaltEvent, *, sector: str = "", subsector: str = "",
@@ -205,6 +209,78 @@ def render_followup(halt: HaltEvent, item: NewsItem, *, sector: str = "",
             sector_line += f" / {subsector}"
         parts.append(sector_line)
     parts.append(f"Source: {followup_source_label(item)} press release")
+    return "\n".join(parts)
+
+
+def hc_event_when(published_at: str) -> tuple[str, str]:
+    """(time_hhmm, date_short) in ET for an HC event, from its PR publish time.
+
+    Falls back to ("", "") if the timestamp is missing/malformed — the caller
+    then simply omits the stamp rather than printing garbage.
+    """
+    et = _iso_utc_to_et(published_at)
+    if et is None:
+        return ("", "")
+    return (f"{et.hour:02d}:{et.minute:02d}",
+            f"{et.month}/{et.day:02d}/{et.year % 100:02d}")
+
+
+def hc_event_headline(headline: str) -> str:
+    """The event headline, verbatim from the issuer, capped for readability.
+
+    SA reproduces issuer language; v1 delivers the issuer's own title (the
+    fact-dense §15/§19 efficacy body is a deferred LLM enhancement).
+    """
+    headline = (headline or "").strip()
+    if len(headline) > _FOLLOWUP_HEADLINE_LIMIT:
+        headline = headline[:_FOLLOWUP_HEADLINE_LIMIT].rsplit(" ", 1)[0] + "…"
+    return headline
+
+
+# Human label for an HC event type, used in the biotech triage CTA so it reads
+# "Biotech readout — triage this name?" rather than the halt path's "Biotech halt".
+_HC_CTA_CONTEXT = {
+    "trial_readout": "readout",
+    "fda_approval": "approval",
+    "crl": "CRL",
+    "clearance": "clearance",
+}
+
+
+def hc_event_cta_context(event) -> str:
+    """CTA context word for an HCEvent (falls back to a generic 'event')."""
+    return _HC_CTA_CONTEXT.get(event.event_type, "event")
+
+
+def render_hc_event(event, *, sector: str = "", subsector: str = "") -> str:
+    """Render an HC event-wire alert to plain text (stdout / --slack off).
+
+    event is an events.types.HCEvent. Mirrors render_followup's shape:
+
+        HH:MM ET M/DD/YY [StreetAccount] TICKER {verbatim issuer headline}
+        Sector: {sector} / {subsector}
+        [biotech triage CTA if biotech]
+        Source: {Wire} press release · {url}
+    """
+    time_hhmm, date_short = hc_event_when(event.published_at)
+    headline = hc_event_headline(event.headline)
+
+    when = f"{time_hhmm} ET {date_short} ".lstrip() if time_hhmm else ""
+    header = f"{when}[StreetAccount] {event.symbol} {headline}"
+
+    parts = [header]
+    if sector:
+        sector_line = f"Sector: {sector}"
+        if subsector:
+            sector_line += f" / {subsector}"
+        parts.append(sector_line)
+    if is_biotech(subsector):
+        parts.append(biotech_triage_cta(event.symbol, context=hc_event_cta_context(event)))
+    label = _NEWS_SOURCE_LABELS.get(event.source, event.source)
+    source_line = f"Source: {label} press release"
+    if event.url:
+        source_line += f" · {event.url}"
+    parts.append(source_line)
     return "\n".join(parts)
 
 
