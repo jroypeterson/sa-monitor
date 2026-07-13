@@ -1,6 +1,20 @@
 """Tests for halt + resume template rendering."""
 from src.feeds.types import HaltEvent
-from src.template import render_halt, render_resume
+from src.news.types import NewsItem
+from src.template import render_followup, render_halt, render_resume
+
+
+def make_news(**overrides):
+    defaults = dict(
+        source="prnewswire",
+        title="Viridian reports positive Phase 3 topline results",
+        body="b",
+        url="https://prn.test/vrdn",
+        published_at="2026-05-05T11:10:00+00:00",  # 07:10 ET
+        tickers=("VRDN",),
+    )
+    defaults.update(overrides)
+    return NewsItem(**defaults)
 
 
 def make_event(**overrides):
@@ -107,6 +121,67 @@ def test_render_halt_non_biotech_no_triage_cta():
     out = render_halt(event, sector="MedTech", subsector="Diagnostics")
     assert "triage this name" not in out
     assert "triage VRDN" not in out
+
+
+def test_render_followup_full_shape():
+    """§7 header uses the news publish time in ET, references the halt in-body."""
+    out = render_followup(
+        make_event(halt_time="07:00:00"), make_news(),
+        sector="Biopharma", subsector="Biotech",
+    )
+    lines = out.split("\n")
+    assert lines[0] == (
+        "07:10 ET 5/05/26 [StreetAccount] VRDN "
+        "Follow-up: Viridian reports positive Phase 3 topline results ($14.06)"
+    )
+    assert "Follows the 07:00 ET halt on VRDN" in out
+    assert "Sector: Biopharma / Biotech" in out
+    assert "Source: PR Newswire press release" in out
+
+
+def test_render_followup_uses_news_publish_time_not_halt_time():
+    out = render_followup(
+        make_event(halt_time="07:00:00"),
+        make_news(published_at="2026-05-05T13:30:00+00:00"),  # 09:30 ET
+    )
+    assert out.startswith("09:30 ET 5/05/26 [StreetAccount] VRDN Follow-up:")
+
+
+def test_render_followup_falls_back_to_halt_time_on_bad_publish():
+    out = render_followup(
+        make_event(halt_time="07:00:00"),
+        make_news(published_at="not-a-timestamp"),
+    )
+    assert out.startswith("07:00 ET 5/05/26 [StreetAccount] VRDN Follow-up:")
+
+
+def test_render_followup_omits_price_when_none():
+    out = render_followup(make_event(last_price=None), make_news())
+    assert "Follow-up: Viridian reports positive Phase 3 topline results" in out
+    assert "($" not in out
+
+
+def test_render_followup_last_price_override():
+    out = render_followup(make_event(last_price=14.06), make_news(), last_price=15.50)
+    assert "($15.50)" in out
+    assert "($14.06)" not in out
+
+
+def test_render_followup_truncates_long_headline():
+    out = render_followup(make_event(), make_news(title="word " * 100))  # ~500 chars
+    assert "…" in out
+    header = out.split("\n")[0]
+    assert len(header) < 260
+
+
+def test_render_followup_globenewswire_label():
+    out = render_followup(make_event(), make_news(source="globenewswire"))
+    assert "Source: GlobeNewswire press release" in out
+
+
+def test_render_followup_omits_sector_when_absent():
+    out = render_followup(make_event(), make_news())
+    assert "Sector:" not in out
 
 
 def test_date_format_matches_sa_grammar():

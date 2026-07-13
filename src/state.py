@@ -17,7 +17,9 @@ File format: JSON
     "trading_day_et": "2026-05-05",
     "saved_at_utc": "2026-05-05T20:30:00+00:00",
     "halts": [["VRDN","2026-05-05","06:55:32"], …],
-    "resumes_emitted": [["INSM","2026-04-07","16:01:15"], …]
+    "resumes_emitted": [["INSM","2026-04-07","16:01:15"], …],
+    "emitted_halts": [["VRDN","2026-05-05","06:55:32"], …],
+    "followed_up": [["INSM","2026-04-07","16:01:15"], …]
   }
 """
 from __future__ import annotations
@@ -60,6 +62,8 @@ def save(tracker: HaltTracker, *, state_dir: Path = DEFAULT_STATE_DIR,
         "saved_at_utc": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "halts": [list(hid) for hid in tracker.seen_halts.keys()],
         "resumes_emitted": [list(hid) for hid in tracker.resumes_emitted],
+        "emitted_halts": [list(hid) for hid in tracker.emitted_halts],
+        "followed_up": [list(hid) for hid in tracker.followed_up],
     }
 
     # Atomic write: tmp file → rename
@@ -98,6 +102,10 @@ def load(*, state_dir: Path = DEFAULT_STATE_DIR, day_key: str = "") -> HaltTrack
 
     halts = [tuple(h) for h in payload.get("halts", [])]
     resumes = {tuple(r) for r in payload.get("resumes_emitted", [])}
+    # Additive fields (introduced after schema v1 shipped); older state files
+    # simply lack them and rehydrate to empty sets.
+    emitted_halts = {tuple(e) for e in payload.get("emitted_halts", [])}
+    followed_up = {tuple(f) for f in payload.get("followed_up", [])}
 
     # Pre-fill seen_halts with placeholder HaltEvents — we only need the
     # halt_ids to be populated so dedup works; the full event history isn't
@@ -114,9 +122,11 @@ def load(*, state_dir: Path = DEFAULT_STATE_DIR, day_key: str = "") -> HaltTrack
             source="restored_from_state",
         )
     tracker.resumes_emitted = resumes
+    tracker.emitted_halts = emitted_halts
+    tracker.followed_up = followed_up
     log.info(
-        "state: rehydrated from %s (%d halts, %d resumes)",
-        path, len(halts), len(resumes),
+        "state: rehydrated from %s (%d halts, %d resumes, %d emitted, %d followed_up)",
+        path, len(halts), len(resumes), len(emitted_halts), len(followed_up),
     )
     return tracker
 

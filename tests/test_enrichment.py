@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from src.calendars import AnalystDayCalendar, EarningsCalendar
-from src.enrichment import build_note_context
+from src.enrichment import build_note_context, find_followup_news
 from src.feeds.types import HaltEvent
 from src.news.cache import NewsCache
 from src.news.types import NewsItem
@@ -267,6 +267,95 @@ def test_no_news_cache_returns_calendar_note(tmp_path):
     }), encoding="utf-8")
     note = build_note_context(halt, earnings=EarningsCalendar(e_path))
     assert note == "Note X is scheduled to report earnings this morning"
+
+
+# --- §7 Follow-up matcher (find_followup_news) -----------------------------
+# 07:00 ET on 2026-05-05 (EDT) == 11:00 UTC.
+
+
+def _followup_halt(symbol="VRDN"):
+    return HaltEvent(
+        symbol=symbol, exchange="Nasdaq", halt_date="2026-05-05",
+        halt_time="07:00:00", reason_code="T1", reason_description="News Pending",
+        name="Viridian Therapeutics", last_price=14.06, source="nasdaq_rss",
+    )
+
+
+def test_find_followup_matches_pr_after_halt():
+    halt = _followup_halt()
+    cache = NewsCache()
+    now = datetime(2026, 5, 5, 11, 10, tzinfo=timezone.utc)
+    cache.ingest([NewsItem(
+        source="prnewswire", title="Viridian reports positive Phase 3 topline",
+        body="b", url="https://prn.test/vrdn",
+        published_at="2026-05-05T11:10:00+00:00", tickers=("VRDN",),
+    )], now_utc=now)
+    item = find_followup_news(halt, cache)
+    assert item is not None
+    assert item.title == "Viridian reports positive Phase 3 topline"
+
+
+def test_find_followup_ignores_pr_before_halt():
+    """A PR that crossed BEFORE the halt is the cross-ref-note case, not a
+    follow-up — find_followup_news requires publish time AT/AFTER the halt."""
+    halt = _followup_halt()
+    cache = NewsCache()
+    now = datetime(2026, 5, 5, 11, 0, tzinfo=timezone.utc)
+    cache.ingest([NewsItem(
+        source="prnewswire", title="pre-halt PR", body="b",
+        url="https://prn.test/pre", published_at="2026-05-05T10:50:00+00:00",
+        tickers=("VRDN",),
+    )], now_utc=now)
+    assert find_followup_news(halt, cache) is None
+
+
+def test_find_followup_picks_earliest_when_multiple():
+    """Among multiple post-halt PRs, the EARLIEST at/after the halt is the
+    breaking one that resolved it (tie-break opposite of the cross-ref note)."""
+    halt = _followup_halt()
+    cache = NewsCache()
+    now = datetime(2026, 5, 5, 11, 40, tzinfo=timezone.utc)
+    cache.ingest([
+        NewsItem(source="businesswire", title="later unrelated wire", body="b",
+                 url="https://x.test/late", published_at="2026-05-05T11:35:00+00:00",
+                 tickers=("VRDN",)),
+        NewsItem(source="prnewswire", title="breaking PR that resolved the halt",
+                 body="b", url="https://x.test/break",
+                 published_at="2026-05-05T11:05:00+00:00", tickers=("VRDN",)),
+    ], now_utc=now)
+    item = find_followup_news(halt, cache)
+    assert item.title == "breaking PR that resolved the halt"
+
+
+def test_find_followup_no_match_returns_none():
+    halt = _followup_halt()
+    assert find_followup_news(halt, NewsCache()) is None  # empty cache
+
+
+def test_find_followup_skips_item_without_title():
+    halt = _followup_halt()
+    cache = NewsCache()
+    now = datetime(2026, 5, 5, 11, 10, tzinfo=timezone.utc)
+    cache.ingest([NewsItem(
+        source="prnewswire", title="   ", body="b", url="https://prn.test/empty",
+        published_at="2026-05-05T11:10:00+00:00", tickers=("VRDN",),
+    )], now_utc=now)
+    assert find_followup_news(halt, cache) is None
+
+
+def test_find_followup_reuses_halt_dt_conversion_returns_none_on_bad_halt():
+    """Malformed halt time flows through the shared _halt_dt_to_utc → None."""
+    bad = HaltEvent(
+        symbol="VRDN", exchange="Nasdaq", halt_date="", halt_time="",
+        reason_code="T1", reason_description="News Pending", source="nasdaq_rss",
+    )
+    cache = NewsCache()
+    now = datetime(2026, 5, 5, 11, 10, tzinfo=timezone.utc)
+    cache.ingest([NewsItem(
+        source="prnewswire", title="a real PR", body="b", url="https://prn.test/x",
+        published_at="2026-05-05T11:10:00+00:00", tickers=("VRDN",),
+    )], now_utc=now)
+    assert find_followup_news(bad, cache) is None
 
 
 def test_earnings_takes_priority_over_analyst_day(tmp_path):

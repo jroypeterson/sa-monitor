@@ -20,11 +20,15 @@ import requests
 
 from .coverage import TickerMeta
 from .feeds.types import HaltEvent
+from .news.types import NewsItem
 from .template import (
     _format_date_short,
     _format_price,
     _format_time_hhmm,
     biotech_triage_cta,
+    followup_headline,
+    followup_source_label,
+    followup_when,
     is_biotech,
 )
 
@@ -140,6 +144,44 @@ def build_resume_blocks(event: HaltEvent, meta: Optional[TickerMeta]) -> dict:
     }
 
 
+def build_followup_blocks(halt: HaltEvent, item: NewsItem,
+                          meta: Optional[TickerMeta], *,
+                          last_price: Optional[float] = None) -> dict:
+    """Block Kit for a §7 Follow-up alert — the substantive news that broke on a
+    previously-halted covered name. Mirrors build_halt_blocks; references the
+    original halt in-body (no Slack threading over a webhook)."""
+    symbol = halt.symbol
+    name = (meta.name if meta else "") or halt.name or symbol
+    time_hhmm, date_short = followup_when(halt, item)
+    headline = followup_headline(item)
+
+    header = f":newspaper: *SA:* `{symbol}` — Follow-up: {headline}"
+    price = last_price if last_price is not None else halt.last_price
+    if price is not None:
+        header += f"  ·  {_format_price(price)}"
+
+    halt_hhmm = _format_time_hhmm(halt.halt_time)
+    detail = f"`{time_hhmm} ET {date_short}`  ·  Follows the {halt_hhmm} ET halt on `{symbol}`"
+    if meta and meta.sector:
+        sector_str = meta.sector
+        if meta.subsector:
+            sector_str += f" / {meta.subsector}"
+        detail += f"  ·  Sector: {sector_str}"
+
+    source_line = f"_source: {followup_source_label(item)} press release_"
+    text_block = "\n".join([header, detail, source_line])
+    fallback = f"SA: {symbol} Follow-up: {headline}"
+    return {
+        "blocks": [
+            {
+                "type": "section",
+                "text": {"type": "mrkdwn", "text": text_block[:SLACK_SECTION_TEXT_LIMIT]},
+            }
+        ],
+        "text": fallback,
+    }
+
+
 def build_dm_blocks(message: str, *, level: str = "warning") -> dict:
     emoji = {"ok": ":white_check_mark:", "warning": ":warning:", "error": ":x:"}.get(
         level, ":warning:"
@@ -197,6 +239,19 @@ def post_resume(event: HaltEvent, meta: Optional[TickerMeta], *,
     payload = build_resume_blocks(event, meta)
     if dry_run:
         log.info("slack[dry-run] resume payload for %s:\n%s", event.symbol,
+                 json.dumps(payload, indent=2))
+        return payload
+    post_payload(payload, webhook_url=webhook_url)
+    return payload
+
+
+def post_followup(halt: HaltEvent, item: NewsItem, meta: Optional[TickerMeta], *,
+                  webhook_url: Optional[str] = None,
+                  dry_run: bool = False,
+                  last_price: Optional[float] = None) -> Optional[dict]:
+    payload = build_followup_blocks(halt, item, meta, last_price=last_price)
+    if dry_run:
+        log.info("slack[dry-run] followup payload for %s:\n%s", halt.symbol,
                  json.dumps(payload, indent=2))
         return payload
     post_payload(payload, webhook_url=webhook_url)

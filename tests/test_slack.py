@@ -5,10 +5,13 @@ import pytest
 
 from src.coverage import TickerMeta
 from src.feeds.types import HaltEvent
+from src.news.types import NewsItem
 from src.slack import (
     build_dm_blocks,
+    build_followup_blocks,
     build_halt_blocks,
     build_resume_blocks,
+    post_followup,
     post_halt,
     post_payload,
     post_resume,
@@ -135,6 +138,76 @@ def test_resume_blocks():
     assert ":white_check_mark:" in text
     assert "07:30 ET" in text
     assert "06:55 ET" in text
+
+
+def make_news(**overrides):
+    defaults = dict(
+        source="prnewswire",
+        title="Viridian reports positive Phase 3 topline results",
+        body="b",
+        url="https://prn.test/vrdn",
+        published_at="2026-05-05T11:10:00+00:00",  # 07:10 ET
+        tickers=("VRDN",),
+    )
+    defaults.update(overrides)
+    return NewsItem(**defaults)
+
+
+def test_followup_blocks_have_required_fields():
+    payload = build_followup_blocks(
+        make_event(halt_time="07:00:00"), make_news(), make_meta())
+    assert "blocks" in payload
+    assert "text" in payload
+    assert payload["blocks"][0]["type"] == "section"
+    assert payload["blocks"][0]["text"]["type"] == "mrkdwn"
+
+
+def test_followup_blocks_headline_ticker_and_source():
+    payload = build_followup_blocks(
+        make_event(halt_time="07:00:00"), make_news(), make_meta())
+    text = payload["blocks"][0]["text"]["text"]
+    assert ":newspaper:" in text
+    assert "*SA:* `VRDN` — Follow-up: Viridian reports positive Phase 3 topline" in text
+    assert "07:10 ET 5/05/26" in text
+    assert "Follows the 07:00 ET halt on `VRDN`" in text
+    assert "PR Newswire press release" in text
+    assert "Sector: MedTech / Diagnostics" in text
+
+
+def test_followup_blocks_include_price():
+    payload = build_followup_blocks(make_event(last_price=14.06), make_news(), make_meta())
+    assert "$14.06" in payload["blocks"][0]["text"]["text"]
+
+
+def test_followup_blocks_handle_missing_price():
+    payload = build_followup_blocks(make_event(last_price=None), make_news(), make_meta())
+    assert "$" not in payload["blocks"][0]["text"]["text"]
+
+
+def test_followup_blocks_omit_sector_without_meta():
+    payload = build_followup_blocks(make_event(), make_news(), None)
+    assert "Sector:" not in payload["blocks"][0]["text"]["text"]
+
+
+def test_followup_fallback_no_markdown():
+    payload = build_followup_blocks(make_event(), make_news(), make_meta())
+    assert "*" not in payload["text"]
+    assert "VRDN" in payload["text"]
+
+
+@patch("src.slack.requests.post")
+def test_post_followup_dry_run_no_post(mock_post):
+    payload = post_followup(make_event(), make_news(), make_meta(), dry_run=True)
+    mock_post.assert_not_called()
+    assert payload is not None
+
+
+@patch("src.slack.requests.post")
+def test_post_followup_live(mock_post):
+    mock_post.return_value = MagicMock(status_code=200)
+    mock_post.return_value.raise_for_status = MagicMock()
+    post_followup(make_event(), make_news(), make_meta(), webhook_url="https://test")
+    mock_post.assert_called_once()
 
 
 def test_dm_warning():

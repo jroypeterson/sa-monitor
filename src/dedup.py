@@ -34,6 +34,15 @@ class HaltTracker:
 
     seen_halts: dict[HaltId, HaltEvent] = field(default_factory=dict)
     resumes_emitted: set[HaltId] = field(default_factory=set)
+    # halt_ids we actually DELIVERED a halt alert for (passed the non-emit-code
+    # filter AND — in live mode — posted successfully). seen_halts records mere
+    # OBSERVATIONS; this records deliveries. A §7 Follow-up may only fire for a
+    # halt we delivered. Persisted so a restart preserves the gate.
+    emitted_halts: set[HaltId] = field(default_factory=set)
+    # halt_ids for which a §7 Follow-up alert has already fired — one per halt,
+    # ever. Persisted alongside seen_halts so a mid-session restart never
+    # re-emits a follow-up.
+    followed_up: set[HaltId] = field(default_factory=set)
 
     def ingest(self, events: list[HaltEvent]) -> Iterator[tuple[str, HaltEvent]]:
         """Diff `events` against state and yield (kind, event) for new ones.
@@ -74,3 +83,5 @@ class HaltTracker:
         """Clear state — used at session boundary or for tests."""
         self.seen_halts.clear()
         self.resumes_emitted.clear()
+        self.emitted_halts.clear()
+        self.followed_up.clear()

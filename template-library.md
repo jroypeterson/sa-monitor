@@ -265,9 +265,11 @@ Sector: {sector} / {subsector}
 
 ---
 
-## 7. Halt subtype 5 — Follow-up to halted news ✅ LOCKED (Phase 2 reference)
+## 7. Halt subtype 5 — Follow-up to halted news ✅ LOCKED + ✅ BUILT (2026-07-13)
 
-After a halt, when actual news crosses, SA emits a `Follow-up: ...` alert with substantive body content. **This is the editorial "real" alert that the halt + resume bracket** — Phase 2 sa-monitor will need to match this when we ingest the underlying PR wire / 8-K.
+After a halt, when actual news crosses, SA emits a `Follow-up: ...` alert with substantive body content. **This is the editorial "real" alert that the halt + resume bracket.**
+
+**BUILT 2026-07-13:** `enrichment.find_followup_news` + `template.render_followup` + `slack.build_followup_blocks`/`post_followup` + `halt_monitor._emit_followups`. When a PR crosses AFTER a covered "halted, news pending" alert already fired, sa-monitor emits a standalone Follow-up (webhook = no threading, so it references the halt in-body). Fires only for halts sa-monitor actually DELIVERED (`tracker.emitted_halts`), once per halt (`tracker.followed_up`), post-then-mark. A PR already inside the halt's cross-ref-note window (`enrichment.cross_ref_match`, [halt−60m, halt+5m]) is conveyed by the halt note and does NOT re-fire a follow-up; a PR crossing later (out to +60m) does. LLM fact-dense body generation from the raw PR (the ideal below) is a future enhancement — v1 uses the PR headline + source.
 
 **Locked body skeleton:**
 

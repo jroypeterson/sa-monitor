@@ -85,21 +85,71 @@ def build_note_context(
     return None
 
 
-def _cross_ref_note(halt: HaltEvent, cache: NewsCache) -> Optional[str]:
-    """Look up news items in the cache that match this halt by ticker + time.
-    If a match exists, render a 'Follows {source} press release that {title}' note."""
+def cross_ref_match(halt: HaltEvent, cache: NewsCache) -> Optional[NewsItem]:
+    """The news item (if any) referenced by the halt-time cross-ref note — the
+    newest PR within the SAME window the halt alert's note uses.
+
+    Shared by `_cross_ref_note` (which renders it) and the §7 follow-up pre-mark
+    (which suppresses a redundant standalone follow-up). Sharing this matcher
+    keeps the two WINDOW-ALIGNED by construction: the follow-up is suppressed
+    iff the halt's note actually fired. (find_followup_news uses a wider 60-min
+    window and must NOT be used for suppression, or a PR just outside the note
+    window would be dropped from both the note and the follow-up.)"""
     halt_dt_utc = _halt_dt_to_utc(halt)
     if halt_dt_utc is None:
         return None
     matches = cache.lookup(halt.symbol, halt_dt_utc)
-    if not matches:
+    return matches[0] if matches else None  # newest within the note window
+
+
+def _cross_ref_note(halt: HaltEvent, cache: NewsCache) -> Optional[str]:
+    """Look up news items in the cache that match this halt by ticker + time.
+    If a match exists, render a 'Follows {source} press release that {title}' note."""
+    item = cross_ref_match(halt, cache)
+    if item is None:
         return None
-    item = matches[0]  # newest within the window
     label = _NEWS_SOURCE_LABELS.get(item.source, item.source)
     title = (item.title or "").strip()
     if len(title) > _CROSS_REF_TITLE_LIMIT:
         title = title[:_CROSS_REF_TITLE_LIMIT].rsplit(" ", 1)[0] + "…"
     return f"Follows {label} press release: {title}"
+
+
+def find_followup_news(halt: HaltEvent, cache: NewsCache) -> Optional[NewsItem]:
+    """Return the breaking NewsItem that resolves a previously-halted name — the
+    §7 Follow-up trigger — or None if nothing qualifies.
+
+    Matching reuses the SAME ticker+time core as `_cross_ref_note`: the halt is
+    converted to UTC via `_halt_dt_to_utc`, then `NewsCache.lookup` does the
+    ticker index + time-window filter. The ONLY difference from the halt-time
+    cross-ref note is the window and tie-break:
+
+    - Window: news published AT/AFTER the halt (`lookback_minutes=0`, so the
+      lower bound is the halt instant), out to the cache's own retention window
+      (`lookforward_minutes=cache.window_minutes` — the same 60-min span
+      enrichment already uses). This is the PR that crosses *after* the
+      "halted, news pending" alert already fired.
+    - Tie-break: `lookup` returns newest-first, so the EARLIEST at/after the
+      halt is `matches[-1]` — the breaking PR that resolved the halt, not the
+      latest unrelated wire.
+
+    Returns None if no item matches or the matched item has no usable title
+    (rule: no headline → no follow-up, never a guess).
+    """
+    halt_dt_utc = _halt_dt_to_utc(halt)
+    if halt_dt_utc is None:
+        return None
+    matches = cache.lookup(
+        halt.symbol, halt_dt_utc,
+        lookback_minutes=0,
+        lookforward_minutes=cache.window_minutes,
+    )
+    if not matches:
+        return None
+    item = matches[-1]  # earliest at/after the halt = the breaking PR
+    if not (item.title or "").strip():
+        return None
+    return item
 
 
 def _halt_dt_to_utc(halt: HaltEvent) -> Optional[datetime]:

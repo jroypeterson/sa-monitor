@@ -72,6 +72,45 @@ def test_resumes_round_trip(tmp_path):
     assert out == []  # halt seen + resume already emitted
 
 
+def test_followed_up_round_trip(tmp_path):
+    """§7 follow-up markers persist so a restart never re-emits a follow-up."""
+    tracker = HaltTracker()
+    e = make_event("INSM", date="2026-04-07", time_="16:01:15")
+    list(tracker.ingest([e]))
+    tracker.followed_up.add(e.halt_id)
+    state.save(tracker, state_dir=tmp_path, day_key="2026-04-07")
+
+    rehydrated = state.load(state_dir=tmp_path, day_key="2026-04-07")
+    assert ("INSM", "2026-04-07", "16:01:15") in rehydrated.followed_up
+
+
+def test_emitted_halts_round_trip(tmp_path):
+    """Delivered-halt markers persist so the follow-up delivery gate survives
+    a restart (a follow-up only fires for a halt we actually delivered)."""
+    tracker = HaltTracker()
+    e = make_event("VRDN")
+    list(tracker.ingest([e]))
+    tracker.emitted_halts.add(e.halt_id)
+    state.save(tracker, state_dir=tmp_path, day_key="2026-05-05")
+
+    rehydrated = state.load(state_dir=tmp_path, day_key="2026-05-05")
+    assert ("VRDN", "2026-05-05", "06:55:32") in rehydrated.emitted_halts
+
+
+def test_load_old_file_without_new_fields(tmp_path):
+    """A pre-§7 state file (no emitted_halts / followed_up keys) rehydrates to
+    empty sets and still loads its halts."""
+    path = tmp_path / "dedup_state_2026-05-05.json"
+    path.write_text(
+        '{"schema_version": 1, "trading_day_et": "2026-05-05", '
+        '"halts": [["VRDN","2026-05-05","06:55:32"]], "resumes_emitted": []}'
+    )
+    fresh = state.load(state_dir=tmp_path, day_key="2026-05-05")
+    assert fresh.emitted_halts == set()
+    assert fresh.followed_up == set()
+    assert ("VRDN", "2026-05-05", "06:55:32") in fresh.seen_halts
+
+
 def test_cleanup_deletes_old_files(tmp_path):
     (tmp_path / "dedup_state_2020-01-01.json").write_text("{}")
     (tmp_path / "dedup_state_2099-12-31.json").write_text("{}")

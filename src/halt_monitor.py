@@ -31,13 +31,13 @@ from . import slack, state
 from .calendars import AnalystDayCalendar, EarningsCalendar
 from .coverage import Universe
 from .dedup import HaltTracker
-from .enrichment import build_note_context
+from .enrichment import build_note_context, cross_ref_match, find_followup_news
 from .feeds import nasdaq, nyse
 from .feeds.types import HaltEvent
 from .news import bw, gnw, prnewswire
 from .news.cache import NewsCache
 from .reason_codes import is_phase1_emit_code
-from .template import render_halt, render_resume
+from .template import render_followup, render_halt, render_resume
 
 logging.basicConfig(
     level=logging.INFO,
@@ -73,6 +73,7 @@ class RunStats:
     nyse_events_seen: int = 0
     halts_emitted: int = 0
     resumes_emitted: int = 0
+    followups_emitted: int = 0
     halts_filtered_out_of_universe: int = 0
     halts_filtered_non_emit_code: int = 0
     halts_enriched_with_note: int = 0
@@ -159,6 +160,7 @@ def _emit(
     earnings_calendar: Optional[EarningsCalendar] = None,
     analyst_days_calendar: Optional[AnalystDayCalendar] = None,
     news_cache: Optional[NewsCache] = None,
+    tracker: Optional[HaltTracker] = None,
 ) -> None:
     """Filter, render, and emit one halt or resume event."""
     meta = universe.get(event.symbol)
@@ -210,6 +212,7 @@ def _emit(
     print("=" * 60)
     sys.stdout.flush()
 
+    post_ok = False
     if slack_mode != "off":
         try:
             if kind == "halt":
@@ -220,12 +223,118 @@ def _emit(
                 slack.post_resume(event, meta, webhook_url=slack_webhook_url,
                                   dry_run=(slack_mode == "dry-run"))
             stats.slack_posts_succeeded += 1
+            post_ok = True
         except Exception as exc:
             stats.slack_posts_failed += 1
             log.error("slack post failed for %s: %s", event.symbol, exc)
 
+    # Delivery-gating for §7 follow-up eligibility. seen_halts records mere
+    # OBSERVATIONS; a follow-up may only fire for a halt we actually DELIVERED.
+    # We reach here only past the non-emit-code filter, so:
+    #   off      → the stdout emit IS the delivery
+    #   live     → only a successful post_halt counts
+    #   dry-run  → nothing was delivered, never mark
+    if kind == "halt" and tracker is not None:
+        if slack_mode == "off":
+            delivered = True
+        elif slack_mode == "dry-run":
+            delivered = False
+        else:  # live
+            delivered = post_ok
+        if delivered:
+            tracker.emitted_halts.add(event.halt_id)
+            # Bug-3 guard: suppress a redundant standalone §7 follow-up ONLY
+            # when this halt's cross-ref NOTE actually fired — i.e. the resolving
+            # PR is within the note's window, so the news is already conveyed by
+            # the halt alert. Uses cross_ref_match (the note's own matcher), NOT
+            # find_followup_news: the latter's wider 60-min window would suppress
+            # follow-ups for PRs the note never included, silently dropping the
+            # news. A PR outside the note window (or crossing in a later poll)
+            # is left unmarked and still fires a real follow-up.
+            if (news_cache is not None
+                    and event.halt_id not in tracker.followed_up
+                    and cross_ref_match(event, news_cache) is not None):
+                tracker.followed_up.add(event.halt_id)
+
     if log_path:
         _append_log(log_path, kind, event, meta, emitted=True, note_context=note_context)
+
+
+def _emit_followups(
+    tracker: HaltTracker,
+    universe: Universe,
+    news_cache: Optional[NewsCache],
+    log_path: Optional[Path],
+    *,
+    stats: RunStats,
+    slack_mode: str = "off",
+    slack_webhook_url: Optional[str] = None,
+) -> None:
+    """Detect + emit §7 Follow-up alerts for previously-posted covered halts.
+
+    For each halt sa-monitor actually DELIVERED an alert for (tracker.emitted_
+    halts — NOT merely observed in seen_halts), if the ticker is in the covered
+    universe and a breaking PR has since crossed (matched by the shared
+    enrichment matcher find_followup_news), emit a standalone Follow-up alert —
+    the substantive news that resolves the "halted, news pending" alert.
+
+    One follow-up per halt, ever: tracker.followed_up is the persisted marker.
+    Post-then-mark — a halt is marked only AFTER a successful post so a transient
+    post failure retries next poll. Dry-run never posts and never marks.
+    """
+    if news_cache is None:
+        return
+
+    for hid, halt in list(tracker.seen_halts.items()):
+        if hid in tracker.followed_up:
+            continue  # one follow-up per halt, ever
+        if hid not in tracker.emitted_halts:
+            continue  # only follow-up halts we actually DELIVERED an alert for
+        meta = universe.get(halt.symbol)
+        if meta is None:
+            continue  # only follow-up covered names sa-monitor actually posted
+
+        item = find_followup_news(halt, news_cache)
+        if item is None:
+            continue  # no matching post-halt PR → emit nothing (no guessing)
+
+        rendered = render_followup(halt, item, sector=meta.sector,
+                                   subsector=meta.subsector)
+        print()
+        print("=" * 60)
+        print(rendered)
+        print("=" * 60)
+        sys.stdout.flush()
+
+        # dry-run: render only — never post, never mark (so it can be re-tested)
+        if slack_mode == "dry-run":
+            try:
+                slack.post_followup(halt, item, meta,
+                                    webhook_url=slack_webhook_url, dry_run=True)
+            except Exception as exc:
+                log.error("followup dry-run render failed for %s: %s", halt.symbol, exc)
+            continue
+
+        posted = True
+        if slack_mode == "live":
+            try:
+                slack.post_followup(halt, item, meta,
+                                    webhook_url=slack_webhook_url, dry_run=False)
+                stats.slack_posts_succeeded += 1
+            except Exception as exc:
+                posted = False
+                stats.slack_posts_failed += 1
+                log.error("slack followup post failed for %s: %s", halt.symbol, exc)
+
+        # slack_mode == "off": stdout emit is the delivery — mark so we don't
+        # reprint every poll. live: mark only on a successful post.
+        if posted:
+            tracker.followed_up.add(hid)
+            stats.followups_emitted += 1
+            log.info("followup emitted for %s: %s", halt.symbol, item.title)
+            if log_path:
+                _append_log(log_path, "followup", halt, meta, emitted=True,
+                            note_context=f"Follow-up: {item.title}")
 
 
 def _append_log(log_path: Path, kind: str, event: HaltEvent, meta,
@@ -261,13 +370,15 @@ def _post_health_heartbeat(stats: RunStats, slack_mode: str,
     if stats.fetch_errors > 0 and not ended_with_error:
         status = "warning"
 
-    parts = [
+    base_parts = [
         f"halt-monitor run summary: polls={stats.polls_completed}",
         f"halts={stats.halts_emitted}",
         f"resumes={stats.resumes_emitted}",
+        f"followups={stats.followups_emitted}",
         f"slack_ok/fail={stats.slack_posts_succeeded}/{stats.slack_posts_failed}",
         f"fetch_errors={stats.fetch_errors}",
     ]
+    enrich_part = ""
     if (stats.earnings_calendar_loaded or stats.analyst_days_calendar_loaded
             or stats.news_polls_completed):
         enrich_bits = [f"enriched={stats.halts_enriched_with_note}"]
@@ -286,8 +397,8 @@ def _post_health_heartbeat(stats: RunStats, slack_mode: str,
             sources.append(
                 f"news_cache={stats.news_cache_size} ({stats.news_polls_completed} polls)"
             )
-        parts.append(" ".join(enrich_bits) + " (" + ", ".join(sources) + ")")
-    summary = ", ".join(parts[:5]) + (" — " + parts[5] if len(parts) > 5 else "")
+        enrich_part = " ".join(enrich_bits) + " (" + ", ".join(sources) + ")"
+    summary = ", ".join(base_parts) + (" — " + enrich_part if enrich_part else "")
     try:
         slack.post_dm(summary, level=status if status in {"ok","warning","error"} else "warning")
     except Exception as exc:
@@ -388,7 +499,15 @@ def run(
                       slack_mode=slack_mode, slack_webhook_url=slack_webhook_url,
                       earnings_calendar=earnings_calendar,
                       analyst_days_calendar=analyst_days_calendar,
-                      news_cache=news_cache)
+                      news_cache=news_cache, tracker=tracker)
+
+            # §7 Follow-up detection: a PR that crossed AFTER a previously-
+            # posted covered halt fired. Runs every poll (cheap — iterates
+            # seen_halts) so a follow-up fires promptly once its PR lands in
+            # the news cache. Obeys the same slack_mode gating as halt/resume.
+            _emit_followups(tracker, universe, news_cache, log_path,
+                            stats=stats, slack_mode=slack_mode,
+                            slack_webhook_url=slack_webhook_url)
 
             if persist_state:
                 try:

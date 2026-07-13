@@ -10,10 +10,26 @@ D5 will switch to Slack Block Kit per HEALTH_REPORTING.md §4.1 conventions.
 """
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
+from zoneinfo import ZoneInfo
 
 from .feeds.types import HaltEvent
+from .news.types import NewsItem
+
+_ET = ZoneInfo("America/New_York")
+
+# Presentation labels for news-wire sources. Mirrors enrichment._NEWS_SOURCE_LABELS
+# (kept local so template.py has no upward dependency on enrichment).
+_NEWS_SOURCE_LABELS = {
+    "prnewswire": "PR Newswire",
+    "businesswire": "Business Wire",
+    "globenewswire": "GlobeNewswire",
+}
+
+# Cap for the {headline} portion of a §7 Follow-up. SA follow-up subjects run
+# long; this keeps the Slack line readable while preserving the substance.
+_FOLLOWUP_HEADLINE_LIMIT = 200
 
 
 def _format_date_short(iso_date: str) -> str:
@@ -107,6 +123,88 @@ def render_halt(event: HaltEvent, *, sector: str = "", subsector: str = "",
     if is_biotech(subsector):
         parts.append(biotech_triage_cta(event.symbol))
     parts.append(f"Source: {event.source} ({event.exchange})")
+    return "\n".join(parts)
+
+
+def _iso_utc_to_et(iso_ts: str) -> Optional[datetime]:
+    """ISO-8601 UTC timestamp -> ET datetime; None on malformed input."""
+    if not iso_ts:
+        return None
+    try:
+        dt = datetime.fromisoformat(iso_ts.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(_ET)
+
+
+def followup_when(halt: HaltEvent, item: NewsItem) -> tuple[str, str]:
+    """(time_hhmm, date_short) for a §7 Follow-up header.
+
+    The follow-up crosses when the news breaks, so the header stamps the news
+    item's publish time in ET. Falls back to the halt's own timestamp if the
+    item has no parseable publish time. Shared by render_followup + Slack so
+    both render the identical header.
+    """
+    et = _iso_utc_to_et(item.published_at)
+    if et is not None:
+        return (f"{et.hour:02d}:{et.minute:02d}",
+                f"{et.month}/{et.day:02d}/{et.year % 100:02d}")
+    return (_format_time_hhmm(halt.halt_time), _format_date_short(halt.halt_date))
+
+
+def followup_headline(item: NewsItem) -> str:
+    """The substantive headline for a §7 Follow-up, capped for readability."""
+    headline = (item.title or "").strip()
+    if len(headline) > _FOLLOWUP_HEADLINE_LIMIT:
+        headline = headline[:_FOLLOWUP_HEADLINE_LIMIT].rsplit(" ", 1)[0] + "…"
+    return headline
+
+
+def followup_source_label(item: NewsItem) -> str:
+    """Pretty wire-source label (e.g. 'PR Newswire') for a §7 Follow-up."""
+    return _NEWS_SOURCE_LABELS.get(item.source, item.source)
+
+
+def render_followup(halt: HaltEvent, item: NewsItem, *, sector: str = "",
+                    subsector: str = "", last_price: Optional[float] = None) -> str:
+    """Render a §7 Follow-up alert — the substantive news that broke on a
+    previously-halted covered name (template-library.md §7, webhook variant).
+
+        HH:MM ET M/DD/YY [StreetAccount] TICKER Follow-up: {headline} ($X.XX)
+        Follows the HH:MM ET halt on TICKER
+        Sector: {sector} / {subsector}
+        Source: {Wire} press release
+
+    sa-monitor posts via webhook (no Slack threading), so the original halt is
+    referenced in-body rather than via SA's archive block. Price is the halt's
+    last_price unless a fresher one is supplied.
+    """
+    symbol = halt.symbol
+    time_hhmm, date_short = followup_when(halt, item)
+    headline = followup_headline(item)
+
+    price = last_price if last_price is not None else halt.last_price
+    price_str = _format_price(price)
+
+    header = (
+        f"{time_hhmm} ET {date_short} [StreetAccount] {symbol} "
+        f"Follow-up: {headline}"
+    )
+    if price_str:
+        header += f" ({price_str})"
+
+    halt_hhmm = _format_time_hhmm(halt.halt_time)
+    back_ref = f"Follows the {halt_hhmm} ET halt on {symbol}"
+
+    parts = [header, back_ref]
+    if sector:
+        sector_line = f"Sector: {sector}"
+        if subsector:
+            sector_line += f" / {subsector}"
+        parts.append(sector_line)
+    parts.append(f"Source: {followup_source_label(item)} press release")
     return "\n".join(parts)
 
 
