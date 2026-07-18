@@ -1,4 +1,8 @@
 """Smoke test for coverage Universe loading."""
+import json
+
+import pytest
+
 from src.coverage import Universe
 
 
@@ -36,3 +40,21 @@ def test_universe_membership_case_insensitive():
 def test_universe_get_returns_none_for_missing():
     u = Universe()
     assert u.get("NONEXISTENT") is None
+
+
+def test_universe_rejects_wrong_schema_version(tmp_path):
+    """A schema-version mismatch must fail loud, not silently misread."""
+    p = tmp_path / "u.json"
+    p.write_text(json.dumps({"schema_version": 99, "tickers": {"IDXX": {}}}),
+                 encoding="utf-8")
+    with pytest.raises(ValueError, match="schema_version"):
+        Universe(p)
+
+
+def test_universe_rejects_empty_universe(tmp_path):
+    """A zero-ticker universe would silently drop every halt — must fail loud."""
+    p = tmp_path / "u.json"
+    p.write_text(json.dumps({"schema_version": 1, "tickers": {}}),
+                 encoding="utf-8")
+    with pytest.raises(ValueError, match="zero tickers"):
+        Universe(p)

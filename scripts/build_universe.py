@@ -69,6 +69,19 @@ def main() -> None:
         }
         sector_counter[sector] += 1
 
+    # Fail loud rather than write a zero-ticker universe: a header-only or
+    # truncated CM CSV (that still passes the status schema/validation check
+    # above) would otherwise produce an empty universe.json, and the LIVE
+    # monitor would silently filter every covered halt out-of-universe. Better
+    # to abort the build and keep the last-good file in place.
+    if not tickers:
+        raise SystemExit(
+            f"build_universe: filtered universe is EMPTY (0 tickers) from "
+            f"{len(rows)} source rows in {CM_UNIVERSE_CSV}. Refusing to write a "
+            f"zero-ticker universe.json (would cause a silent 100% halt-alert "
+            f"outage). Check the CM export."
+        )
+
     out = {
         "schema_version": 1,
         "generated_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),

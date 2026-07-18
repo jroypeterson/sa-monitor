@@ -46,6 +46,18 @@ class Universe:
                 f"Run `python scripts/build_universe.py` to generate it."
             )
         payload = json.loads(self.path.read_text(encoding="utf-8"))
+        # Fail-loud on a schema mismatch: this file is self-produced by
+        # scripts/build_universe.py with schema_version==1. A mismatch means the
+        # producer and consumer disagree on shape — mirror the same guard that
+        # build_universe.py applies to the CM export and state.py applies to its
+        # own file, rather than silently misreading it into a partial universe.
+        schema_version = payload.get("schema_version")
+        if schema_version != 1:
+            raise ValueError(
+                f"sa-monitor universe at {self.path} has schema_version "
+                f"{schema_version!r}, expected 1. Rebuild with "
+                f"`python scripts/build_universe.py`."
+            )
         self._meta_payload = {k: v for k, v in payload.items() if k != "tickers"}
         for symbol, meta in payload.get("tickers", {}).items():
             self._tickers[symbol.upper()] = TickerMeta(
@@ -58,6 +70,18 @@ class Universe:
                 exchange=meta.get("exchange", ""),
                 country_hq=meta.get("country_hq", ""),
                 currency=meta.get("currency", ""),
+            )
+        # A zero-ticker universe is never operationally valid for a LIVE
+        # monitor — it would silently filter EVERY covered halt out-of-universe
+        # (meta is None) and emit nothing, indistinguishable from a quiet
+        # market. Fail loud so a stale/empty/corrupt build can't cause a silent
+        # 100% miss.
+        if not self._tickers:
+            raise ValueError(
+                f"sa-monitor universe at {self.path} loaded zero tickers. "
+                f"Refusing to run against an empty universe (would silently "
+                f"drop every halt). Rebuild with "
+                f"`python scripts/build_universe.py`."
             )
 
     def __contains__(self, symbol: str) -> bool:
