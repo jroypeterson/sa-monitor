@@ -38,9 +38,27 @@ def test_load_no_file_returns_empty_tracker(tmp_path):
     assert len(fresh) == 0
 
 
-def test_load_corrupt_file_returns_empty_tracker(tmp_path, caplog):
+def test_load_corrupt_file_fails_loud(tmp_path):
+    """A corrupt state file must NOT silently reset to empty (that would re-spam
+    every prior halt). It fails loud so the runner crashes with a signal."""
     path = tmp_path / "dedup_state_2026-05-05.json"
     path.write_text("not valid json")
+    with pytest.raises(state.StateError):
+        state.load(state_dir=tmp_path, day_key="2026-05-05")
+
+
+def test_load_wrong_schema_fails_loud(tmp_path):
+    """An unexpected schema_version means producer/consumer disagree on shape —
+    fail loud rather than misread it into a silent fresh start."""
+    path = tmp_path / "dedup_state_2026-05-05.json"
+    path.write_text('{"schema_version": 99, "halts": []}')
+    with pytest.raises(state.StateError):
+        state.load(state_dir=tmp_path, day_key="2026-05-05")
+
+
+def test_load_missing_file_still_starts_fresh(tmp_path):
+    """A genuinely absent file (normal first poll of the day) is NOT an error —
+    only an EXISTING-but-corrupt file fails loud."""
     fresh = state.load(state_dir=tmp_path, day_key="2026-05-05")
     assert len(fresh) == 0
 

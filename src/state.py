@@ -36,6 +36,18 @@ from .feeds.types import HaltEvent
 
 log = logging.getLogger(__name__)
 
+
+class StateError(RuntimeError):
+    """A state file exists but is unusable (corrupt JSON / unexpected schema).
+
+    Raised by `load()` instead of silently returning a fresh tracker: an empty
+    tracker would re-emit every previously-seen halt/resume/follow-up/HC alert as
+    new on the next poll (a re-spam), with only a log line and no failure signal.
+    Failing loud turns a corrupt-state restart into a hard, alarmed startup crash
+    (non-zero exit → CI/fleet alarm) rather than a silent alert flood.
+    """
+
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_STATE_DIR = REPO_ROOT / "state"
 ET = dt.timezone(dt.timedelta(hours=-4))  # EDT during DST; close enough for daily-rotation key
@@ -86,20 +98,33 @@ def load(*, state_dir: Path = DEFAULT_STATE_DIR, day_key: str = "") -> HaltTrack
     path = _state_file_for(day_key, state_dir)
     tracker = HaltTracker()
     if not path.exists():
+        # A genuinely absent file is the normal first-poll-of-the-day case:
+        # start fresh, no alarm.
         log.info("state: no prior file at %s; starting fresh", path)
         return tracker
+    # From here the file EXISTS. If it is unreadable/corrupt/wrong-schema we must
+    # NOT silently reset to empty — that would re-spam every prior halt on the
+    # next poll. Fail loud (StateError) so the runner crashes with a signal.
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
-        log.warning("state: failed to read %s (%s); starting fresh", path, exc)
-        return tracker
+        log.error("state: %s exists but is unreadable/corrupt (%s); refusing to "
+                  "start fresh (would re-spam prior halts)", path, exc)
+        raise StateError(
+            f"state file {path} exists but could not be parsed ({exc}). "
+            f"Refusing to silently start fresh (would re-emit every prior "
+            f"halt/resume/follow-up/HC alert). Inspect or remove the file."
+        ) from exc
 
-    if payload.get("schema_version") != 1:
-        log.warning(
-            "state: unexpected schema_version %r in %s; starting fresh",
-            payload.get("schema_version"), path,
+    schema_version = payload.get("schema_version")
+    if schema_version != 1:
+        log.error("state: %s has unexpected schema_version %r; refusing to start "
+                  "fresh (would re-spam prior halts)", path, schema_version)
+        raise StateError(
+            f"state file {path} has schema_version {schema_version!r}, expected 1. "
+            f"Refusing to silently start fresh (would re-emit every prior "
+            f"halt/resume/follow-up/HC alert). Inspect or remove the file."
         )
-        return tracker
 
     halts = [tuple(h) for h in payload.get("halts", [])]
     resumes = {tuple(r) for r in payload.get("resumes_emitted", [])}

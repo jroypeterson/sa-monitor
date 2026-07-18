@@ -51,6 +51,10 @@ def test_failed_live_halt_post_retries_next_poll():
     assert halt.halt_id not in tracker.emitted_halts     # never delivered
     assert stats.slack_posts_failed == 1
 
+    # Delivery-accurate render counter: the failed poll rolled it back, so it
+    # must NOT count the undelivered halt.
+    assert stats.halts_emitted == 0
+
     # Poll 2: the SAME halt is re-fetched from the feed; post now succeeds.
     with patch("src.slack.post_halt") as ok_post:
         _poll(tracker, [halt], universe, stats)
@@ -58,6 +62,9 @@ def test_failed_live_halt_post_retries_next_poll():
     assert halt.halt_id in tracker.seen_halts
     assert halt.halt_id in tracker.emitted_halts
     assert stats.slack_posts_succeeded == 1
+    # The eventual single delivery is counted exactly once (no double-count from
+    # the failed-then-retried poll).
+    assert stats.halts_emitted == 1
 
 
 def test_failed_live_resume_post_retries_next_poll():
@@ -75,12 +82,14 @@ def test_failed_live_resume_post_retries_next_poll():
     with patch("src.slack.post_resume", side_effect=RuntimeError("slack down")):
         _poll(tracker, [resumed], universe, stats)
     assert resumed.halt_id not in tracker.resumes_emitted   # rolled back for retry
+    assert stats.resumes_emitted == 0                        # undelivered → not counted
 
     # Poll 3: same resumed event, post succeeds → resume delivered once.
     with patch("src.slack.post_resume") as ok_resume:
         _poll(tracker, [resumed], universe, stats)
         assert ok_resume.called
     assert resumed.halt_id in tracker.resumes_emitted
+    assert stats.resumes_emitted == 1                        # counted exactly once
 
 
 def test_successful_live_post_keeps_marker():

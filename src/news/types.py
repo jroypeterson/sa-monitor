@@ -26,6 +26,20 @@ class NewsItem:
         """Stable dedup key — same item across re-fetches resolves to one ID."""
         return self.url
 
+    @property
+    def issuer_ticker(self) -> Optional[str]:
+        """The subject/issuer of this release — the FIRST exchange-prefixed
+        ticker (dateline/lead convention), or None if none were extracted.
+
+        Attribution must use this, NOT any ticker in `tickers`: a PR-wire body
+        often name-drops a partner/rival/read-across ticker
+        (`Acme (NASDAQ: ACME) comments on FDA approval of RivalCorp (NASDAQ: VRDN)`).
+        Treating every mention as the issuer mis-attributes cross-ref/follow-up
+        and HC-event alerts to the wrong (merely-mentioned) covered name. The
+        issuer's own ticker leads on these wires, so first-seen = subject.
+        """
+        return self.tickers[0] if self.tickers else None
+
     def __str__(self) -> str:
         tickers_str = f" tickers={','.join(self.tickers)}" if self.tickers else ""
         return f"{self.source}: {self.title[:80]}{tickers_str} ({self.published_at})"

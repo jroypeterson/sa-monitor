@@ -239,10 +239,17 @@ def _emit(
     # re-emits and retries. (slack_mode "off" = stdout IS the delivery, and
     # "dry-run" is intentionally never delivered: neither rolls back.)
     if slack_mode == "live" and not post_ok and tracker is not None:
+        # Roll back the render counter too: it was incremented above (before the
+        # post attempt), but this event was NOT delivered and will be re-yielded
+        # + re-counted on the retry poll. Leaving it would double-count the
+        # eventual single delivery, making halts_emitted/resumes_emitted no
+        # longer delivery-accurate.
         if kind == "halt":
             tracker.seen_halts.pop(event.halt_id, None)
+            stats.halts_emitted -= 1
         elif kind == "resume":
             tracker.resumes_emitted.discard(event.halt_id)
+            stats.resumes_emitted -= 1
         log.warning("live post failed for %s (%s) — dropped from dedup state to "
                     "retry next poll", event.symbol, kind)
         if log_path:
@@ -391,9 +398,15 @@ def _emit_hc_events(
         ev = classify(item)
         if ev is None:
             continue
-        # v1 universe filter = issuer-extracted tickers ∩ covered Universe.
+        # Attribution = the ISSUER (subject) ticker ∩ covered Universe, NOT any
+        # mentioned ticker. A PR that name-drops a partner/rival/read-across
+        # covered ticker must not emit an HC alert falsely attributed to that
+        # merely-mentioned name (e.g. an Acme readout that cites Pfizer
+        # (NYSE: PFE) must never fire for PFE). The issuer leads on these wires,
+        # so issuer_ticker = first-seen extracted ticker.
         # (session 2 adds the sponsor→ticker resolver fallback here.)
-        covered = [t for t in item.tickers if universe.get(t)]
+        issuer = item.issuer_ticker
+        covered = [issuer] if (issuer and universe.get(issuer)) else []
         if not covered:
             continue
         for symbol in covered:

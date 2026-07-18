@@ -354,30 +354,47 @@ def test_item_with_no_tickers_never_fires():
     assert stats.hc_events_emitted == 0
 
 
-def test_partner_ticker_covered_fires_for_partner():
-    # Small biotech's approval names its covered large-pharma partner — both
-    # tickers land in item.tickers; the covered one fires.
+def test_issuer_fires_when_issuer_covered():
+    # The issuer (ARVN, first/subject ticker) is covered — its own approval
+    # fires, even though the release also name-drops PFE.
     item = _item("Arvinas issues press release on FDA approval of VEPPANU for "
                  "the treatment of ER+/HER2- advanced breast cancer",
                  tickers=("ARVN", "PFE"))
-    universe = StubUniverse({"PFE": _meta("PFE", subsector="Pharma")})  # only PFE covered
+    universe = StubUniverse({"ARVN": _meta("ARVN")})  # issuer covered
     tracker = HaltTracker()
 
     stats = _run_emit([item], universe, tracker)
     assert stats.hc_events_emitted == 1
-    assert f"{item.news_id}|PFE|{FDA_APPROVAL}" in tracker.hc_events_emitted
+    assert f"{item.news_id}|ARVN|{FDA_APPROVAL}" in tracker.hc_events_emitted
 
 
-def test_both_covered_tickers_each_fire_once():
+def test_passing_mention_covered_does_not_fire():
+    # ARVN issues the release; PFE is only name-dropped. When ONLY the
+    # merely-mentioned PFE is covered, nothing fires — an alert must never be
+    # mis-attributed to a passing exchange-prefixed mention.
+    item = _item("Arvinas issues press release on FDA approval of VEPPANU for "
+                 "the treatment of ER+/HER2- advanced breast cancer",
+                 tickers=("ARVN", "PFE"))
+    universe = StubUniverse({"PFE": _meta("PFE", subsector="Pharma")})  # only mention covered
+    tracker = HaltTracker()
+
+    stats = _run_emit([item], universe, tracker)
+    assert stats.hc_events_emitted == 0
+    assert tracker.hc_events_emitted == set()
+
+
+def test_only_issuer_fires_even_if_both_covered():
+    # Even when BOTH the issuer (ARVN) and a mentioned name (PFE) are covered,
+    # only the issuer is attributed — one alert, for the subject of the release.
     item = _item("Arvinas issues press release on FDA approval of VEPPANU",
                  tickers=("ARVN", "PFE"))
     universe = StubUniverse({"ARVN": _meta("ARVN"), "PFE": _meta("PFE")})
     tracker = HaltTracker()
 
     stats = _run_emit([item], universe, tracker)
-    assert stats.hc_events_emitted == 2
+    assert stats.hc_events_emitted == 1
     assert f"{item.news_id}|ARVN|{FDA_APPROVAL}" in tracker.hc_events_emitted
-    assert f"{item.news_id}|PFE|{FDA_APPROVAL}" in tracker.hc_events_emitted
+    assert f"{item.news_id}|PFE|{FDA_APPROVAL}" not in tracker.hc_events_emitted
 
 
 def test_dedup_one_alert_per_pr_ticker_type_ever():

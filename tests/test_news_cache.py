@@ -108,17 +108,19 @@ def test_lookup_no_match_for_unindexed_ticker():
     assert cache.lookup("ZZZZ", halt) == []
 
 
-def test_multi_ticker_news_indexed_under_each():
-    """A press release that mentions multiple tickers should resolve from
-    any of them."""
+def test_multi_ticker_news_indexed_under_issuer_only():
+    """A release that mentions multiple tickers resolves ONLY from its issuer
+    (the first/subject ticker), never from a passing partner/rival mention —
+    otherwise a halt on the mentioned name would falsely cross-ref this release."""
     cache = NewsCache()
     halt = datetime(2026, 5, 8, 12, 0, tzinfo=timezone.utc)
     multi = NewsItem(
-        source="prnewswire", title="merger pact", body="body",
+        source="prnewswire", title="Foo comments on Bar approval", body="body",
         url="https://x.test/multi", published_at="2026-05-08T11:55:00+00:00",
-        tickers=("FOO", "BAR"),
+        tickers=("FOO", "BAR"),  # FOO issues; BAR is a passing mention
     )
     cache.ingest([multi], now_utc=halt)
-    assert cache.lookup("FOO", halt)
-    assert cache.lookup("BAR", halt)
-    assert len(cache) == 1  # but counted once in seen_ids
+    assert cache.lookup("FOO", halt)          # issuer resolves
+    assert cache.lookup("BAR", halt) == []    # passing mention does NOT
+    assert cache.tickers_indexed == 1         # indexed under one ticker only
+    assert len(cache) == 1                    # counted once in seen_ids

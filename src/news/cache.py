@@ -1,8 +1,11 @@
 """Rolling in-memory cache of news items for halt cross-reference.
 
 Each session starts with an empty cache; first news poll populates it. Items
-are indexed by extracted ticker (one item can appear under multiple tickers).
-The cache evicts items older than `window_minutes` (default 60) on every
+are indexed by the issuing company's ticker only (the first exchange-prefixed
+mention — see NewsItem.issuer_ticker). Indexing under a merely-mentioned
+partner/rival ticker would let a halt on that name falsely cross-ref/resolve
+against a release it does not issue. The cache evicts items older than
+`window_minutes` (default 60) on every
 ingest — items that age out can no longer cross-ref a halt because by then
 they're outside SA's typical lookback grammar.
 
@@ -49,13 +52,15 @@ class NewsCache:
         now = now_utc or datetime.now(timezone.utc)
         added = 0
         for item in items:
-            if not item.tickers:
+            issuer = item.issuer_ticker
+            if not issuer:
                 continue
             if item.news_id in self._seen_ids:
                 continue
             self._seen_ids.add(item.news_id)
-            for ticker in item.tickers:
-                self._by_ticker.setdefault(ticker.upper(), []).append(item)
+            # Index under the ISSUER only, never every mentioned ticker — a
+            # passing partner/rival mention must not resolve another name's halt.
+            self._by_ticker.setdefault(issuer.upper(), []).append(item)
             added += 1
         self._evict_older_than(now - timedelta(minutes=self.window_minutes))
         return added
