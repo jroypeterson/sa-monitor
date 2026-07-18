@@ -20,7 +20,7 @@ from typing import Optional
 
 import requests
 
-from .types import HaltEvent
+from .types import FeedParseError, HaltEvent
 from ..reason_codes import describe, normalize_nyse_reason
 
 log = logging.getLogger(__name__)
@@ -28,6 +28,35 @@ log = logging.getLogger(__name__)
 FEED_URL = "https://www.nyse.com/api/trade-halts/current/download"
 USER_AGENT = "sa-monitor/0.1 (+https://github.com/jroypeterson/sa-monitor)"
 TIMEOUT_SEC = 10
+
+# Columns the CSV header MUST carry for the body to be the expected feed.
+# Used only by the fetch()-layer soft-failure guard (fix #2) — parse() itself
+# stays tolerant of any header (pinned invariant).
+REQUIRED_CSV_COLUMNS = {"Symbol", "Halt Date", "Halt Time"}
+
+
+def _validate_csv_header(csv_text: str) -> None:
+    """Raise FeedParseError if the CSV header isn't the NYSE halts schema.
+
+    A 200 that is actually an HTML error page (or any non-CSV body) parses to a
+    DictReader with a garbage header and zero matching rows, so parse() returns
+    [] — indistinguishable from an empty-but-valid halts feed. Checking the
+    header at the fetch layer lets a soft failure surface as a fetch error
+    instead of a silent "no halts". A genuinely empty feed (header row, no data)
+    still passes.
+    """
+    reader = csv.reader(io.StringIO(csv_text))
+    try:
+        header = next(reader)
+    except StopIteration:
+        raise FeedParseError("nyse feed: empty 200 response (no CSV header)") from None
+    cols = {c.strip() for c in header}
+    missing = REQUIRED_CSV_COLUMNS - cols
+    if missing:
+        raise FeedParseError(
+            f"nyse feed: CSV header missing required columns {sorted(missing)}; "
+            f"got {header[:8]!r} — likely a soft-failed / non-CSV response"
+        )
 
 
 def _parse_date(date_str: str) -> str:
@@ -105,4 +134,6 @@ def fetch(timeout: int = TIMEOUT_SEC) -> list[HaltEvent]:
     log.debug("nyse feed: fetching %s", FEED_URL)
     resp = requests.get(FEED_URL, headers=headers, timeout=timeout)
     resp.raise_for_status()
-    return parse(resp.text)
+    text = resp.text
+    _validate_csv_header(text)  # fix #2: soft-failure guard at the fetch layer
+    return parse(text)

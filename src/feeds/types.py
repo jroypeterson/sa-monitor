@@ -1,8 +1,38 @@
 """Shared types for halt-feed parsers."""
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 from typing import Optional
+
+
+class FeedParseError(RuntimeError):
+    """A feed returned a 200 whose body is NOT the expected feed shape.
+
+    Raised by the fetch() layer (nasdaq.fetch / nyse.fetch) when a soft failure
+    slips through HTTP status — an HTML error page, a WAF/CDN challenge, a
+    truncated body — that would otherwise parse() to an empty list and be
+    indistinguishable from a genuine "no halts right now". Kept strictly at the
+    fetch() layer: parse() tolerance is a pinned invariant, so the shape check
+    lives in fetch(), not parse().
+    """
+
+
+def _canonical_time(t: str) -> str:
+    """Normalize a halt time to zero-padded 'HH:MM:SS' for the dedup id.
+
+    Different feeds format the same instant differently (Nasdaq RSS may emit
+    '6:55:32' where the NYSE CSV emits '06:55:32'); without canonicalization the
+    halt_id tuple differs and the same halt double-alerts. Best-effort: if the
+    string doesn't look like a time it's returned stripped, unchanged (parsers
+    stay tolerant of odd inputs; display still uses the raw halt_time field).
+    """
+    s = (t or "").strip()
+    m = re.match(r"^(\d{1,2}):(\d{1,2}):(\d{1,2})", s)
+    if m:
+        hh, mm, ss = m.groups()
+        return f"{int(hh):02d}:{int(mm):02d}:{int(ss):02d}"
+    return s
 
 
 @dataclass(frozen=True)
@@ -30,8 +60,13 @@ class HaltEvent:
 
     @property
     def halt_id(self) -> tuple[str, str, str]:
-        """Dedup key — stable across re-fetches of the same event."""
-        return (self.symbol.upper(), self.halt_date, self.halt_time)
+        """Dedup key — stable across re-fetches of the same event.
+
+        Time is canonicalized to zero-padded 'HH:MM:SS' so a formatting
+        difference between feeds ('6:55:32' vs '06:55:32') can't split one halt
+        into two ids and double-alert.
+        """
+        return (self.symbol.upper(), self.halt_date, _canonical_time(self.halt_time))
 
     @property
     def is_resumed(self) -> bool:

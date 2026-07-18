@@ -231,6 +231,25 @@ def _emit(
             stats.slack_posts_failed += 1
             log.error("slack post failed for %s: %s", event.symbol, exc)
 
+    # Fix #1 (Crit): a transient LIVE post failure must not permanently drop the
+    # event. tracker.ingest() records the dedup marker (seen_halts for a halt,
+    # resumes_emitted for a resume) BEFORE this delivery attempt, so on a failed
+    # live post the marker already exists and the next poll would suppress the
+    # re-yield — losing the halt forever. Roll the marker back so the next poll
+    # re-emits and retries. (slack_mode "off" = stdout IS the delivery, and
+    # "dry-run" is intentionally never delivered: neither rolls back.)
+    if slack_mode == "live" and not post_ok and tracker is not None:
+        if kind == "halt":
+            tracker.seen_halts.pop(event.halt_id, None)
+        elif kind == "resume":
+            tracker.resumes_emitted.discard(event.halt_id)
+        log.warning("live post failed for %s (%s) — dropped from dedup state to "
+                    "retry next poll", event.symbol, kind)
+        if log_path:
+            _append_log(log_path, kind, event, meta, emitted=False,
+                        note_context=note_context)
+        return
+
     # Delivery-gating for §7 follow-up eligibility. seen_halts records mere
     # OBSERVATIONS; a follow-up may only fire for a halt we actually DELIVERED.
     # We reach here only past the non-emit-code filter, so:

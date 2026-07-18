@@ -16,6 +16,7 @@ from dataclasses import dataclass, field
 from typing import Iterator
 
 from .feeds.types import HaltEvent
+from .reason_codes import is_phase1_emit_code
 
 # halt_id -> the most-recently-seen HaltEvent for that id (so resume info
 # accumulates as the feed publishes it).
@@ -74,10 +75,31 @@ class HaltTracker:
                     yield ("resume", event)
                 continue
 
-            # Already seen — update stored event (resume info may have
-            # populated since the prior poll) and check whether resume
-            # is freshly-known.
+            # Already seen. Fix #3: the SAME halt is reported by both feeds
+            # (Nasdaq RSS + NYSE CSV), and one source can carry a malformed /
+            # blank / non-emittable reason_code while the other carries the
+            # valid emittable one. If the first sighting was non-emit it got
+            # filtered in _emit and NEVER delivered — but it still recorded
+            # seen_halts, so without this a later emittable record for the same
+            # halt_id is silently shadowed. Re-yield "halt" when the stored code
+            # was non-emit and the incoming one is emittable, but ONLY while the
+            # halt was never actually delivered (emitted_halts is the delivery
+            # ledger) so a genuinely-delivered halt never double-posts.
+            # A placeholder rehydrated from disk (state.load) always has an
+            # empty reason_code; it is NOT a genuine non-emit first source, so
+            # exclude it — #3 is about same-session cross-SOURCE shadowing, and
+            # the persisted emitted_halts set already governs restart dedup.
+            upgraded = (
+                hid not in self.emitted_halts
+                and previous.source != "restored_from_state"
+                and not is_phase1_emit_code(previous.reason_code)
+                and is_phase1_emit_code(event.reason_code)
+            )
+            # update stored event (resume info may have populated since the
+            # prior poll; also keep the better reason record)
             self.seen_halts[hid] = event
+            if upgraded:
+                yield ("halt", event)
             if event.is_resumed and hid not in self.resumes_emitted:
                 self.resumes_emitted.add(hid)
                 yield ("resume", event)

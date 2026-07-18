@@ -143,7 +143,10 @@ def test_failed_live_post_halt_no_followup(_mock_post):
     universe = StubUniverse({"VRDN": _meta()})
     tracker = HaltTracker()
     _deliver_halt(tracker, halt, universe, NewsCache(), slack_mode="live")
-    assert halt.halt_id in tracker.seen_halts
+    # Fix #1: a failed LIVE post drops the halt from seen_halts so the next poll
+    # retries it — so it is neither seen nor delivered (previously it stuck in
+    # seen_halts, silently lost forever).
+    assert halt.halt_id not in tracker.seen_halts
     assert halt.halt_id not in tracker.emitted_halts  # post raised → not delivered
 
     stats = _run_followups(tracker, universe, _post_halt_pr_cache())

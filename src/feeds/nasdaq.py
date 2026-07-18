@@ -16,7 +16,7 @@ from typing import Optional
 
 import requests
 
-from .types import HaltEvent
+from .types import FeedParseError, HaltEvent
 from ..reason_codes import describe
 
 log = logging.getLogger(__name__)
@@ -141,4 +141,23 @@ def fetch(timeout: int = TIMEOUT_SEC) -> list[HaltEvent]:
     log.debug("nasdaq feed: fetching %s", FEED_URL)
     resp = requests.get(FEED_URL, headers=headers, timeout=timeout)
     resp.raise_for_status()
-    return parse(resp.content)
+    content = resp.content
+    # Soft-failure guard (fix #2): a 200 that is NOT valid RSS — an HTML error
+    # page, a WAF challenge, a truncated body — would fall through parse()'s
+    # tolerant ET.ParseError handler and return [], indistinguishable from a
+    # genuine "no halts". Validate the feed shape HERE so the caller's fetch
+    # loop treats it as a fetch failure (retry/backoff/DM), NOT as zero halts.
+    # parse() stays tolerant (pinned invariant); this check lives in fetch().
+    try:
+        root = ET.fromstring(content)
+    except ET.ParseError as e:
+        raise FeedParseError(
+            f"nasdaq feed: 200 response is not valid XML ({e}); "
+            f"likely an HTML error/challenge page"
+        ) from e
+    if _strip_ns(root.tag).lower() != "rss":
+        raise FeedParseError(
+            f"nasdaq feed: unexpected root <{_strip_ns(root.tag)}> (expected <rss>); "
+            f"likely a soft-failed response"
+        )
+    return parse(content)
