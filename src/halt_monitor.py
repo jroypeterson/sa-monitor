@@ -505,6 +505,29 @@ def _append_log(log_path: Path, kind: str, event: HaltEvent, meta,
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 
+# Abnormal-counts guard (HEALTH_REPORTING.md §4.2): the exchange halt feeds are
+# cumulative day-lists, so a long session of successful polls that saw ZERO raw
+# events market-wide on BOTH feeds is far more likely a broken/redirected feed
+# (200-with-empty) than a genuinely halt-free trading day. Below this many
+# completed polls the session is too short to judge and the check is skipped.
+# Sized below the SHORTEST scheduled full session so both qualify: AM ci_run
+# is 20100s (~4020 polls), PM is 8700s (~1740 polls) at the 5s interval —
+# while a 60s smoke test (12 polls) never trips it. (Codex round-1 High: the
+# original 2000 silently exempted the entire PM session.)
+EMPTY_FEED_MIN_POLLS = 1200  # ~1.7h at the 5s interval
+
+
+def _empty_feed_suspect(stats: RunStats, ended_with_error: bool) -> bool:
+    """True when a full-enough session saw zero market-wide events on both
+    exchange feeds — the broken-feed-vs-quiet-market tell."""
+    return (
+        not ended_with_error
+        and stats.polls_completed >= EMPTY_FEED_MIN_POLLS
+        and stats.nasdaq_events_seen == 0
+        and stats.nyse_events_seen == 0
+    )
+
+
 def _post_health_heartbeat(stats: RunStats, slack_mode: str,
                             ended_with_error: bool = False) -> None:
     """End-of-run heartbeat to #street-account per HEALTH_REPORTING.md.
@@ -514,6 +537,9 @@ def _post_health_heartbeat(stats: RunStats, slack_mode: str,
     status = "error" if ended_with_error else "ok"
     if stats.fetch_errors > 0 and not ended_with_error:
         status = "warning"
+    feed_suspect = _empty_feed_suspect(stats, ended_with_error)
+    if feed_suspect and status == "ok":
+        status = "warning"
 
     base_parts = [
         f"halt-monitor run summary: polls={stats.polls_completed}",
@@ -521,9 +547,15 @@ def _post_health_heartbeat(stats: RunStats, slack_mode: str,
         f"resumes={stats.resumes_emitted}",
         f"followups={stats.followups_emitted}",
         f"hc_events={stats.hc_events_emitted}",
+        f"events_seen={stats.nasdaq_events_seen}/{stats.nyse_events_seen} (nasdaq/nyse, max per poll)",
         f"slack_ok/fail={stats.slack_posts_succeeded}/{stats.slack_posts_failed}",
         f"fetch_errors={stats.fetch_errors}",
     ]
+    if feed_suspect:
+        base_parts.append(
+            "⚠ zero market-wide events on BOTH feeds all session — "
+            "broken/empty feed, or an exceptionally quiet market"
+        )
     enrich_part = ""
     if (stats.earnings_calendar_loaded or stats.analyst_days_calendar_loaded
             or stats.news_polls_completed):
