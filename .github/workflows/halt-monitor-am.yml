@@ -1,10 +1,17 @@
 name: halt-monitor — AM session
 
-# AM session covers ~09:25 ET (EDT) or ~08:25 ET (EST) through ~15:10 ET (EDT)
-# or ~14:00 ET (EST). Cron is in UTC and not DST-aware, so 13:25 UTC drifts by
+# AM session covers ~09:25 ET (EDT) or ~08:25 ET (EST) through 15:00 ET (EDT)
+# or 14:00 ET (EST). Cron is in UTC and not DST-aware, so 13:25 UTC drifts by
 # one hour vs ET twice a year. Pre-open buffer absorbs the EST early-start.
 #
-# Duration 20,100s = 5h35m. End at 19:00 UTC. PM session starts at 19:05 UTC.
+# The session END is wall-clock (19:00 UTC), not "20,100s from launch"
+# (2026-07-28). GitHub delivers free-tier crons up to ~2h late; the old
+# duration-from-launch model let a late AM run hold the shared
+# `halt-monitor-session` concurrency group until 21:00 UTC — right through the
+# 16:00 ET close the PM session exists to watch. Clamping to a wall-clock end
+# means a late AM run is SHORTENED, and the group is always free by 19:00 UTC.
+# 20,100s = 5h35m is now the cap (the on-time length), not the guarantee.
+# See scripts/session_window.py.
 #
 # State persistence: scripts/ci_run.sh commits state/dedup_state_<YYYY-MM-DD>.json
 # back to the repo at end of run so PM session reads the latest state.
@@ -15,10 +22,15 @@ on:
   workflow_dispatch:
     inputs:
       duration:
-        description: 'Run duration in seconds. Default 20100 (5h35m full session). Use a small value (e.g. 60) for a smoke test.'
+        description: 'Max run duration in seconds. Default 20100 (5h35m full session). Use a small value (e.g. 60) for a smoke test.'
         required: false
         default: '20100'
         type: string
+      ignore_window:
+        description: 'Ignore the 19:00 UTC wall-clock session end (needed to smoke-test outside the AM window).'
+        required: false
+        default: false
+        type: boolean
 
 # Prevent overlap if a prior AM run ran long.
 concurrency:
@@ -51,7 +63,8 @@ jobs:
           SLACK_WEBHOOK_STREET_ACCOUNT: ${{ secrets.SLACK_WEBHOOK_STREET_ACCOUNT }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DURATION: ${{ inputs.duration || '20100' }}
-        run: bash scripts/ci_run.sh am "$DURATION"
+          IGNORE_SESSION_WINDOW: ${{ inputs.ignore_window && '1' || '0' }}
+        run: bash scripts/ci_run.sh am "$DURATION" 19:00
 
       - name: Upload event log artifact
         if: always()

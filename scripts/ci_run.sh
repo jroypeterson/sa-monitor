@@ -7,9 +7,22 @@
 # repo so the next workflow run (or a restart) picks up where this one left
 # off.
 #
-# Usage: scripts/ci_run.sh <session_label> <duration_seconds>
-#   <session_label>     "am" | "pm"  — used in log filenames + commit messages
-#   <duration_seconds>  e.g. 20100 (5h35m for AM), 8700 (2h25m for PM)
+# Usage: scripts/ci_run.sh <session_label> <max_duration_seconds> [session_end_utc]
+#   <session_label>        "am" | "pm"  — used in log filenames + commit messages
+#   <max_duration_seconds> upper bound, e.g. 20100 (5h35m AM), 19500 (5h25m PM)
+#   [session_end_utc]      'HH:MM' UTC wall-clock end of the session. When set,
+#                          the run is clamped to `end - now` (see below).
+#
+# Wall-clock session windows (2026-07-28). GitHub delays free-tier crons by
+# ~2h, and a session that ran "<duration> from launch" dragged its watched
+# window along with the delay — the PM session routinely started after the
+# 16:00 ET close it exists to watch. Sessions are now pinned to a wall-clock
+# END: a late start shortens the run instead of sliding it. The AM session
+# therefore always releases the `halt-monitor-session` concurrency group at
+# 19:00 UTC, so a late AM can no longer starve PM through the close, and a
+# duplicate/very-late PM run exits as a no-op instead of watching a shut
+# market. Math + tests: scripts/session_window.py, tests/test_session_window.py.
+# Override for an out-of-hours smoke test with IGNORE_SESSION_WINDOW=1.
 #
 # Required env:
 #   SLACK_WEBHOOK_STREET_ACCOUNT  — webhook URL for #street-account
@@ -19,8 +32,29 @@ set -euo pipefail
 
 SESSION="${1:-unknown}"
 DURATION="${2:-3600}"
+SESSION_END_UTC="${3:-${SESSION_END_UTC:-}}"
 TODAY=$(date -u +%Y-%m-%d)
 LOG_FILE="logs/halt_monitor_${TODAY}_${SESSION}.jsonl"
+
+# Clamp to the wall-clock window BEFORE anything else (before the calendar
+# fetch and before the commit-state trap is armed) so a run outside its window
+# costs nothing and leaves no half-state behind.
+if [ -n "$SESSION_END_UTC" ] && [ "${IGNORE_SESSION_WINDOW:-0}" != "1" ]; then
+  REQUESTED="$DURATION"
+  DURATION=$(python scripts/session_window.py \
+    --end-utc "$SESSION_END_UTC" --max-duration "$REQUESTED")
+  echo "[window] session=${SESSION} end=${SESSION_END_UTC} UTC now=$(date -u +%H:%M) UTC requested=${REQUESTED}s effective=${DURATION}s"
+  if [ "$DURATION" -le 0 ]; then
+    # Not a failure: the window this session watches has already closed (a
+    # cron delivered hours late, or a redundant watchdog recovery). Exit clean
+    # and LOUD rather than burning a full session on a shut market.
+    echo "::notice title=halt-monitor ${SESSION} skipped::window ending ${SESSION_END_UTC} UTC has already closed on ${TODAY} - nothing to watch, exiting without running the monitor"
+    exit 0
+  fi
+  if [ "$DURATION" -lt "$REQUESTED" ]; then
+    echo "::warning title=halt-monitor ${SESSION} started late::run shortened from ${REQUESTED}s to ${DURATION}s to hold the ${SESSION_END_UTC} UTC session end (delayed cron delivery)"
+  fi
+fi
 
 # Phase 2 enrichment calendars — fetched fresh each session from sibling
 # public repos. Best-effort: missing/stale calendars only mean the "Note:"

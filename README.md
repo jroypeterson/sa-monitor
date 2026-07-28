@@ -2,10 +2,10 @@
 > **Goal: a self-hosted, free recreation of StreetAccount's full editorial feed**, scoped to the user's coverage universe and delivered to Slack `#street-account`. StreetAccount (a paid FactSet product) publishes halt notes, earnings-cycle alerts, clinical/regulatory event alerts, and weekly data trackers; sa-monitor recreates that *signal* without the subscription. **Phase 1 (trade-halt feed) and Phase 2 (halt enrichment) are LIVE; Phases 3–5 (earnings cycle, clinical/regulatory events, weekly data products, morning brief) are spec'd but not yet built.**
 
 - **Status:** live — **Phase 1–2 of 5** (halt feed + enrichment). See the phase roadmap below for what's built vs planned.
-- **Runtime/trigger:** Python via GitHub Actions (AM session 13:25 UTC, PM session 19:05 UTC, weekdays; hourly watchdog)
+- **Runtime/trigger:** Python via GitHub Actions (AM session cron 13:25 UTC ends 19:00 UTC, PM session cron 16:05 UTC ends 21:30 UTC, weekdays; hourly watchdog). Sessions are pinned to a **wall-clock end**, not a run length — see "Session windows" below.
 - **Reads:** NYSE LULD CSV + Nasdaq halt RSS (5s poll) · Coverage Manager universe (`data/sa_monitor_universe.json`) · earnings-agent + analyst-days event calendars
 - **Writes:** Slack `#street-account` (halt/resume) · `state/dedup_state_<date>.json` · `logs/*.jsonl` · `#status-reports` (heartbeat/failure)
-- **Run:** `bash scripts/ci_run.sh am 20100` (or `python -m src.halt_monitor --slack live --duration …`)  ·  **Entry points:** `src/halt_monitor.py`, `scripts/ci_run.sh`, `src/slack.py`
+- **Run:** `bash scripts/ci_run.sh am 20100 19:00` (or `python -m src.halt_monitor --slack live --duration …`)  ·  **Entry points:** `src/halt_monitor.py`, `scripts/ci_run.sh`, `src/slack.py`
 
 Repo: `https://github.com/jroypeterson/sa-monitor` (public — runs on free GitHub Actions minutes).
 
@@ -99,9 +99,9 @@ The runtime deployment is two scheduled workflows + a watchdog, modeled on `sigm
 
 ```
 .github/workflows/
-├── halt-monitor-am.yml       # Cron 13:25 UTC, runs 5h35m → ends 19:00 UTC
-├── halt-monitor-pm.yml       # Cron 19:05 UTC, runs 2h25m → ends 21:30 UTC
-└── halt-monitor-watchdog.yml # Hourly 14:00-21:00 UTC; recovers missed sessions
+├── halt-monitor-am.yml       # Cron 13:25 UTC, cap 5h35m → hard end 19:00 UTC
+├── halt-monitor-pm.yml       # Cron 16:05 UTC, cap 5h25m → hard end 21:30 UTC
+└── halt-monitor-watchdog.yml # Hourly 14:00-23:00 UTC; recovers missed sessions
 ```
 
 **Setup checklist (one-time, completed 2026-05-06):**
@@ -116,9 +116,34 @@ The runtime deployment is two scheduled workflows + a watchdog, modeled on `sigm
 gh workflow run "halt-monitor — AM session" -f duration=60
 gh workflow run "halt-monitor — PM session" -f duration=60
 ```
-Defaults preserve full session length (20100s AM, 8700s PM) when scheduled by cron. Watch `#street-account` for the end-of-run heartbeat.
+Defaults preserve full session length (20100s AM cap, 19500s PM cap) when scheduled by cron. Both workflows also take an `ignore_window` boolean — set it when smoke-testing OUTSIDE the session's wall-clock window, otherwise `ci_run.sh` correctly refuses to run a session whose window has closed:
+```
+gh workflow run "halt-monitor — PM session" -f duration=60 -f ignore_window=true
+```
 
-**State persistence on Actions.** `scripts/ci_run.sh` commits `state/dedup_state_<YYYY-MM-DD>.json` and `logs/halt_monitor_<date>_<session>.jsonl` back to the repo at end-of-job (via shell trap). The next session reads the latest state via `actions/checkout` at job start. There's a 5-minute gap between AM (ends 19:00 UTC) and PM (starts 19:05 UTC) — this is a known halt-monitor blind spot during market hours; documented and accepted for Phase 1.
+**State persistence on Actions.** `scripts/ci_run.sh` commits `state/dedup_state_<YYYY-MM-DD>.json` and `logs/halt_monitor_<date>_<session>.jsonl` back to the repo at end-of-job (via shell trap). The next session reads the latest state via `actions/checkout` at job start. AM ends at 19:00 UTC and PM takes over within ~2 minutes (it is already queued), so the old 5-minute handoff gap is now just the runner-setup time.
+
+**Session windows (wall-clock, not run-length).** GitHub delivers free-tier
+scheduled crons up to ~2h late. A session defined as "run N seconds from
+launch" therefore slid its whole watched window forward with the delay — the PM
+session regularly started after the 16:00 ET close it exists to watch. Each
+session is now pinned to the wall-clock time it must END (`scripts/ci_run.sh`
+3rd arg → `scripts/session_window.py`), and the duration is derived:
+`min(cap, end - now)`.
+
+| Session | Cron (UTC) | Hard end (UTC) | Cap | Effect of a late start |
+|---|---|---|---|---|
+| AM | 13:25 | 19:00 | 5h35m | run is shortened; the shared concurrency group is always free by 19:00 |
+| PM | 16:05 | 21:30 | 5h25m | queues behind AM, starts by ~19:02, still ends 21:30 |
+
+The PM cron deliberately fires ~3h early: the `halt-monitor-session`
+concurrency group (`cancel-in-progress: false`) holds the run PENDING — free —
+until the AM session's wall-clock end releases it at 19:00 UTC. So PM begins
+monitoring at `max(19:00 UTC, its own delivery time)`, which covers
+**15:30–16:15 ET (19:30–20:15 UTC in EDT, 20:30–21:15 UTC in EST)** for any
+cron slip under 3h25m — versus 25 minutes of slack under the old schedule. A
+run that somehow starts after its end time exits as a clean no-op (a
+`::notice::` in the job log) rather than watching a closed market.
 
 **EDT vs EST timing.** GH Actions cron is UTC-only and not DST-aware. The 13:25 UTC AM cron lands at 09:25 ET during EDT and 08:25 ET during EST. The pre-market early-start during EST is harmless (idle polling against quiet feeds). Same pattern as sibling sigma-alert.
 
@@ -218,8 +243,8 @@ sa-monitor/
 ├── requirements.txt
 ├── .gitignore
 ├── .github/workflows/
-│   ├── halt-monitor-am.yml         ← Cron 13:25 UTC, AM session
-│   ├── halt-monitor-pm.yml         ← Cron 19:05 UTC, PM session
+│   ├── halt-monitor-am.yml         ← Cron 13:25 UTC → 19:00 UTC, AM session
+│   ├── halt-monitor-pm.yml         ← Cron 16:05 UTC → 21:30 UTC, PM session
 │   └── halt-monitor-watchdog.yml   ← Hourly, recovers missed sessions
 ├── data/
 │   └── sa_monitor_universe.json    ← Filtered ticker universe (D2 output)

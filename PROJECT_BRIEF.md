@@ -55,7 +55,7 @@ release) to triage without opening the terminal.**
 | 4 | Alerts carry actionable context, not just "halted" | ✅ Done | sa-monitor template = CM sector tag + raw exchange reason code (`src/template.py`, `src/reason_codes.py`); Phase 2 adds the cross-ref/calendar preface |
 | 5 | Cross-reference a coincident press release ("Follows {source}…") | ✅ Done | Phase 2 slice 2B LIVE; PRN/BW/GNW RSS polled ~30s, ±60-min ticker-keyed window; `src/news/` + `src/enrichment.py`; cross-ref wins over calendar context |
 | 6 | Survive a mid-session runner restart without re-firing seen halts | ✅ Done | Daily-rotated `state/dedup_state_<date>.json`, atomic writes, committed back by CI; `tests/test_state.py` (7) |
-| 7 | Runs unattended and free | ✅ Done | GitHub Actions AM (13:25 UTC) + PM (19:05 UTC) weekdays + hourly watchdog; `scripts/ci_run.sh` |
+| 7 | Runs unattended and free | ✅ Done | GitHub Actions AM (cron 13:25 → hard end 19:00 UTC) + PM (cron 16:05 → hard end 21:30 UTC) weekdays + hourly watchdog; wall-clock session windows so a delayed cron can't slide the session past the close; `scripts/ci_run.sh` |
 | 8 | No silent failures | ✅ Done | Failure DM after 60 consecutive feed failures (~5 min); end-of-run `health/v1`-style heartbeat regardless of outcome; watchdog recovers missed sessions |
 | 9 | Universe stays in sync with the Coverage Manager source of truth | ✅ Done | Regenerated via `scripts/build_universe.py`; CM schema gate bumped v2→**v3** on 2026-06-14 (565af1c), so regeneration tracks CM's current exports |
 | 10 | Cover the names the user actually trades | ✅ Done | HC Svcs / MedTech / Pharma + all non-HC sectors, and **biotech re-included 2026-06-16** (~1,095 tickers, was ~568) to feed the biotech catalyst/triage loop (root `biotech_catalyst_architecture_plan.md`) |
@@ -122,9 +122,12 @@ The larger gap is between this slice and the *full* StreetAccount vision: Phases
 - **CM schema v2→v3 bump** — ✅ RESOLVED 2026-06-14 (565af1c); `build_universe.py`
   now gates v3. (Was the live debt; no longer.)
 - **PM-session reliability** — ✅ RESOLVED 2026-06-15 (ed5588b); fixed silent
-  state-loss in `commit_state` + watchdog false-failure noise. (Residual: GitHub
-  delays the PM cron ~2h, so the session often runs after the close it watches —
-  a scheduling-strategy follow-up, logged in the root `PROJECT_IDEAS.md`.)
+  state-loss in `commit_state` + watchdog false-failure noise. The residual
+  scheduling problem (GitHub delaying the PM cron ~2h so the session ran after
+  the close it watches) is ✅ RESOLVED 2026-07-28 (triage #210): sessions are now
+  pinned to a wall-clock END rather than a run length, and the PM cron moved
+  19:05 → 16:05 UTC so it queues behind AM and starts the moment AM's
+  19:00 UTC hard end frees the concurrency group. See README §"Session windows".
 - **Biotech re-inclusion** (Phase 2 follow-on) — the largest halt-coverage expansion.
 - **CORRECTION-halt auto-handling** (Phase 2).
 - **The 5-minute AM→PM gap** is an accepted blind spot during market hours;

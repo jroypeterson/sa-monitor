@@ -510,10 +510,13 @@ def _append_log(log_path: Path, kind: str, event: HaltEvent, meta,
 # events market-wide on BOTH feeds is far more likely a broken/redirected feed
 # (200-with-empty) than a genuinely halt-free trading day. Below this many
 # completed polls the session is too short to judge and the check is skipped.
-# Sized below the SHORTEST scheduled full session so both qualify: AM ci_run
-# is 20100s (~4020 polls), PM is 8700s (~1740 polls) at the 5s interval —
-# while a 60s smoke test (12 polls) never trips it. (Codex round-1 High: the
-# original 2000 silently exempted the entire PM session.)
+# Sized below the SHORTEST scheduled full session so both qualify: at the 5s
+# interval the AM session's 19:00 UTC hard end gives ~4020 polls from an on-time
+# start and the PM session's 21:30 UTC hard end gives ~1800 polls from the
+# 19:00 UTC handoff — while a 60s smoke test (12 polls) never trips it. Sessions
+# are wall-clock-bounded (scripts/session_window.py), so a badly delayed cron
+# yields a short run that falls under this floor and is correctly not judged.
+# (Codex round-1 High: the original 2000 silently exempted the entire PM session.)
 EMPTY_FEED_MIN_POLLS = 1200  # ~1.7h at the 5s interval
 
 

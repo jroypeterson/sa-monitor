@@ -20,10 +20,22 @@ name: halt-monitor — Watchdog
 #
 # Mirrors the sigma-alert/.github/workflows/sigma-watchdog.yml pattern.
 
+#   3) (2026-07-28, triage #210) The PM grace shrank 22:00 -> 19:00 UTC. It was
+#      set to 22:00 to outlast the ~2h PM cron slip, but that made recovery
+#      useless: 22:00 UTC is 18:00 ET, two hours after the close the PM session
+#      exists to watch. Recovery is now armed at 19:00 UTC — the instant the AM
+#      session's wall-clock end frees the concurrency group — so a dropped PM
+#      cron is replaced in time to cover the close. Two things make the shorter
+#      grace safe: a merely-DELAYED PM run already exists in `queued` state (it
+#      pends behind AM from its 16:05 cron) and counts as healthy, so it is not
+#      double-fired; and if a cron does land after we dispatched, the wall-clock
+#      window in ci_run.sh makes the late duplicate a no-op instead of a
+#      cancelled run.
+
 on:
   schedule:
-    # Every hour 14:00–23:00 UTC weekdays. Extended past 21:00 so the post-grace
-    # PM recovery check (>= 22:00 UTC) has ticks to run on.
+    # Every hour 14:00–23:00 UTC weekdays. Kept past 21:00 so a delayed
+    # watchdog tick still has ticks left to run the recovery checks on.
     - cron: '0 14-23 * * 1-5'
   workflow_dispatch:
     inputs:
@@ -83,11 +95,15 @@ jobs:
             recovered+=("$workflow_name")
           }
 
-          # Recover-after = scheduled time + grace. AM cron 13:25 → 15:30 (2h grace);
-          # PM cron 19:05 → 22:00 (absorbs the observed ~2h PM delivery slip, so the
-          # late-but-fine scheduled run lands and counts before we'd ever dispatch).
+          # Recover-after. AM cron 13:25 → 15:30 (2h grace).
+          # PM cron 16:05 → 19:00: the PM run normally sits `queued` behind the AM
+          # session from 16:05 and starts when AM's wall-clock end frees the
+          # concurrency group at 19:00 UTC. So at 19:00 a healthy PM run should
+          # already exist; if none does, the cron was genuinely dropped and we
+          # recover NOW, while there is still time to cover the 16:00 ET close
+          # (the old 22:00 grace recovered two hours after it).
           check_session "halt-monitor — AM session" "1530"
-          check_session "halt-monitor — PM session" "2200"
+          check_session "halt-monitor — PM session" "1900"
 
           # Test mode — force a heartbeat to validate the Slack webhook path on demand.
           if [ "${TEST_HEARTBEAT:-false}" = "true" ] && [ "${#recovered[@]}" -eq 0 ]; then

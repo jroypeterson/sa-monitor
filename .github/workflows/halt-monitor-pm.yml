@@ -1,20 +1,54 @@
 name: halt-monitor — PM session
 
-# PM session covers market close. Starts at 19:05 UTC (5-min gap after AM ends
-# at 19:00 UTC), runs 2h25m → ends 21:30 UTC.
-#   EDT: 15:05 ET → 17:30 ET (covers 16:00 close + 1h30m buffer)
-#   EST: 14:05 ET → 16:30 ET (covers 16:00 close + 30m buffer)
+# PM session covers the market close, and is the one session that MUST be live
+# for it (the highest halt-density window of the trading day).
+#
+# Scheduling strategy, rewritten 2026-07-28 (triage #210)
+# ------------------------------------------------------
+# Old shape: cron 19:05 UTC, run 2h25m from launch. GitHub delays free-tier
+# cron DELIVERY by ~2h, so the session routinely started ~21:05 UTC = 17:05 ET
+# — an hour AFTER the close it exists to watch. Lengthening the run alone would
+# not have helped: the whole window slid forward with the delay.
+#
+# New shape: cron 16:05 UTC and a wall-clock END of 21:30 UTC.
+#   * The cron fires ~3h before the session is actually needed. The AM session
+#     is still in progress then, so this run sits PENDING in the shared
+#     `halt-monitor-session` concurrency group (cancel-in-progress: false),
+#     consuming no runner minutes while it waits.
+#   * The AM session is itself clamped to a wall-clock end of 19:00 UTC, so the
+#     group is released at 19:00 UTC every weekday no matter how late AM began.
+#   * The PM session therefore begins monitoring at
+#         max(19:00 UTC, its own delivery time) + ~2min of runner setup
+#     and stops at 21:30 UTC = 17:30 ET (EDT) / 16:30 ET (EST).
+#
+# Close-coverage guarantee. The 15:30-16:15 ET window is 19:30-20:15 UTC under
+# EDT and 20:30-21:15 UTC under EST. Coverage holds as long as the run starts
+# before 19:30 UTC, i.e. as long as cron delivery slips by less than 3h25m
+# (EDT) / 4h25m (EST). Observed slip is ~2h. If the cron is DROPPED entirely,
+# the watchdog dispatches a recovery run from 19:00 UTC. The old margin was
+# 25 minutes.
+#
+# Duration 19,500s = 5h25m is the CAP (16:05 -> 21:30, i.e. the no-AM-run
+# case), not the guarantee — scripts/ci_run.sh derives the real duration from
+# the wall clock, so a run starting at 19:00 runs 2h30m and a run that somehow
+# starts after 21:30 exits as a clean no-op instead of watching a shut market.
+# See scripts/session_window.py + tests/test_session_window.py.
 
 on:
   schedule:
-    - cron: '5 19 * * 1-5'  # 19:05 UTC weekdays
+    - cron: '5 16 * * 1-5'  # 16:05 UTC weekdays (queues behind the AM session)
   workflow_dispatch:
     inputs:
       duration:
-        description: 'Run duration in seconds. Default 8700 (2h25m full session). Use a small value (e.g. 60) for a smoke test.'
+        description: 'Max run duration in seconds. Default 19500 (5h25m cap). Use a small value (e.g. 60) for a smoke test.'
         required: false
-        default: '8700'
+        default: '19500'
         type: string
+      ignore_window:
+        description: 'Ignore the 21:30 UTC wall-clock session end (needed to smoke-test outside the PM window).'
+        required: false
+        default: false
+        type: boolean
 
 concurrency:
   group: halt-monitor-session
@@ -26,7 +60,7 @@ permissions:
 jobs:
   pm-session:
     runs-on: ubuntu-latest
-    timeout-minutes: 160  # 2h40m hard cap (vs 2h25m ci_run duration)
+    timeout-minutes: 340  # 5h40m hard cap (vs the 5h25m ci_run cap)
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -45,8 +79,9 @@ jobs:
         env:
           SLACK_WEBHOOK_STREET_ACCOUNT: ${{ secrets.SLACK_WEBHOOK_STREET_ACCOUNT }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DURATION: ${{ inputs.duration || '8700' }}
-        run: bash scripts/ci_run.sh pm "$DURATION"
+          DURATION: ${{ inputs.duration || '19500' }}
+          IGNORE_SESSION_WINDOW: ${{ inputs.ignore_window && '1' || '0' }}
+        run: bash scripts/ci_run.sh pm "$DURATION" 21:30
 
       - name: Upload event log artifact
         if: always()
