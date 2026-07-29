@@ -27,11 +27,21 @@ OUTPUT_PATH = REPO_ROOT / "data" / "sa_monitor_universe.json"
 EXCLUDE_SUBSECTOR: set[str] = set()
 EXCLUDE_BIOPHARMA_BLANK_SUBSECTOR = False
 
+# TEMPORARY window for the CM v4 dual-ISIN release (2026-07-28); NARROW TO {4}
+# in phase 4. CM adds `ISIN (Primary Listing)` + `Country (Incorporation)` and
+# flips 3 -> 4; this script reads every field by name below, so the two new
+# columns are inert for it and only the gate has to move. Widened here first,
+# while CM still publishes 3, so both sides of the flip are green on disk.
+_ACCEPTED_CM_SCHEMA = frozenset({3, 4})
+
 
 def main() -> None:
     status = json.loads(CM_UNIVERSE_STATUS.read_text())
-    if status.get("schema_version") != 3:
-        raise SystemExit(f"Coverage Manager schema_version {status.get('schema_version')!r}, expected 3")
+    if status.get("schema_version") not in _ACCEPTED_CM_SCHEMA:
+        raise SystemExit(
+            f"Coverage Manager schema_version {status.get('schema_version')!r}, "
+            f"expected one of {sorted(_ACCEPTED_CM_SCHEMA)}"
+        )
     if not status.get("validation_passed"):
         raise SystemExit(f"Coverage Manager universe failed validation: {status.get('validation_errors')!r}")
 
