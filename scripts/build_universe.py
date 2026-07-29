@@ -27,12 +27,18 @@ OUTPUT_PATH = REPO_ROOT / "data" / "sa_monitor_universe.json"
 EXCLUDE_SUBSECTOR: set[str] = set()
 EXCLUDE_BIOPHARMA_BLANK_SUBSECTOR = False
 
-# TEMPORARY window for the CM v4 dual-ISIN release (2026-07-28); NARROW TO {4}
-# in phase 4. CM adds `ISIN (Primary Listing)` + `Country (Incorporation)` and
-# flips 3 -> 4; this script reads every field by name below, so the two new
-# columns are inert for it and only the gate has to move. Widened here first,
-# while CM still publishes 3, so both sides of the flip are green on disk.
-_ACCEPTED_CM_SCHEMA = frozenset({3, 4})
+# CM exports schema. Adding a CSV column does NOT bump this -- the `LEI` and
+# `IPO Date`/`Est Lockup` backfills all landed in universe.csv (and in
+# portfolio.json entry keys) with no bump. Only a change to the
+# `universe_metadata.json` entry shape does; that is what the v3 bump was for.
+# New identity columns are therefore expected under v3, and this script reads
+# every field by name below, so extra columns are inert for it either way.
+#
+# Briefly widened to {3, 4} on 2026-07-28 for an anticipated v4 bump that was
+# then disproven the same night (plans/identity_export_v4_release_2026-07-28.md,
+# revision R1). Kept as a frozenset rather than reverting to `!= 3`: the exit
+# message names the accepted set, and a real bump is a one-line change here.
+_ACCEPTED_CM_SCHEMA = frozenset({3})
 
 
 def main() -> None:

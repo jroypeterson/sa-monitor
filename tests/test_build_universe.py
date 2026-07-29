@@ -50,9 +50,16 @@ def test_build_universe_refuses_empty(tmp_path, monkeypatch):
 
 
 # --- CM exports schema gate -------------------------------------------------
-# Phase 1 of the CM v4 (dual-ISIN) release widened this gate from `!= 3` to a
-# frozenset {3, 4} so sa-monitor is green both before and after CM flips.
-# NARROW TO {4} in phase 4 — `test_accepts_schema_v3` becomes a rejection then.
+# The gate accepts exactly {3}. It is a frozenset rather than `!= 3` so the exit
+# message can name the accepted set and a real bump is one line.
+#
+# These tests were added 2026-07-28 during a briefly-widened {3, 4} window and
+# KEPT when it narrowed back: adding a CSV column does not bump CM's
+# EXPORTS_SCHEMA_VERSION (the LEI / IPO Date backfills prove it), so no v4 is
+# coming. sa-monitor had no test for this gate before them.
+
+# Read from the script so the parametrisation tracks the real gate, not a copy.
+_ACCEPTED = _load_module()._ACCEPTED_CM_SCHEMA
 
 _ROWS = (
     "Ticker,Company Name,Sector (JP),Subsector (JP),Sub-subsector (JP),"
@@ -79,11 +86,11 @@ def _wire(tmp_path, monkeypatch, schema_version, csv_text=_ROWS):
     return mod, out_path
 
 
-@pytest.mark.parametrize("version", [3, 4])
+@pytest.mark.parametrize("version", sorted(_ACCEPTED))
 def test_accepted_schema_versions_build_a_non_empty_universe(
     tmp_path, monkeypatch, version
 ):
-    """Both sides of the flip must produce tickers. Asserting only "it didn't
+    """An accepted version must produce tickers. Asserting only "it didn't
     raise" would miss a zero-ticker build, which is the BOM failure signature."""
     mod, out_path = _wire(tmp_path, monkeypatch, version)
     mod.main()
@@ -94,8 +101,13 @@ def test_accepted_schema_versions_build_a_non_empty_universe(
     assert payload["source"]["cm_schema_version"] == version
 
 
-@pytest.mark.parametrize("version", [2, 5, 99])
-def test_schema_outside_the_window_still_exits_loudly(tmp_path, monkeypatch, version):
+@pytest.mark.parametrize("version", [2, 4, 5, 99])
+def test_schema_outside_the_accepted_set_still_exits_loudly(
+    tmp_path, monkeypatch, version
+):
+    """4 is in this list deliberately: it was briefly ACCEPTED on 2026-07-28 in
+    anticipation of a CM bump that was then disproven. An unannounced v4 must
+    stop the build like any other unknown version."""
     mod, out_path = _wire(tmp_path, monkeypatch, version)
     with pytest.raises(SystemExit, match="schema_version"):
         mod.main()
@@ -103,16 +115,17 @@ def test_schema_outside_the_window_still_exits_loudly(tmp_path, monkeypatch, ver
 
 
 def test_schema_error_names_the_accepted_set(tmp_path, monkeypatch):
-    """The operator reading the exit line needs the window, not one number."""
+    """The operator reading the exit line needs the accepted set, not just a no."""
     mod, _ = _wire(tmp_path, monkeypatch, 5)
     with pytest.raises(SystemExit) as exc:
         mod.main()
-    assert "[3, 4]" in str(exc.value)
+    assert str(sorted(_ACCEPTED)) in str(exc.value)
 
 
-def test_v4_extra_identity_columns_are_inert(tmp_path, monkeypatch):
-    """v4 adds `ISIN (Primary Listing)` + `Country (Incorporation)`. Every field
-    here is read by name, so unknown columns must not disturb the build."""
+def test_extra_identity_columns_are_inert_without_a_bump(tmp_path, monkeypatch):
+    """New columns (`ISIN (Primary Listing)`, `Country (Incorporation)`) arrive
+    WITHOUT a schema bump -- CM's documented precedent. Every field here is read
+    by name, so unknown columns must not disturb the build at v3."""
     csv_text = (
         "Ticker,Company Name,Sector (JP),Subsector (JP),Sub-subsector (JP),"
         "Core,Exchange,Country (HQ),Currency,ISIN,ISIN (Primary Listing),"
@@ -120,7 +133,7 @@ def test_v4_extra_identity_columns_are_inert(tmp_path, monkeypatch):
         "AZN,AstraZeneca PLC,Biopharma,Large Pharma,,Y,NYQ,GB,USD,"
         "US0463531089,GB0009895292,GB\n"
     )
-    mod, out_path = _wire(tmp_path, monkeypatch, 4, csv_text=csv_text)
+    mod, out_path = _wire(tmp_path, monkeypatch, 3, csv_text=csv_text)
     mod.main()
 
     payload = json.loads(out_path.read_text(encoding="utf-8"))
