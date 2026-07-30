@@ -38,7 +38,11 @@ EXCLUDE_BIOPHARMA_BLANK_SUBSECTOR = False
 # then disproven the same night (plans/identity_export_v4_release_2026-07-28.md,
 # revision R1). Kept as a frozenset rather than reverting to `!= 3`: the exit
 # message names the accepted set, and a real bump is a one-line change here.
-_ACCEPTED_CM_SCHEMA = frozenset({3})
+_ACCEPTED_CM_SCHEMA = frozenset({3, 4})  # v4 (2026-07-30): universe_metadata.json
+# is keyed by the RAW ticker instead of a suffix-stripped one. `DIA.MI` was published
+# as `DIA`, which broke `metadata[row["Ticker"]]` for 183 of 1,096 rows and silently
+# dropped Rogers Corporation, since `ROG` and `ROG.SW` collided. Both versions are
+# accepted so this repo works either side of CM republishing.
 
 
 def main() -> None:
