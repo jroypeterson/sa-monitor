@@ -44,7 +44,7 @@ ok "tools + auth + secrets in place"
 # ---- Step 1: git init ----------------------------------------------------
 
 bold "Step 1: git init + first commit (if needed)…"
-if [ ! -d ".git" ]; then
+if [ ! -e ".git" ]; then
   git init -b master
   ok "initialized git repo"
 else
