@@ -50,13 +50,14 @@ def test_build_universe_refuses_empty(tmp_path, monkeypatch):
 
 
 # --- CM exports schema gate -------------------------------------------------
-# The gate accepts exactly {3}. It is a frozenset rather than `!= 3` so the exit
-# message can name the accepted set and a real bump is one line.
+# The gate is a frozenset rather than `!= 3` so the exit message can name the
+# accepted set and a real bump is one line. It has been {3, 4} since 612a160
+# (2026-07-30), when CM really did publish v4 (raw-ticker metadata keys).
 #
-# These tests were added 2026-07-28 during a briefly-widened {3, 4} window and
-# KEPT when it narrowed back: adding a CSV column does not bump CM's
-# EXPORTS_SCHEMA_VERSION (the LEI / IPO Date backfills prove it), so no v4 is
-# coming. sa-monitor had no test for this gate before them.
+# The rejected versions below are DERIVED from the gate, never typed. A typed
+# list said "4 must be rejected" and stayed red for two months after the gate
+# legitimately accepted 4 -- a test that contradicts the code it guards is
+# skimmed, and the next real failure beside it is skimmed with it.
 
 # Read from the script so the parametrisation tracks the real gate, not a copy.
 _ACCEPTED = _load_module()._ACCEPTED_CM_SCHEMA
@@ -101,13 +102,23 @@ def test_accepted_schema_versions_build_a_non_empty_universe(
     assert payload["source"]["cm_schema_version"] == version
 
 
-@pytest.mark.parametrize("version", [2, 4, 5, 99])
+# Neighbours of the accepted range (the off-by-one a `>=`/`<=` gate would get
+# wrong) plus far-off values; whatever the gate accepts is removed, not asserted.
+_REJECTED = sorted(
+    {0, 1, 2, min(_ACCEPTED) - 1, max(_ACCEPTED) + 1, 5, 99} - set(_ACCEPTED)
+)
+
+def test_rejected_probe_set_is_non_trivial():
+    """Derivation must not quietly empty the rejection probes."""
+    assert max(_ACCEPTED) + 1 in _REJECTED and min(_ACCEPTED) - 1 in _REJECTED
+
+
+@pytest.mark.parametrize("version", _REJECTED)
 def test_schema_outside_the_accepted_set_still_exits_loudly(
     tmp_path, monkeypatch, version
 ):
-    """4 is in this list deliberately: it was briefly ACCEPTED on 2026-07-28 in
-    anticipation of a CM bump that was then disproven. An unannounced v4 must
-    stop the build like any other unknown version."""
+    """Any version outside the gate -- including the next one up, an unannounced
+    bump -- must stop the build rather than read a shape it does not know."""
     mod, out_path = _wire(tmp_path, monkeypatch, version)
     with pytest.raises(SystemExit, match="schema_version"):
         mod.main()
