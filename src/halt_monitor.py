@@ -38,7 +38,7 @@ from .feeds.types import HaltEvent
 from .news import bw, gnw, prnewswire
 from .news.cache import NewsCache
 from .news.types import NewsItem
-from .reason_codes import is_phase1_emit_code
+from .reason_codes import is_phase1_emit_code, is_resumption_relabel_code
 from .template import render_followup, render_halt, render_hc_event, render_resume
 
 logging.basicConfig(
@@ -85,6 +85,11 @@ class RunStats:
     slack_posts_failed: int = 0
     state_loads: int = 0
     state_saves: int = 0
+    # A failed save leaves the NEXT session reading stale dedup state (it
+    # re-alerts what this one delivered), so failures are counted, escalate the
+    # heartbeat, and — when the LAST save failed — make main() exit non-zero.
+    state_save_failures: int = 0
+    state_last_save_ok: bool = True
     earnings_calendar_loaded: int = 0
     earnings_calendar_generated_at: Optional[str] = None
     analyst_days_calendar_loaded: int = 0
@@ -172,7 +177,31 @@ def _emit(
         log.debug("skip out-of-universe: %s", event)
         return
 
-    if not include_non_emit and not is_phase1_emit_code(event.reason_code):
+    # A resume yielded in the SAME poll as its halt, after that halt's live post
+    # failed: the rollback below popped the halt from seen_halts so the next poll
+    # retries it. Posting the resume now would announce a resume for a halt that
+    # was never delivered, and the retry poll would post it again. Roll the
+    # resume mark back too, so halt and resume retry together.
+    if (kind == "resume" and tracker is not None
+            and event.halt_id not in tracker.seen_halts):
+        tracker.resumes_emitted.discard(event.halt_id)
+        log.info("defer resume for %s: its halt was not delivered this poll "
+                 "(retrying both next poll)", event.symbol)
+        return
+
+    # A resume whose row Nasdaq relabelled to T3 ("News and Resumption Times")
+    # is the resume of a halt we may already have delivered under T1. Pass it
+    # only when that halt was DELIVERED (emitted_halts), so a resume is sent if
+    # and only if its halt was. Other non-emit codes (e.g. "D", a deletion) stay
+    # filtered: they are not resumes.
+    relabelled_resume = (
+        kind == "resume"
+        and tracker is not None
+        and is_resumption_relabel_code(event.reason_code)
+        and event.halt_id in tracker.emitted_halts
+    )
+    if (not include_non_emit and not relabelled_resume
+            and not is_phase1_emit_code(event.reason_code)):
         stats.halts_filtered_non_emit_code += 1
         log.info("skip non-emit code %s for %s (logged only)",
                  event.reason_code, event.symbol)
@@ -263,6 +292,13 @@ def _emit(
     #   off      → the stdout emit IS the delivery
     #   live     → only a successful post_halt counts
     #   dry-run  → nothing was delivered, never mark
+    # Delivered-resume ledger. resumes_emitted is set by ingest() BEFORE this
+    # function filters, so it also holds resumes that were filtered and never
+    # posted; resumes_delivered holds only real deliveries, and is what
+    # state.load trusts when it carries resumes across day files.
+    if kind == "resume" and tracker is not None and slack_mode != "dry-run":
+        tracker.resumes_delivered.add(event.halt_id)
+
     if kind == "halt" and tracker is not None:
         if slack_mode == "off":
             delivered = True
@@ -387,8 +423,10 @@ def _emit_hc_events(
     name-matching / misattribution risk (the openFDA sponsor→ticker resolver is
     deferred to session 2).
 
-    Dedup key: f"{news_id}|{symbol}|{event_type}" in tracker.hc_events_emitted —
-    one alert per (press release, covered ticker, event type), ever. Post-then-
+    Dedup key: f"{news_id}|{symbol}|{event_type}" in tracker.hc_events_emitted
+    (this day) or tracker.hc_events_prior (earlier retained days) — one alert
+    per (press release, covered ticker, event type) for the 7-day state
+    retention. Post-then-
     mark, identical gating to _emit_followups:
       off      → stdout emit is the delivery → mark
       live     → mark only on a successful post
@@ -411,8 +449,9 @@ def _emit_hc_events(
             continue
         for symbol in covered:
             dedup_key = f"{item.news_id}|{symbol}|{ev.event_type}"
-            if dedup_key in tracker.hc_events_emitted:
-                continue  # one alert per (PR, ticker, type), ever
+            if (dedup_key in tracker.hc_events_emitted
+                    or dedup_key in tracker.hc_events_prior):
+                continue  # one alert per (PR, ticker, type) within retention
             meta = universe.get(symbol)
             event = replace(ev, symbol=symbol)
 
@@ -543,6 +582,8 @@ def _post_health_heartbeat(stats: RunStats, slack_mode: str,
     feed_suspect = _empty_feed_suspect(stats, ended_with_error)
     if feed_suspect and status == "ok":
         status = "warning"
+    if stats.state_save_failures and status == "ok":
+        status = "warning"
 
     base_parts = [
         f"halt-monitor run summary: polls={stats.polls_completed}",
@@ -554,6 +595,11 @@ def _post_health_heartbeat(stats: RunStats, slack_mode: str,
         f"slack_ok/fail={stats.slack_posts_succeeded}/{stats.slack_posts_failed}",
         f"fetch_errors={stats.fetch_errors}",
     ]
+    if stats.state_save_failures:
+        base_parts.append(
+            f"state_save_failures={stats.state_save_failures}"
+            + ("" if stats.state_last_save_ok else " (LAST save failed: next session reads stale state)")
+        )
     if feed_suspect:
         base_parts.append(
             "⚠ zero market-wide events on BOTH feeds all session — "
@@ -584,6 +630,37 @@ def _post_health_heartbeat(stats: RunStats, slack_mode: str,
         slack.post_dm(summary, level=status if status in {"ok","warning","error"} else "warning")
     except Exception as exc:
         log.error("failed to post health heartbeat: %s", exc)
+
+
+def _save_state(tracker: HaltTracker, stats: RunStats) -> None:
+    """Persist the tracker once; record the outcome in `stats`.
+
+    A failure does not abort the session (a transient disk error must not cost
+    live coverage), but it must not be silent either: it is counted, and
+    `state_last_save_ok` tells main() whether the state the next session will
+    read is current.
+    """
+    try:
+        state.save(tracker)
+        stats.state_saves += 1
+        stats.state_last_save_ok = True
+    except Exception as exc:
+        stats.state_save_failures += 1
+        stats.state_last_save_ok = False
+        log.error("state save failed (%d this run): %s",
+                  stats.state_save_failures, exc)
+
+
+def exit_code_for(stats: RunStats, *, persist_state: bool) -> int:
+    """Process exit status for a finished run.
+
+    Non-zero when persistence was on and the LAST save failed: the dedup state
+    on disk (and so the state the CI commit-back pushes for the next session)
+    is stale, and a green run would hide that.
+    """
+    if persist_state and not stats.state_last_save_ok:
+        return 1
+    return 0
 
 
 def run(
@@ -705,11 +782,7 @@ def run(
                             slack_webhook_url=slack_webhook_url)
 
             if persist_state:
-                try:
-                    state.save(tracker)
-                    stats.state_saves += 1
-                except Exception as exc:
-                    log.error("state save failed: %s", exc)
+                _save_state(tracker, stats)
 
             stats.polls_completed += 1
             if stats.polls_completed % 12 == 0:
@@ -785,7 +858,12 @@ def main(argv: Optional[list[str]] = None) -> int:
         hc_events_enabled=args.hc_events,
     )
     print(json.dumps(asdict(stats), indent=2))
-    return 0
+    code = exit_code_for(stats, persist_state=not args.no_persist)
+    if code:
+        log.error("exiting %d: the last state save failed (%d failures this run); "
+                  "the next session would read stale dedup state",
+                  code, stats.state_save_failures)
+    return code
 
 
 if __name__ == "__main__":

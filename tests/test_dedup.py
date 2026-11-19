@@ -150,3 +150,25 @@ def test_non_emit_both_sources_no_reyield():
     b = _event(reason_code="M2", source="nyse_csv")   # also non-emit
     list(tracker.ingest([a]))
     assert list(tracker.ingest([b])) == []
+
+
+# --- Finding 1 (2026-11-18): a filtered resume must not shadow the valid one --
+
+def _coded(code, *, source, resume_trade_time="16:30:00", exchange="Nasdaq"):
+    return HaltEvent(
+        symbol="AYTU", exchange=exchange, halt_date="2026-11-16",
+        halt_time="16:00:10", reason_code=code, reason_description="",
+        resume_trade_time=resume_trade_time, source=source,
+    )
+
+
+def test_relabelled_nasdaq_resume_does_not_shadow_nyse_t1_resume():
+    """Real shape (AYTU 2026-11-16): Nasdaq relabels the row T3 when it
+    publishes the resume and is ingested first; NYSE carries T1 + resume second.
+    Nothing delivered yet -> the T1 resume must come out."""
+    t = HaltTracker()
+    nasdaq_t3 = _coded("T3", source="nasdaq_rss")
+    nyse_t1 = _coded("T1", source="nyse_csv", exchange="NYSE")
+    out = list(t.ingest([nasdaq_t3, nyse_t1]))
+    assert ("resume", nyse_t1) in out
+    assert ("halt", nyse_t1) in out

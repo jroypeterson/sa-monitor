@@ -13,9 +13,64 @@ from __future__ import annotations
 
 import html
 import re
+import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from typing import Optional
+
+from ..feeds.types import FeedParseError
+
+# Root elements a syndication document can have (RSS 2.0, Atom, RSS 1.0/RDF).
+_FEED_ROOTS = {"rss", "feed", "rdf"}
+
+
+def require_feed_shape(content: bytes, source: str) -> None:
+    """Raise FeedParseError unless `content` is a feed document with >= 1 <item>.
+
+    A news wire can answer HTTP 200 with an HTML maintenance page, a WAF or CDN
+    challenge, or a truncated body. The adapters' parse() is deliberately
+    tolerant and turns all of those into [], which _safe_fetch would count as a
+    healthy, empty poll — so a dead wire would never reach the failure counter
+    or the failure DM. The halt adapters got this same guard in fetch()
+    (feeds/nasdaq.py); this is the news-wire equivalent. It belongs in fetch(),
+    never parse(): parse() tolerance is pinned by tests.
+
+    Zero <item> elements also fails: these wires always carry their latest
+    releases, so an itemless channel is a soft failure, not a quiet hour.
+    """
+    try:
+        root = ET.fromstring(content)
+    except ET.ParseError as e:
+        raise FeedParseError(
+            f"{source} feed: 200 response is not valid XML ({e}); "
+            f"likely an HTML error/challenge page"
+        ) from e
+    root_name = strip_ns(root.tag).lower()
+    if root_name not in _FEED_ROOTS:
+        raise FeedParseError(
+            f"{source} feed: unexpected root <{strip_ns(root.tag)}> "
+            f"(expected rss/feed/RDF); likely a soft-failed response"
+        )
+    if not any(strip_ns(node.tag) == "item" for node in root.iter()):
+        raise FeedParseError(
+            f"{source} feed: 200 response has no <item> elements; "
+            f"likely a soft-failed or truncated response"
+        )
+
+
+def require_items(items: list, source: str) -> list:
+    """Raise FeedParseError when a well-formed feed yielded no usable record.
+
+    require_feed_shape() only proves an <item> element exists. A truncated or
+    soft-failed body can carry items that parse() skips (no title or no link),
+    and an empty result would again read as a healthy, quiet wire.
+    """
+    if not items:
+        raise FeedParseError(
+            f"{source} feed: <item> elements present but none parsed into a "
+            f"usable record (missing title/link); likely a soft-failed response"
+        )
+    return items
 
 
 # Match (NASDAQ: ABCD), (Nasdaq:ABCD), (NYSE: ABCD), (NYSE Arca: ABCD), etc.

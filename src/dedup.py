@@ -40,16 +40,27 @@ class HaltTracker:
     # OBSERVATIONS; this records deliveries. A §7 Follow-up may only fire for a
     # halt we delivered. Persisted so a restart preserves the gate.
     emitted_halts: set[HaltId] = field(default_factory=set)
-    # halt_ids for which a §7 Follow-up alert has already fired — one per halt,
-    # ever. Persisted alongside seen_halts so a mid-session restart never
+    # halt_ids for which a §7 Follow-up alert has already fired — one per halt
+    # for the 7-day state retention (state.load carries delivered halts across
+    # day files). Persisted alongside seen_halts so a mid-session restart never
     # re-emits a follow-up.
     followed_up: set[HaltId] = field(default_factory=set)
     # Delivery-dedup for the HC event-wire lane. Keys are strings of the form
     # f"{news_id}|{symbol}|{event_type}" — one alert per (press release,
-    # covered ticker, event type), ever. Persisted like followed_up so a
-    # mid-session restart never re-emits an HC event. (Mirrors emitted_halts /
-    # followed_up exactly; unlike them, keyed by string not HaltId.)
+    # covered ticker, event type) for the 7-day state retention. Persisted like
+    # followed_up so a mid-session restart never re-emits an HC event. (Mirrors
+    # emitted_halts / followed_up exactly; unlike them, keyed by string not
+    # HaltId.)
     hc_events_emitted: set[str] = field(default_factory=set)
+    # HC keys delivered on PRIOR days, loaded by state.load from the retained
+    # day files. Checked alongside hc_events_emitted but never saved, so each
+    # day file holds only its own deliveries and does not grow without bound.
+    hc_events_prior: set[str] = field(default_factory=set)
+    # halt_ids whose resume alert was actually DELIVERED (set by _emit after
+    # the filter and a successful post). resumes_emitted is marked by ingest()
+    # before filtering, so it also holds filtered, never-posted resumes; only
+    # this set is trusted when state.load carries resumes across day files.
+    resumes_delivered: set[HaltId] = field(default_factory=set)
 
     def ingest(self, events: list[HaltEvent]) -> Iterator[tuple[str, HaltEvent]]:
         """Diff `events` against state and yield (kind, event) for new ones.
@@ -85,13 +96,15 @@ class HaltTracker:
             # was non-emit and the incoming one is emittable, but ONLY while the
             # halt was never actually delivered (emitted_halts is the delivery
             # ledger) so a genuinely-delivered halt never double-posts.
-            # A placeholder rehydrated from disk (state.load) always has an
-            # empty reason_code; it is NOT a genuine non-emit first source, so
-            # exclude it — #3 is about same-session cross-SOURCE shadowing, and
-            # the persisted emitted_halts set already governs restart dedup.
+            # A placeholder rehydrated from disk (state.load) has an empty
+            # reason_code, which is non-emit, so it upgrades exactly like a
+            # genuine non-emit first source. That is intended: a halt that was
+            # only OBSERVED before a restart (say as O1) was never delivered,
+            # and the delivery ledger (emitted_halts), not mere observation, is
+            # what decides whether it may still be delivered. A delivered
+            # halt's id is in emitted_halts, which blocks the upgrade.
             upgraded = (
                 hid not in self.emitted_halts
-                and previous.source != "restored_from_state"
                 and not is_phase1_emit_code(previous.reason_code)
                 and is_phase1_emit_code(event.reason_code)
             )
@@ -100,6 +113,12 @@ class HaltTracker:
             self.seen_halts[hid] = event
             if upgraded:
                 yield ("halt", event)
+                # The halt was never delivered, so no resume for it can have
+                # been delivered either; any resumes_emitted mark came from a
+                # non-emit copy that _emit filtered. Clear it so the resume
+                # re-yields with this emittable record instead of being
+                # shadowed by the filtered one.
+                self.resumes_emitted.discard(hid)
             if event.is_resumed and hid not in self.resumes_emitted:
                 self.resumes_emitted.add(hid)
                 yield ("resume", event)
@@ -114,3 +133,5 @@ class HaltTracker:
         self.emitted_halts.clear()
         self.followed_up.clear()
         self.hc_events_emitted.clear()
+        self.hc_events_prior.clear()
+        self.resumes_delivered.clear()

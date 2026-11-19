@@ -476,3 +476,18 @@ def test_old_state_without_hc_field_rehydrates_empty(tmp_path):
     )
     fresh = state.load(state_dir=tmp_path, day_key="2026-05-05")
     assert fresh.hc_events_emitted == set()
+
+
+def test_hc_key_delivered_on_prior_day_is_not_realerted():
+    """Finding 5 (2026-11-18): a key delivered on an earlier day (loaded by
+    state.load into hc_events_prior) suppresses the same item today."""
+    item = _item("Viridian reports Phase 3 REVEAL-2 trial of elegrobart in "
+                 "chronic thyroid eye disease met its primary endpoint",
+                 tickers=("VRDN",))
+    universe = StubUniverse({"VRDN": _meta("VRDN")})
+    tracker = HaltTracker()
+    tracker.hc_events_prior.add(f"{item.news_id}|VRDN|{TRIAL_READOUT}")
+
+    stats = _run_emit([item], universe, tracker)
+    assert stats.hc_events_emitted == 0
+    assert tracker.hc_events_emitted == set()

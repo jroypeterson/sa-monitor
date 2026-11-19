@@ -42,7 +42,18 @@ NASDAQ_REASON_CODES: dict[str, str] = {
     "MWCQ": "MWCB Quote halt",
     "R4": "Resumption Trade Time",
     "R1": "Resumption Quote Time",
+    "T3": "News and Resumption Times",
 }
+
+# Codes Nasdaq RELABELS a halt row to when it publishes the resume. Nasdaq's
+# row for a T1 halt becomes "T3 - News and Resumption Times" at the moment the
+# resumption time appears (3,630 T3 records in the session logs), so the resume
+# arrives under a non-emit code even though its halt was emittable. A resume
+# carrying one of these codes is deliverable iff its halt was DELIVERED.
+# Deliberately NOT in PHASE1_EMIT_CODES: a halt first seen as T3 is not by
+# itself an alert, and code "D" (a deletion / delisting) must never be read
+# as a resume.
+RESUMPTION_RELABEL_CODES: set[str] = {"T3"}
 
 # NYSE's API publishes "Reason" as a free-text string (e.g. "News pending",
 # "News Released", "LULD pause"). Map common strings back to the canonical
@@ -94,3 +105,8 @@ def normalize_nyse_reason(reason: str) -> str:
 def is_phase1_emit_code(code: str) -> bool:
     """Whether a halt-reason code should fire a Slack alert in Phase 1."""
     return code.upper() in PHASE1_EMIT_CODES
+
+
+def is_resumption_relabel_code(code: str) -> bool:
+    """Whether `code` is a resume-time relabel of an earlier halt (Nasdaq T3)."""
+    return (code or "").upper() in RESUMPTION_RELABEL_CODES

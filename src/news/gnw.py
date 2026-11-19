@@ -15,7 +15,8 @@ import xml.etree.ElementTree as ET
 
 import requests
 
-from .parsers import extract_tickers, parse_pubdate, strip_html, strip_ns
+from .parsers import (extract_tickers, parse_pubdate, require_feed_shape,
+                      require_items, strip_html, strip_ns)
 from .types import NewsItem
 
 log = logging.getLogger(__name__)
@@ -84,4 +85,5 @@ def fetch(url: str = DEFAULT_FEED_URL, timeout: int = TIMEOUT_SEC) -> list[NewsI
     log.debug("gnw feed: fetching %s", url)
     resp = requests.get(url, headers=headers, timeout=timeout)
     resp.raise_for_status()
-    return parse(resp.content)
+    require_feed_shape(resp.content, SOURCE)
+    return require_items(parse(resp.content), SOURCE)

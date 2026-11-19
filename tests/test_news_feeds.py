@@ -125,3 +125,49 @@ def test_gnw_surfaces_category_or_subject_taxonomy():
     items = gnw.parse(_read("gnw_health_sample.xml"))
     with_industries = [i for i in items if i.industries]
     assert len(with_industries) >= 1
+
+
+# --- Finding 3 (2026-11-18): a 200 that is not a feed fails loud -------------
+
+from unittest.mock import patch
+
+from src.feeds.types import FeedParseError
+
+
+class _FakeResp:
+    def __init__(self, content):
+        self.content = content
+        self.status_code = 200
+
+    def raise_for_status(self):
+        return None
+
+
+_ADAPTERS = [
+    (prn, "src.news.prnewswire.requests.get", "prn_health_sample.xml"),
+    (bw, "src.news.bw.requests.get", "bw_sample.xml"),
+    (gnw, "src.news.gnw.requests.get", "gnw_health_sample.xml"),
+]
+_SOFT_FAILURES = [
+    b"<html><head><title>maintenance</title></head><body>down</body></html>",
+    b"Access Denied",
+    b'<?xml version="1.0"?><rss version="2.0"><channel><title>x</title></channel></rss>',
+    # A non-feed root is rejected even if it happens to hold a parseable item.
+    b'<html><body><item><title>t</title><link>https://x.test/a</link></item></body></html>',
+    # Codex R2: an <item> exists but parses to no usable record (no link).
+    b'<?xml version="1.0"?><rss version="2.0"><channel><item><title>t</title></item></channel></rss>',
+]
+
+
+@pytest.mark.parametrize("mod,target,_fixture", _ADAPTERS)
+@pytest.mark.parametrize("body", _SOFT_FAILURES)
+def test_news_fetch_raises_on_soft_failure(mod, target, _fixture, body):
+    with patch(target, return_value=_FakeResp(body)):
+        with pytest.raises(FeedParseError):
+            mod.fetch()
+
+
+@pytest.mark.parametrize("mod,target,fixture", _ADAPTERS)
+def test_news_fetch_ok_on_real_fixture(mod, target, fixture):
+    with patch(target, return_value=_FakeResp(_read(fixture))):
+        assert len(mod.fetch()) >= 1
